@@ -1,5 +1,9 @@
 ### Final Capstone Project - Zombie Survival
 
+**Team Name:** The Savannah Bananas
+
+**Team Members:** Jeremy Mills, Justin Hwang, Rishi Zamvar
+
 Team Name: The Savannah Bananas
 
 Team Members: Jeremy Mills, Justin Hwang, Rishi Zamvar
