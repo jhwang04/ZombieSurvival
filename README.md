@@ -19,7 +19,7 @@ Class List:
 Team Responsibility: Jeremy Mills - Graphics
 			    Justin Hwang - Overall Game Function
 			    Rishi Zamvar - Classes for Zombies, etc.
-
+ 
 Known Bugs/ Workarounds:
 
 Key Learnings: N/A
