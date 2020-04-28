@@ -1,4 +1,4 @@
-###Final Capstone Project - Zombie Survival
+### Final Capstone Project - Zombie Survival
 
 Team Name: The Savannah Bananas
 
