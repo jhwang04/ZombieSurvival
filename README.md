@@ -4,6 +4,10 @@
 
 **Team Members:** Jeremy Mills, Justin Hwang, Rishi Zamvar
 
+Team Name: The Savannah Bananas
+
+Team Members: Jeremy Mills, Justin Hwang, Rishi Zamvar
+
 Revision Date: 4/27 Rev #1
 
 Program Purpose: After running this program, users will be able to play a zombie survival game, where waves of zombies come at you, while you try to survive.
