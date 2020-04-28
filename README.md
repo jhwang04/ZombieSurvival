@@ -2,7 +2,7 @@
 
 **Team Name:** The Savannah Bananas
 
-Team Members: Jeremy Mills, Justin Hwang, Rishi Zamvar
+**Team Members:** Jeremy Mills, Justin Hwang, Rishi Zamvar
 
 Revision Date: 4/27 Rev #1
 
