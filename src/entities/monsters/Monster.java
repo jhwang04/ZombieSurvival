@@ -1,7 +1,7 @@
 //This is a placeholder. You can change whatever you need to.
 //Probably, you will extend this for each monster
 
-package monsters;
+package entities.monsters;
 
 public abstract class Monster {
     private int x, y; //coordinates
