@@ -1,9 +1,17 @@
-//This is a placeholder. You can change whatever you need to.
-//Probably, you will extend this for each monster
+//Generic monster class, extend for other monsters.
 
 package entities.monsters;
 
 public abstract class Monster {
-    private int x, y; //coordinates
-    //Other ones like speed or coordinates of the player they're targeting, it's up to you.
+    private int targetX; //x-coordinate of the thing the monster is targeting
+    private int targetY; //y-coordinate of the thing the monster is targeting
+
+    //generic "get" methods
+    public int getTargetX() {
+        return targetX;
+    }
+
+    public int getTargetY() {
+        return targetY;
+    }
 }
