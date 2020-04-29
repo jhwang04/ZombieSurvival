@@ -12,7 +12,7 @@ Target User Profile: Our Target User Profile is people who like to play video ga
 
 Feature List: Some features for our game include zombie waves, finding items on the floor that spawn randomly, healing from certain items, powerups, and more.
 
-Instructions: To run our program, either click on the *.jar file and run it, or copy the project folder in Eclipse and run the folder
+Instructions: To run our program, either click on the *.jar file and run it, or copy the project folder in IntelliJ and run the folder
 
 Class List:
 
