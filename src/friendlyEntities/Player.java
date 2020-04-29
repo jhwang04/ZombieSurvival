@@ -1,3 +1,5 @@
+package friendlyEntities;
+
 /*
 Savannah Bananas
 4/28/2020
