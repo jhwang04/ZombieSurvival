@@ -19,7 +19,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
         //Clock inserts a delay between redrawing each frame. For testing, the delay can be modified.
         //The delay is in milliseconds. If you set delay to 20, that's 50 fps.
-        Timer clock = new Timer(1000, this);
+        Timer clock = new Timer(20, this);
         clock.start();
     }
 
@@ -49,7 +49,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     }*/
 
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Gone through actionPerformed");
         time++;
         repaint();
     }
