@@ -4,6 +4,8 @@ Savannah Bananas
 This is the class that will contain all of the graphics, and will be added to the main class on startup
 */
 
+import entities.friendlyEntities.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +14,8 @@ import java.awt.event.ActionListener;
 public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
     private int time; //counts the number of game ticks since the start of the wave
+    private Player player; //This is the player that the user can control.
+    private int waveNumber; //Assuming we use the wave system, this will hold the wave number.
 
     //Default constructor
     public ZombieSurvivalGame() {
