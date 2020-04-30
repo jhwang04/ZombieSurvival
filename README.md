@@ -8,21 +8,25 @@
 
 **Program Purpose:** After running this program, users will be able to play a zombie survival game, where waves of zombies come at you, while you try to survive.
 
-Target User Profile: Our Target User Profile is people who like to play video games, and one who does not enjoy playing cooperatively
+**Target User Profile:** Our Target User Profile is people who like to play video games, and one who does not enjoy playing cooperatively
 
-Feature List: Some features for our game include zombie waves, finding items on the floor that spawn randomly, healing from certain items, powerups, and more.
+**Feature List:** Some features for our game include zombie waves, finding items on the floor that spawn randomly, healing from certain items, powerups, and more.
 
-Instructions: To run our program, either click on the *.jar file and run it, or copy the project folder in IntelliJ and run the folder
+**Instructions:** To run our program, either click on the *.jar file and run it, or copy the project folder in IntelliJ and run the folder
 
-Class List:
 
-Team Responsibility: Jeremy Mills - Graphics
+
+###Class List:
+
+**Team Responsibility:** Jeremy Mills - Graphics
 			    Justin Hwang - Overall Game Function
 			    Rishi Zamvar - Classes for Zombies, etc.
  
-Known Bugs/ Workarounds:
+**Known Bugs/ Workarounds:** N/A
 
-Key Learnings: N/A
+**Key Learnings:** N/A
+
+
 
 Credit List:
 Zombie Sprites - https://wonderkidstudio.itch.io/sprite-zombie
