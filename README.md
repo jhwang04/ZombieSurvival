@@ -16,7 +16,7 @@
 
 
 
-###Class List:
+### Class List:
 
 **Team Responsibility:** Jeremy Mills - Graphics
 			    Justin Hwang - Overall Game Function
