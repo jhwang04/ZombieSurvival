@@ -25,7 +25,7 @@ See "CLASSLIST.md" for the list of classes
  
 **Known Bugs/ Workarounds:** N/A
 
-**Key Learnings:** N/A
+**Key Learnings:** Learning how to link Github and IntelliJ so making changes is easier.
 
 
 
