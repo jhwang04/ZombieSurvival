@@ -1,5 +1,7 @@
 package entities.monsters;
 
+import java.awt.*;
+
 public class Zombie extends Monster {
 
     public static final double ZOMBIE_MAX_HEALTH = 100.0;
@@ -13,6 +15,13 @@ public class Zombie extends Monster {
     //default zombie constructor (normal zombie default values)
     public Zombie(int x, int y, int targetX, int targetY) {
         super(x, y, ZOMBIE_MAX_HEALTH, ZOMBIE_MAX_HEALTH, ZOMBIE_MOVEMENT_SPEED, targetX, targetY);
+    }
+
+    //Zombie draw method
+    @Override
+    public void draw(Graphics g) {
+        g.setColor(Color.GREEN);
+        g.fillOval(this.getX() - 10, this.getY() - 10, 20, 20);
     }
 
 }

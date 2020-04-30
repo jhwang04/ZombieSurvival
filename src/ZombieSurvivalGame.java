@@ -29,7 +29,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         clock.start();
     }
 
-    // Initialization of the window
+    // Initialization of the window. This only happens once.
     public void initialize() {
         //sets up the window
         JFrame w = new JFrame("ZombieSurvival - by the SavannahBananas");
@@ -41,29 +41,42 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         w.setResizable(false);
     }
 
-    // start a game
+    // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
+    // (without restarting the program)
     public void startNewGame() {
         time = 0;
         player = new Player(500, 500, 100.0, 100.0, 5.0);
+
     }
 
-    // This draws the scene
+    // This draws the scene every frame.
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        this.drawNextFrame(g);
+    }
+
+    //This event gets activated by the Clock, and repaints the screen.
+    public void actionPerformed(ActionEvent e) {
+        time++;
+        repaint();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    //This is the main "repaint" method that will redraw every single frame
+    private void drawNextFrame(Graphics g) {
         g.drawString("Time = " + time, 50, 50);
 
         //Calls the draw method of the player
         player.draw(g);
-    }
-    /*public void paintComponent(Graphics g) {
-        System.out.println("yeah");
-        super.paintComponent(g);
-        setBackground(Color.GREEN);
-        g.drawString("Time = " + time, 50, 50);
-    }*/
-
-    public void actionPerformed(ActionEvent e) {
-        time++;
-        repaint();
     }
 }
