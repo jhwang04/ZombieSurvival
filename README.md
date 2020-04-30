@@ -17,6 +17,7 @@
 
 
 ### Class List:
+See "CLASSLIST.md" for the list of classes
 
 **Team Responsibility:** Jeremy Mills - Graphics
 			    Justin Hwang - Overall Game Function
@@ -29,6 +30,6 @@
 
 
 Credit List:
-Zombie Sprites - https://wonderkidstudio.itch.io/sprite-zombie
-Player - https://toppng.com/2d-character-sprite-PNG-free-PNG-Images_165688
-Coin - https://wonderkidstudio.itch.io/coin
+Zombie Sprites - https://wonderkidstudio.itch.io/sprite-zombie  
+Player - https://toppng.com/2d-character-sprite-PNG-free-PNG-Images_165688  
+Coin - https://wonderkidstudio.itch.io/coin  
