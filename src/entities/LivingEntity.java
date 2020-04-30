@@ -12,6 +12,10 @@ public abstract class LivingEntity {
     private int x; //x-coordinate of entity
     private int y; //y-coordinate of entity
 
+    //useful methods
+    public void draw() {
+        //placeholder, change this method if needed
+    }
 
     //Generic "get" methods
     public double getMaxHealth() {

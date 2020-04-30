@@ -11,10 +11,17 @@ public abstract class Ranged {
     private Image bulletImage; //whatever picture we're using for the bullet
     private Image weaponImage; //picture of the weapon itself. If we're doing animations, you're gonna have to change the whole image system.
 
-    //generic "get" methods
-    public int getRange() {
-        return range;
+    //useful methods
+    public void shoot() {
+        //placeholder, change anything you'd like
     }
+
+    public void draw() {
+        //placeholder, change anything you'd like
+    }
+
+    //generic "get" methods
+    public int getRange() { return range; }
 
     public double getBulletSpeed() {
         return bulletSpeed;
