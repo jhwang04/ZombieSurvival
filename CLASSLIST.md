@@ -91,6 +91,16 @@
   * _inherits methods from LivingEntity class_
   * generic "get" methods to query targetX and targetY
 
+#### Zombie.java
+**Is a:**
+  * Is a Monster, and represents the generic zombie enemy.
+
+**Has a:**
+  * int ZOMBIE_MAX_HEALTH
+    * static final int, which defines the default zombie max health.
+  * double ZOMBIE_MOVEMENT_SPEED
+    * static final double, which defines default zombie movement speed.
+
 ## entities.friendlyEntities package
 
 #### Player.java
