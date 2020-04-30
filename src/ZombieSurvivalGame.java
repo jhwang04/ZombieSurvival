@@ -5,6 +5,7 @@ This is the class that will contain all of the graphics, and will be added to th
 */
 
 import entities.friendlyEntities.Player;
+import entities.monsters.Monster;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,11 +17,12 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     private int time; //counts the number of game ticks since the start of the wave
     private Player player; //This is the player that the user can control.
     private int waveNumber; //Assuming we use the wave system, this will hold the wave number.
+    private Monster[] monsters; //List of all monsters on screen
 
     //Default constructor
     public ZombieSurvivalGame() {
         time = 0;
-
+        startNewGame();
         //Clock inserts a delay between redrawing each frame. For testing, the delay can be modified.
         //The delay is in milliseconds. If you set delay to 20, that's 50 fps.
         Timer clock = new Timer(20, this);
@@ -39,11 +41,19 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         w.setResizable(false);
     }
 
+    // start a game
+    public void startNewGame() {
+        time = 0;
+        player = new Player(500, 500, 100.0, 100.0, 5.0);
+    }
+
     // This draws the scene
     public void paintComponent(Graphics g) {
-        System.out.println("Called repaint()");
         super.paintComponent(g);
         g.drawString("Time = " + time, 50, 50);
+
+        //Calls the draw method of the player
+        player.draw(g);
     }
     /*public void paintComponent(Graphics g) {
         System.out.println("yeah");

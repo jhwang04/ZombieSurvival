@@ -8,6 +8,13 @@ public abstract class Monster extends LivingEntity {
     private int targetX; //x-coordinate of the thing the monster is targeting
     private int targetY; //y-coordinate of the thing the monster is targeting
 
+    //default constructor
+    public Monster(int x, int y, double maxHealth, double health, double movementSpeed, int targetX, int targetY) {
+        super(x, y, maxHealth, health, movementSpeed);
+        this.targetX = targetX;
+        this.targetY = targetY;
+    }
+
     //generic "get" methods
     public int getTargetX() {
         return targetX;

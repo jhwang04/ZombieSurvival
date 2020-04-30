@@ -5,6 +5,8 @@ Savannah Bananas
 Generic class for a living entity, which both Monster and Player will extend
 */
 
+import java.awt.*;
+
 public abstract class LivingEntity {
     private double maxHealth; //maximum health for the entity
     private double health; //current health for the entity
@@ -12,9 +14,19 @@ public abstract class LivingEntity {
     private int x; //x-coordinate of entity
     private int y; //y-coordinate of entity
 
+    //default constructor
+    public LivingEntity(int x, int y, double maxHealth, double health, double movementSpeed) {
+        this.x = x;
+        this.y = y;
+        this.maxHealth = maxHealth;
+        this.health = health;
+        this.movementSpeed = movementSpeed;
+    }
+
     //useful methods
-    public void draw() {
-        //placeholder, change this method if needed
+    public void draw(Graphics g) {
+        //placeholder, change this method if needed. This just puts a placeholder circle when draw() is called.
+        g.drawOval(x-10, y-10, 20, 20);
     }
 
     //Generic "get" methods

@@ -13,6 +13,10 @@ public class Player extends LivingEntity {
     private int points; //number of points the player has
     private int coins; //number of coins/currency the player has
 
+    public Player(int x, int y, double maxHealth, double health, double movementSpeed) {
+        super(x, y, maxHealth, health, movementSpeed);
+    }
+
     //generic "get" commands
     public int getPoints() {
         return points;
