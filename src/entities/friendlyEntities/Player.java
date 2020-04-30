@@ -8,10 +8,12 @@ This is the class of the main character that the user controls.
 package entities.friendlyEntities;
 
 import entities.LivingEntity;
+import weapons.Ranged;
 
 public class Player extends LivingEntity {
     private int points; //number of points the player has
     private int coins; //number of coins/currency the player has
+    private Ranged gun; //player's equipped ranged weapon.
 
     public Player(int x, int y, double maxHealth, double health, double movementSpeed) {
         super(x, y, maxHealth, health, movementSpeed);

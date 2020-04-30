@@ -113,6 +113,8 @@
 	* the total number of points this player has, accumulates over time
   * int coins
 	* the current amount of in-game currency the player has, functionality may be implemented later
+  * gun
+    * An instance of "Ranged" abstract class, of some kind of gun.
 
 **Does:**
   * _inherits methods from LivingEntity class_
