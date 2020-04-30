@@ -6,6 +6,7 @@ This is the class that will contain all of the graphics, and will be added to th
 
 import entities.friendlyEntities.Player;
 import entities.monsters.Monster;
+import entities.monsters.Zombie;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +18,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     private int time; //counts the number of game ticks since the start of the wave
     private Player player; //This is the player that the user can control.
     private int waveNumber; //Assuming we use the wave system, this will hold the wave number.
-    private Monster[] monsters; //List of all monsters on screen
+    private Monster[] monsters = new Monster[0]; //List of all monsters on screen
 
     //Default constructor
     public ZombieSurvivalGame() {
@@ -46,6 +47,18 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     public void startNewGame() {
         time = 0;
         player = new Player(500, 500, 100.0, 100.0, 5.0);
+    }
+
+    // starts a new wave.  Will be called when all zombies are dead not functional yet)
+    public void nextWave() {
+        int placeholderNumberOfZombies = 10;
+
+        monsters = new Monster[0];
+
+        for(int i = 0; i < placeholderNumberOfZombies; i++) {
+            monsters = addMonster(monsters, new Zombie(i * 100, 100, 500, 500));
+            System.out.println("" + monsters.length);
+        }
 
     }
 
@@ -61,12 +74,16 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         repaint();
     }
 
-
-
-
-
-
-
+    //adds element to array
+    public static Monster[] addMonster(Monster[] originalArray, Monster newMonster) {
+        System.out.println("Called addMonster");
+        Monster[] newMonsterArray = new Monster[originalArray.length + 1];
+        for(int i = 0; i < originalArray.length; i++) {
+            newMonsterArray[i] = originalArray[i];
+        }
+        newMonsterArray[originalArray.length] = newMonster;
+        return newMonsterArray;
+    }
 
 
 
@@ -74,7 +91,30 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
     //This is the main "repaint" method that will redraw every single frame
     private void drawNextFrame(Graphics g) {
+
+        //moves onto next wave if all monsters are dead
+        if(monsters.length == 0) {
+            System.out.println("next wave has been called");
+            nextWave();
+        }
+
+        //checks if each monster is dead. If so, the monster is removed from monsters array.
+        Monster[] newMonsters = new Monster[0];
+        for(int i = 0; i < monsters.length; i++) {
+            if(monsters[i].getHealth() > 0.0) {
+                newMonsters = addMonster(newMonsters, monsters[i]);
+                System.out.println("newMonsters.length = " + newMonsters.length);
+            }
+        }
+        monsters = newMonsters.clone();
+        System.out.println("Number of monsters = " + monsters.length);
+
+
+
         g.drawString("Time = " + time, 50, 50);
+        for(int i = 0; i < monsters.length; i++) {
+            monsters[i].draw(g);
+        }
 
         //Calls the draw method of the player
         player.draw(g);
