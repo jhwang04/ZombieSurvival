@@ -7,7 +7,6 @@ Keep comment headers, but most of what's included here will probably be seen in 
 //helo
 public class ZombieSurvivalMain {
     public static void main(String args[]) {
-        System.out.println("main!");
         ZombieSurvivalGame gameWindow = new ZombieSurvivalGame();
         gameWindow.initialize();
     }

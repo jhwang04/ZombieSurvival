@@ -57,7 +57,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
         for(int i = 0; i < placeholderNumberOfZombies; i++) {
             monsters = addMonster(monsters, new Zombie(i * 100, 100, 500, 500));
-            System.out.println("" + monsters.length);
         }
 
     }
@@ -76,7 +75,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
     //adds element to array
     public static Monster[] addMonster(Monster[] originalArray, Monster newMonster) {
-        System.out.println("Called addMonster");
         Monster[] newMonsterArray = new Monster[originalArray.length + 1];
         for(int i = 0; i < originalArray.length; i++) {
             newMonsterArray[i] = originalArray[i];
@@ -94,7 +92,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
         //moves onto next wave if all monsters are dead
         if(monsters.length == 0) {
-            System.out.println("next wave has been called");
             nextWave();
         }
 
@@ -103,11 +100,9 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         for(int i = 0; i < monsters.length; i++) {
             if(monsters[i].getHealth() > 0.0) {
                 newMonsters = addMonster(newMonsters, monsters[i]);
-                System.out.println("newMonsters.length = " + newMonsters.length);
             }
         }
         monsters = newMonsters.clone();
-        System.out.println("Number of monsters = " + monsters.length);
 
 
 

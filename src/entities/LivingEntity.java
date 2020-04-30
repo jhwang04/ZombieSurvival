@@ -25,8 +25,7 @@ public abstract class LivingEntity {
 
     //useful methods
     public void draw(Graphics g) {
-        //placeholder, change this method if needed. This just puts a placeholder circle when draw() is called.
-        g.drawOval(x-10, y-10, 20, 20);
+        //placeholder, this method is overriden by most classes
     }
 
     //Generic "get" methods

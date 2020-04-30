@@ -20,6 +20,9 @@ public class Zombie extends Monster {
     //Zombie draw method
     @Override
     public void draw(Graphics g) {
+        //This draw() method, as I have it set up now, is going to be the zombie moving itself
+        //and then drawing itself at its new position. I haven't put in any movment or other
+        //functional code yet, but you can put that here.
         g.setColor(Color.GREEN);
         g.fillOval(this.getX() - 10, this.getY() - 10, 20, 20);
     }
