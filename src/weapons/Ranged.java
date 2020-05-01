@@ -5,11 +5,16 @@ package weapons;
 import java.awt.*;
 
 public abstract class Ranged {
-    private int range; //how far a bullet can go
-    private double bulletSpeed; //how quickly a bullet/projectile can go.
-    private double bulletDamage; //how much damage the bullet does on impact
-    private Image bulletImage; //whatever picture we're using for the bullet
+    private int x; //x coordinate of the weapon itself
+    private int y; //y coordinate of the weapon itself
     private Image weaponImage; //picture of the weapon itself. If we're doing animations, you're gonna have to change the whole image system.
+
+    //default contructor
+    public Ranged(int x, int y, Image image) {
+        this.x = x;
+        this.y = y;
+        this.weaponImage = image;
+    }
 
     //useful methods
     public void shoot() {
@@ -21,14 +26,12 @@ public abstract class Ranged {
     }
 
     //generic "get" methods
-    public int getRange() { return range; }
-
-    public double getBulletSpeed() {
-        return bulletSpeed;
+    public int getX() {
+        return x;
     }
 
-    public Image getBulletImage() {
-        return bulletImage;
+    public int getY() {
+        return y;
     }
 
     public Image getWeaponImage() {
