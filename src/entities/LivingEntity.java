@@ -15,7 +15,8 @@ public abstract class LivingEntity extends Hitbox {
     private int y; //y-coordinate of entity
 
     //default constructor
-    public LivingEntity(int x, int y, double maxHealth, double health, double movementSpeed) {
+    public LivingEntity(int x, int y, double maxHealth, double health, double movementSpeed, int hx, int hy, int hw, int hh) {
+        super(hx, hy, hw, hh);
         this.x = x;
         this.y = y;
         this.maxHealth = maxHealth;

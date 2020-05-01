@@ -14,7 +14,8 @@ public abstract class Projectile extends Hitbox {
     private double trajectory; //angle of the projectile, measured in degrees
 
     //default constructor
-    public Projectile(int x, int y, double speed, double damage, int range, Image image, double trajectory) {
+    public Projectile(int x, int y, double speed, double damage, int range, Image image, double trajectory, int hx, int hy, int hw, int hh) {
+        super(hx, hy, hw, hh);
         this.x = x;
         this.y = y;
         this.speed = speed;

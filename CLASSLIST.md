@@ -66,6 +66,7 @@
 #### Projectile.java
 **Is a:**
   * Is the generic projectile, which can be a bullet, an arrow, etc.
+  * Is also a Hitbox
 
 **Has a:**
   * int x
@@ -109,6 +110,7 @@
 #### LivingEntity.java
 **Is a:**
   * Is an abstract class, which is a generic living entity, to be extended by both the Player class and all Monster classes.
+  * Is also a hitbox
 
 **Has a:**
   * double maxHealth

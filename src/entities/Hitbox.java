@@ -1,5 +1,7 @@
 package entities;
 
+import java.awt.*;
+
 public class Hitbox {
     private int hx; //x coordinate of the top left corner of the hitbox
     private int hy; //y coordinate of the top left corner of the hitbox
@@ -25,6 +27,12 @@ public class Hitbox {
         } else {
             return false;
         }
+    }
+
+    //draw the hitbox method
+    public void drawHitbox(Graphics g) {
+        g.setColor(Color.RED);
+        g.drawRect(hx, hy, hw, hh);
     }
 
     //generic "get" methods

@@ -111,9 +111,11 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         g.drawString("Time = " + time, 50, 50);
         for(int i = 0; i < monsters.length; i++) {
             monsters[i].draw(g);
+            monsters[i].drawHitbox(g);
         }
 
         //Calls the draw method of the player
         player.draw(g);
+        player.drawHitbox(g);
     }
 }

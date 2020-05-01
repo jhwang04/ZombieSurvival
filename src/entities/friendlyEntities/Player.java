@@ -17,8 +17,11 @@ public class Player extends LivingEntity {
     private int coins; //number of coins/currency the player has
     private Ranged gun; //player's equipped ranged weapon.
 
+    private static final int PLAYER_HEIGHT = 100; //constant, for the default height of the player
+    private static final int PLAYER_WIDTH = 50; //constant, for the default width of the player
+
     public Player(int x, int y, double maxHealth, double health, double movementSpeed) {
-        super(x, y, maxHealth, health, movementSpeed);
+        super(x, y, maxHealth, health, movementSpeed, x - PLAYER_WIDTH/2, y-PLAYER_HEIGHT/2, PLAYER_WIDTH, PLAYER_HEIGHT);
     }
 
     @Override
