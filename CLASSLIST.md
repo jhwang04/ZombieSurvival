@@ -35,22 +35,74 @@
 
 #### Ranged.java
 **Is a:** Abstract class, represents all ranged weapons. Will be extended to be "pistol" or "rifle" or "bow & arrow".
+
 **Has a:**
-  * int range
-    * range of a bullet
-  * double bulletSpeed
-    * how quickly the projectile can travel
-  * double bulletDamage
-    * base damage for the projectile
-  * Image bulletImage
-    * image for the projectile
-  * Image weaponImage
-    * picture of the weapon itself.
+  * int x
+    * x coordinate of the ranged weapon
+  * int y
+    * y coordinate of the ranged weapon
+  * Image image
+    * the picture of the weapon
 
 **Does:**
   * can shoot a projectile
   * can draw itself
   * has generic "get" methods to query the current state of instance variables
+
+#### Pistol.java
+**Is a:**
+  * Is a Ranged weapon, and represents the default gun (a pistol)
+
+**Has a:**
+  * _Inherits fields from Ranged.java_
+  * Image _PISTOL\_IMAGE_
+    * Is the default image for a pistol
+
+**Does:**
+  * _Inherits methods from Ranged.java_
+
+## weapons.projectiles package
+
+#### Projectile.java
+**Is a:**
+  * Is the generic projectile, which can be a bullet, an arrow, etc.
+
+**Has a:**
+  * int x
+    * x coordinate of the projectile
+  * int y
+    * y coordinate of the projectile
+  * double speed
+    * speed that the projectile can travel
+  * double damage
+    * damage the bullet does on impact
+  * int range
+    * how far the bullet can go before it despawns
+  * Image image
+    * the picture of the bullet
+  * double trajectory
+    * the trajectory of the bullet in degrees
+
+**Does:**
+  * Draw itself
+  * Generic "get" methods
+
+#### PistolBullet.java
+**Is a:**
+  * Is a bullet that is fired by the Pistol.java class
+
+**Has a:**
+  * _Inherits fields from Projectile.java_
+  * double _PISTOL\_BULLET\_SPEED_
+    * The default speed of a pistol bullet
+  * double _PISTOL\_BULLET\_DAMAGE_
+    * The default damage a pistol bullet does on impact
+  * int _PISTOL\_RANGE_
+    * The default range of a pistol bullet before it despawns
+    
+**Does:**
+  * _Inherits methods from Projectile.java_
+  * Calls _super()_ constructor of Projectile.java
 
 ## entities package
 

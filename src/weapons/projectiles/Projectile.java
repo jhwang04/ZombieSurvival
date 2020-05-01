@@ -22,6 +22,11 @@ public abstract class Projectile {
         this.trajectory = trajectory;
     }
 
+    //move and draw method
+    public void draw(Graphics g) {
+        //placeholder
+    }
+
     //generic "get" methods
     public int getX() {
         return x;
