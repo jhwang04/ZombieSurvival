@@ -7,7 +7,7 @@ Generic class for a living entity, which both Monster and Player will extend
 
 import java.awt.*;
 
-public abstract class LivingEntity {
+public abstract class LivingEntity extends Hitbox {
     private double maxHealth; //maximum health for the entity
     private double health; //current health for the entity
     private double movementSpeed; //speed, measured in some form. Not sure what units yet.

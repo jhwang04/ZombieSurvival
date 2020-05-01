@@ -7,6 +7,7 @@ This is the class that will contain all of the graphics, and will be added to th
 import entities.friendlyEntities.Player;
 import entities.monsters.Monster;
 import entities.monsters.Zombie;
+import weapons.Pistol;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,6 +48,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     public void startNewGame() {
         time = 0;
         player = new Player(500, 500, 100.0, 100.0, 5.0);
+        player.setGun(new Pistol(player.getX(), player.getY()));
     }
 
     // starts a new wave.  Will be called when all zombies are dead not functional yet)

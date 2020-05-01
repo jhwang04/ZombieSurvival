@@ -126,6 +126,24 @@
 	* draws itself
 	* has generic "get" methods to query the current state of instance variables
 
+#### Hitbox.java
+**Is a:**
+  * Represents an object with a hitbox, like a player, bullet, or zombie.
+  
+**Has a:**
+  * int hx
+    * the x coordinate of the top left corner of the hitbox
+  * int hy
+    * the y coordinate of the top left corner of the hitbox
+  * int hw
+    * the width of the hitbox
+  * int hh
+    * the height of the hitbox
+
+**Does:**
+  * isTouching, can check if two Hitboxes are in contact with each other
+  * generic "get" methods to query the current values of instance variables
+
 ## entities.monsters package
 
 #### Monster.java
@@ -171,3 +189,5 @@
 **Does:**
   * _inherits methods from LivingEntity class_
   * generic "get" commands to query points and coins
+  * "set" methods, both to set the amount of coins & points the player has, but also "add" methods to increment the amount.
+  

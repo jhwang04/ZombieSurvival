@@ -21,6 +21,22 @@ public class Player extends LivingEntity {
         super(x, y, maxHealth, health, movementSpeed);
     }
 
+    @Override
+    public void draw(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.fillOval(this.getX() - 10, this.getY() - 10, 20, 20);
+
+        //temporary dot, showing where the true x and y coords are
+        g.setColor(Color.RED);
+        g.fillOval(getX()-1, getY()-1, 3, 3);
+
+        if(gun != null) {
+            gun.setX(getX());
+            gun.setY(getY());
+            gun.draw(g);
+        }
+    }
+
     //generic "get" commands
     public int getPoints() {
         return points;
@@ -30,9 +46,26 @@ public class Player extends LivingEntity {
         return coins;
     }
 
-    @Override
-    public void draw(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.fillOval(this.getX() - 10, this.getY() - 10, 20, 20);
+    public Ranged getGun() { return gun; }
+
+    //"set" methods
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+
+    public void addPoints(int amount) {
+        this.points += amount;
+    }
+
+    public void addCoins(int amount) {
+        this.coins += amount;
+    }
+
+    public void setGun(Ranged gun) {
+        this.gun = gun;
     }
 }

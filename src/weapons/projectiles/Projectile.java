@@ -1,8 +1,10 @@
 package weapons.projectiles;
 
+import entities.Hitbox;
+
 import java.awt.*;
 
-public abstract class Projectile {
+public abstract class Projectile extends Hitbox {
     private int x;
     private int y;
     private double speed;

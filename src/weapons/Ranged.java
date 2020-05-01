@@ -21,8 +21,13 @@ public abstract class Ranged {
         //placeholder, change anything you'd like
     }
 
-    public void draw() {
-        //placeholder, change anything you'd like
+    public void draw(Graphics g) {
+        int width = weaponImage.getWidth(null);
+        int height = weaponImage.getHeight(null);
+        g.drawImage(weaponImage, x - width/2, y - height/2, null);
+
+        g.setColor(Color.RED);
+        g.fillOval(x - 1, y-1, 3, 3);
     }
 
     //generic "get" methods
@@ -36,5 +41,18 @@ public abstract class Ranged {
 
     public Image getWeaponImage() {
         return weaponImage;
+    }
+
+    //generic "set" methods
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setWeaponImage(Image image) {
+        this.weaponImage = image;
     }
 }
