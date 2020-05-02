@@ -86,6 +86,8 @@ public class Player extends LivingEntity implements KeyListener {
             setX(getX() - diagonalX);
             setY(getY() + diagonalY);
         }
+
+
     }
 
     @Override
@@ -161,11 +163,11 @@ public class Player extends LivingEntity implements KeyListener {
             case KeyEvent.VK_A:
                 this.movingLeft = true;
                 break;
-            case KeyEvent.VK_S:
-                this.movingDown = true;
-                break;
             case KeyEvent.VK_D:
                 this.movingRight = true;
+                break;
+            case KeyEvent.VK_S:
+                this.movingDown = true;
             default:
                 //do nothing, if it's not a meaningful input
                 break;
