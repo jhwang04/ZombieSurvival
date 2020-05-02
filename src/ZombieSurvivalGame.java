@@ -17,9 +17,10 @@ import java.awt.event.ActionListener;
 public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
     private int time; //counts the number of game ticks since the start of the wave
-    private Player player; //This is the player that the user can control.
+    private Player player = new Player(500, 500, 100.0, 100.0);; //This is the player that the user can control.
     private int waveNumber; //Assuming we use the wave system, this will hold the wave number.
     private Monster[] monsters = new Monster[0]; //List of all monsters on screen
+    private boolean showHitboxes = true;
 
     //Default constructor
     public ZombieSurvivalGame() {
@@ -29,26 +30,34 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         //The delay is in milliseconds. If you set delay to 20, that's 50 fps.
         Timer clock = new Timer(20, this);
         clock.start();
-    }
 
-    // Initialization of the window. This only happens once.
-    public void initialize() {
         //sets up the window
         JFrame w = new JFrame("ZombieSurvival - by the SavannahBananas");
         w.setBounds(200, 0, 1000, 1000);
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container c = w.getContentPane();
-        c.add(new ZombieSurvivalGame());
+        c.add(this);
         w.setVisible(true);
         w.setResizable(false);
+
+        //this allows player input
+        w.addKeyListener(player);
+    }
+
+    // Initialization of the window. This only happens once.
+    public void initialize() {
+
     }
 
     // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
     // (without restarting the program)
     public void startNewGame() {
         time = 0;
-        player = new Player(500, 500, 100.0, 100.0, 5.0);
-        player.setGun(new Pistol(player.getX(), player.getY()));
+        player.setX(500.0);
+        player.setY(500.0);
+        player.setMaxHealth(100.0);
+        player.setMaxHealth(100.0);
+        player.setGun(new Pistol((int) player.getX(), (int) player.getY()));
     }
 
     // starts a new wave.  Will be called when all zombies are dead not functional yet)
@@ -111,11 +120,16 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         g.drawString("Time = " + time, 50, 50);
         for(int i = 0; i < monsters.length; i++) {
             monsters[i].draw(g);
-            monsters[i].drawHitbox(g);
+            if(showHitboxes == true) {
+                monsters[i].drawHitbox(g);
+            }
+
         }
 
         //Calls the draw method of the player
         player.draw(g);
-        player.drawHitbox(g);
+        if(showHitboxes == true) {
+            player.drawHitbox(g);
+        }
     }
 }

@@ -26,7 +26,7 @@ public class Zombie extends Monster {
         //and then drawing itself at its new position. I haven't put in any movment or other
         //functional code yet, but you can put that here.
         g.setColor(Color.GREEN);
-        g.fillOval(this.getX() - 10, this.getY() - 10, 20, 20);
+        g.fillOval((int) this.getX() - 10, (int) this.getY() - 10, 20, 20);
     }
 
 }

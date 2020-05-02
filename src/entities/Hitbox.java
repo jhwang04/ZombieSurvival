@@ -3,12 +3,12 @@ package entities;
 import java.awt.*;
 
 public class Hitbox {
-    private int hx; //x coordinate of the top left corner of the hitbox
-    private int hy; //y coordinate of the top left corner of the hitbox
+    private double hx; //x coordinate of the top left corner of the hitbox
+    private double hy; //y coordinate of the top left corner of the hitbox
     private int hw; //width of the hitbox
     private int hh; //height of the hitbox
 
-    public Hitbox(int x, int y, int w, int h) {
+    public Hitbox(double x, double y, int w, int h) {
         this.hx = x;
         this.hy = y;
         this.hw = w;
@@ -17,8 +17,8 @@ public class Hitbox {
 
     //the main collision detection method
     public boolean isTouching(Hitbox box) {
-        int boxX = box.getHx();
-        int boxY = box.getHy();
+        double boxX = box.getHx();
+        double boxY = box.getHy();
         int boxW = box.getHw();
         int boxH = box.getHh();
 
@@ -32,15 +32,15 @@ public class Hitbox {
     //draw the hitbox method
     public void drawHitbox(Graphics g) {
         g.setColor(Color.RED);
-        g.drawRect(hx, hy, hw, hh);
+        g.drawRect((int) hx, (int) hy, hw, hh);
     }
 
     //generic "get" methods
-    public int getHx() {
+    public double getHx() {
         return hx;
     }
 
-    public int getHy() {
+    public double getHy() {
         return hy;
     }
 
@@ -50,5 +50,22 @@ public class Hitbox {
 
     public int getHh() {
         return hh;
+    }
+
+    //generic "set" methods
+    public void setHx(double x) {
+        this.hx = x;
+    }
+
+    public void setHy(double y) {
+        this.hy = y;
+    }
+
+    public void setHw(int w) {
+        this.hw = w;
+    }
+
+    public void setHh(int h) {
+        this.hh = h;
     }
 }

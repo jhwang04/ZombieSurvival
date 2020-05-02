@@ -11,11 +11,11 @@ public abstract class LivingEntity extends Hitbox {
     private double maxHealth; //maximum health for the entity
     private double health; //current health for the entity
     private double movementSpeed; //speed, measured in some form. Not sure what units yet.
-    private int x; //x-coordinate of entity
-    private int y; //y-coordinate of entity
+    private double x; //x-coordinate of entity
+    private double y; //y-coordinate of entity
 
     //default constructor
-    public LivingEntity(int x, int y, double maxHealth, double health, double movementSpeed, int hx, int hy, int hw, int hh) {
+    public LivingEntity(double x, double y, double maxHealth, double health, double movementSpeed, double hx, double hy, int hw, int hh) {
         super(hx, hy, hw, hh);
         this.x = x;
         this.y = y;
@@ -42,11 +42,22 @@ public abstract class LivingEntity extends Hitbox {
         return movementSpeed;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
+
+    //generic "set" methods
+    public void setMaxHealth(double maxHealth) {this.maxHealth = maxHealth;}
+
+    public void setHealth(double health) {this.health = health;}
+
+    public void setMovementSpeed(double movementSpeed) {this.movementSpeed = movementSpeed;}
+
+    public void setX(double x) {this.x = x;}
+
+    public void setY(double y) {this.y = y;}
 }
