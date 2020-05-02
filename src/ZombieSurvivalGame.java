@@ -21,6 +21,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     private int waveNumber; //Assuming we use the wave system, this will hold the wave number.
     private Monster[] monsters = new Monster[0]; //List of all monsters on screen
     private boolean showHitboxes = true;
+    ImageIcon tree1;
 
     //Default constructor
     public ZombieSurvivalGame() {
@@ -40,6 +41,8 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         w.setVisible(true);
         w.setResizable(false);
 
+        tree1 = new ImageIcon("C:/Users/jrmil/IdeaProjects/ZombieSurvival");
+
         //this allows player input
         w.addKeyListener(player);
     }
@@ -58,6 +61,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         player.setMaxHealth(100.0);
         player.setMaxHealth(100.0);
         player.setGun(new Pistol((int) player.getX(), (int) player.getY()));
+
     }
 
     // starts a new wave.  Will be called when all zombies are dead not functional yet)
@@ -75,6 +79,11 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     // This draws the scene every frame.
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Color background = new Color(60, 179, 113);
+
+
+
+        setBackground(background);
         this.drawNextFrame(g);
     }
 

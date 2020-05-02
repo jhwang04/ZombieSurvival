@@ -155,7 +155,7 @@ public class Player extends LivingEntity implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         switch(keyCode) {
-            case KeyEvent.VK_W:
+            case KeyEvent.VK_W :
                 this.movingUp = true;
                 break;
             case KeyEvent.VK_A:
@@ -166,6 +166,7 @@ public class Player extends LivingEntity implements KeyListener {
                 break;
             case KeyEvent.VK_D:
                 this.movingRight = true;
+
             default:
                 //do nothing, if it's not a meaningful input
                 break;
