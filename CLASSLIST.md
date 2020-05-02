@@ -119,14 +119,15 @@
 	* current health the entity has
   * double movementSpeed
 	* how quickly the entity can move
-  * int x
+  * double x
 	* current x-coordinate of the entity on the screen
-  * int y
+  * double y
 	* current y-coordinate of the entity on the screen
 
 **Does:**
 	* draws itself
 	* has generic "get" methods to query the current state of instance variables
+	* has generic "set" methods to change the values of the variables
 
 #### Hitbox.java
 **Is a:**
@@ -145,6 +146,7 @@
 **Does:**
   * isTouching, can check if two Hitboxes are in contact with each other
   * generic "get" methods to query the current values of instance variables
+  * generic "set" methods to change the values of the variables
 
 ## entities.monsters package
 
