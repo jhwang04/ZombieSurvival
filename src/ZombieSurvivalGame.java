@@ -44,11 +44,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         w.addKeyListener(player);
     }
 
-    // Initialization of the window. This only happens once.
-    public void initialize() {
-
-    }
-
     // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
     // (without restarting the program)
     public void startNewGame() {
