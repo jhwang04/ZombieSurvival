@@ -24,7 +24,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     private int waveNumber; //Assuming we use the wave system, this will hold the wave number.
     public Monster[] monsters = new Monster[0]; //List of all monsters on screen
     private Projectile[] bullets = new Projectile[0];
-    private boolean showHitboxes = true;
+    private boolean debugOn = true;
     ImageIcon tree1;
 
     //Default constructor
@@ -142,28 +142,32 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         }
         bullets = newProjectiles.clone();
 
-
-
-
-        g.drawString("Time = " + time, 50, 50);
-        g.drawString("# of bullets = " + bullets.length, 50, 80);
         for(int i = 0; i < monsters.length; i++) {
             monsters[i].draw(g);
-            if(showHitboxes == true) {
+            if(debugOn == true) {
                 monsters[i].drawHitbox(g);
             }
         }
         for(int i = 0; i < bullets.length; i++) {
             bullets[i].draw(g);
-            if(showHitboxes == true) {
+            if(debugOn == true) {
                 bullets[i].drawHitbox(g);
             }
         }
 
         //Calls the draw method of the player
         player.draw(g);
-        if(showHitboxes == true) {
+        if(debugOn == true) {
             player.drawHitbox(g);
+        }
+
+        //debug screen, more text can be added as needed
+        if(debugOn == true) {
+            g.setColor(Color.WHITE);
+            g.drawString("Time = " + time, 50, 50);
+            g.drawString("# of bullets = " + bullets.length, 50, 80);
+            g.drawString("Player x = " + player.getX(), 50, 110);
+            g.drawString("Player y = " + player.getY(), 50, 140);
         }
     }
 
