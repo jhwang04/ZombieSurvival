@@ -1,7 +1,7 @@
-# CLASS LIST - ALPHA 1.0
+# CLASS LIST - ALPHA 1.1
 ### 4/29/2020
 
-## src package
+## zombiesurvivalgame package
 
 #### ZombieSurvivalMain.java
 **Is a:**
@@ -20,22 +20,30 @@
   
 **Has a:**  
   * int time  
-    * number of game ticks (20-50 per second, not decided yet.)  
+    * number of game ticks (50 per second, as of now)  
   * Player player  
     * The active player, that the user controls.  
   * int waveNumber  
     * the wave number that the game is currently on.
+  * Monster[] monsters
+    * Array that contains all the current zombies
+  * Projectile[] bullets
+    * Array that contains all the active bullets
+  * boolean debugOn
+    * setting that shows hitboxes & other debugging overlays
     
 **Does:**
   * starts a clock, that regulates the time between each game tick
-    * creates new java window, the graphics display for the game itself
-    * repaints the window every game tick
+  * creates new java window, the graphics display for the game itself
+  * repaints the window every game tick
+  * can add elements to the Monster[] and Projectile[] arrays
 
 ## weapons package
 
 #### Ranged.java
-**Is a:** Abstract class, represents all ranged weapons. Will be extended to be "pistol" or "rifle" or "bow & arrow".
-
+**Is a:** Class, represents all ranged weapons. Will be extended to be "pistol" or "rifle" or "bow & arrow".
+  * implements MouseListener so that it can take mouse input (to shoot the bullets)
+  
 **Has a:**
   * int x
     * x coordinate of the ranged weapon
@@ -43,11 +51,14 @@
     * y coordinate of the ranged weapon
   * Image image
     * the picture of the weapon
+  * ZombieSurvivalGame game
+    * the game that the Ranged is inside of
 
 **Does:**
   * can shoot a projectile
   * can draw itself
   * has generic "get" methods to query the current state of instance variables
+  * Uses the mousePressed event to shoot bullets
 
 #### Pistol.java
 **Is a:**
@@ -60,6 +71,7 @@
 
 **Does:**
   * _Inherits methods from Ranged.java_
+  * Overrides the Ranged "shoot" method (not necessary at the moment because of our lack of graphics)
 
 ## weapons.projectiles package
 
@@ -79,14 +91,20 @@
     * damage the bullet does on impact
   * int range
     * how far the bullet can go before it despawns
+  * boolean despawned
+    * whether or not the bullet is despawned
   * Image image
     * the picture of the bullet
   * double trajectory
     * the trajectory of the bullet in degrees
+  * ZombieSurvivalGame game
+    * the game that the projectile exists inside of
 
 **Does:**
   * Draw itself
   * Generic "get" methods
+  * Generic "set" methods to change the values
+  * move() , which will move the bullet the amount it should in one frame
 
 #### PistolBullet.java
 **Is a:**
@@ -100,6 +118,12 @@
     * The default damage a pistol bullet does on impact
   * int _PISTOL\_RANGE_
     * The default range of a pistol bullet before it despawns
+  * int _PISTOL\_BULLET\_WIDTH_
+    * default width of the hitbox
+  * int _PISTOL\_BULLET\_HEIGHT_
+    * default height of the hitbox
+  * Image _PISTOL\_BULLET\_IMAGE_
+    * default image of the pistol bullet (null for now, basic circle is being used);
     
 **Does:**
   * _Inherits methods from Projectile.java_
@@ -164,22 +188,28 @@
 **Does:**
   * _inherits methods from LivingEntity class_
   * generic "get" methods to query targetX and targetY
+  * generic "set" methods to set its instance variables
 
 #### Zombie.java
 **Is a:**
   * Is a Monster, and represents the generic zombie enemy.
 
 **Has a:**
-  * int ZOMBIE_MAX_HEALTH
+  * int _ZOMBIE\_MAX\_HEALTH_
     * static final int, which defines the default zombie max health.
-  * double ZOMBIE_MOVEMENT_SPEED
+  * double _ZOMBIE\_MOVEMENT\_SPEED_
     * static final double, which defines default zombie movement speed.
+  * int _ZOMBIE\_WIDTH_
+    * static final int, the default width of a zombie
+  * int _ZOMBIE\_HEIGHT_
+    * static final int, the default height of a zombie
 
 ## entities.friendlyEntities package
 
 #### Player.java
 **Is a:**
   * is a LivingEntity, and represents the user's character in the game.
+  * implements KeyListener, so that the user can input movement controls
 
 **Has a:**
   * _inherits instance variables from LivingEntity class_
@@ -189,9 +219,20 @@
 	* the current amount of in-game currency the player has, functionality may be implemented later
   * gun
     * An instance of "Ranged" abstract class, of some kind of gun.
+  * int _PLAYER\_HEIGHT_
+    * default height of player's hitbox
+  * int _PLAYER\_WIDTH_
+    * default width of a player's hitbox
+  * double _PLAYER\_MOVEMENT\_SPEED_
+    * default movement speed of a player
+  * boolean movingUp, movingDown, movingLeft, movingRight
+    * private variables, used for determining player movement
 
 **Does:**
   * _inherits methods from LivingEntity class_
+  * move()
+    * moves the player to the location for the next frame (using keyboard input)
+  * draw() (overrides the LivingEntity's draw method)
   * generic "get" commands to query points and coins
   * "set" methods, both to set the amount of coins & points the player has, but also "add" methods to increment the amount.
-  
+  * uses the keyPressed and keyReleased events to take player input
