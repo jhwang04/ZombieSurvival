@@ -22,7 +22,7 @@ public class Hitbox {
         int boxW = box.getHw();
         int boxH = box.getHh();
 
-        if(boxX + boxW > hx && boxX < hx + hw && boxY + boxY > hy && boxY < hy + hh) {
+        if(boxX + boxW > hx && boxX < hx + hw && boxY + boxH > hy && boxY < hy + hh) {
             return true;
         } else {
             return false;

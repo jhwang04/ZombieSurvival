@@ -2,23 +2,50 @@
 
 package weapons;
 
-import java.awt.*;
+import entities.monsters.Zombie;
+import zombiesurvivalgame.ZombieSurvivalGame;
 
-public abstract class Ranged {
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class Ranged implements MouseListener {
     private int x; //x coordinate of the weapon itself
     private int y; //y coordinate of the weapon itself
     private Image weaponImage; //picture of the weapon itself. If we're doing animations, you're gonna have to change the whole image system.
+    public ZombieSurvivalGame game;
 
     //default contructor
-    public Ranged(int x, int y, Image image) {
+    public Ranged(int x, int y, Image image, ZombieSurvivalGame game) {
         this.x = x;
         this.y = y;
         this.weaponImage = image;
+        this.game = game;
     }
 
     //useful methods
-    public void shoot() {
+    public void shoot(double angle) {
         //placeholder, change anything you'd like
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        int mouseX = e.getX();
+        int mouseY = e.getY() - 30;
+
+        int changeX = mouseX - x;
+        int changeY = y - mouseY;
+
+        double hypotenuse = Math.sqrt(changeX * changeX + changeY * changeY);
+
+        double refAngle = Math.asin(changeY/hypotenuse) ;
+        double cosAngle = Math.acos(changeX/hypotenuse) ;
+
+        if(cosAngle > Math.PI/2) {
+            refAngle = Math.PI - refAngle;
+        }
+
+        shoot(refAngle);
     }
 
     public void draw(Graphics g) {
@@ -54,5 +81,28 @@ public abstract class Ranged {
 
     public void setWeaponImage(Image image) {
         this.weaponImage = image;
+    }
+
+
+    //not used
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
