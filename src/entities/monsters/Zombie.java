@@ -25,7 +25,13 @@ public class Zombie extends Monster {
         //This draw() method, as I have it set up now, is going to be the zombie moving itself
         //and then drawing itself at its new position. I haven't put in any movment or other
         //functional code yet, but you can put that here.
-        g.setColor(Color.GREEN);
+        int randInt = (int)(Math.random() * 2);
+
+        Color zombieColor = new Color(0, 100, 0);
+
+        g.setColor(zombieColor);
+
+
         g.fillOval((int) this.getX() - 10, (int) this.getY() - 10, 20, 20);
     }
 

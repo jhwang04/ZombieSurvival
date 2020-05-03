@@ -25,6 +25,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     public Monster[] monsters = new Monster[0]; //List of all monsters on screen
     private Projectile[] bullets = new Projectile[0];
     private boolean showHitboxes = true;
+    ImageIcon tree1;
 
     //Default constructor
     public ZombieSurvivalGame() {
@@ -43,6 +44,8 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         c.add(this);
         w.setVisible(true);
         w.setResizable(false);
+
+        tree1 = new ImageIcon("C:/Users/jrmil/IdeaProjects/ZombieSurvival");
 
         //this allows player input
         w.addKeyListener(player);
@@ -75,6 +78,11 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     // This draws the scene every frame.
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Color background = new Color(60, 179, 113);
+
+
+
+        setBackground(background);
         this.drawNextFrame(g);
     }
 
