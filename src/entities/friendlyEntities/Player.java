@@ -18,6 +18,7 @@ public class Player extends LivingEntity implements KeyListener {
     private int points; //number of points the player has
     private int coins; //number of coins/currency the player has
     private Ranged gun; //player's equipped ranged weapon.
+    private Image image;
 
     private static final int PLAYER_HEIGHT = 100; //constant, for the default height of the player
     private static final int PLAYER_WIDTH = 50; //constant, for the default width of the player
@@ -35,6 +36,7 @@ public class Player extends LivingEntity implements KeyListener {
         movingRight = false;
         movingUp = false;
         movingDown = false;
+
     }
 
     //this is called by the draw method, to determine where the player should be drawn
