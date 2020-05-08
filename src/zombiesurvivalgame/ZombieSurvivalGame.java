@@ -29,6 +29,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
     //Default constructor
     public ZombieSurvivalGame() {
+
         time = 0;
         startNewGame();
         //Clock inserts a delay between redrawing each frame. For testing, the delay can be modified.
