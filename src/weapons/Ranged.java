@@ -14,6 +14,7 @@ public class Ranged implements MouseListener {
     private int y; //y coordinate of the weapon itself
     private Image weaponImage; //picture of the weapon itself. If we're doing animations, you're gonna have to change the whole image system.
     public ZombieSurvivalGame game;
+    public Hitbox hitBox;
 
     //default contructor
     public Ranged(int x, int y, Image image, ZombieSurvivalGame game) {
@@ -21,6 +22,8 @@ public class Ranged implements MouseListener {
         this.y = y;
         this.weaponImage = image;
         this.game = game;
+
+        hitBox = new Hitbox(x-1, y-1, 3, 3);
     }
 
     //useful methods
