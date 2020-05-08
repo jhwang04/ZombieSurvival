@@ -25,6 +25,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     public Monster[] monsters = new Monster[0]; //List of all monsters on screen
     private Projectile[] bullets = new Projectile[0];
     private boolean debugOn = true;
+    public int seconds;
     ImageIcon tree1;
 
     //Default constructor
@@ -51,6 +52,8 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         //this allows player input
         w.addKeyListener(player);
         w.addMouseListener(player.getGun());
+
+        seconds = 0;
     }
 
     // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
@@ -170,11 +173,12 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             g.drawString("Player x = " + player.getX(), 50, 110);
             g.drawString("Player y = " + player.getY(), 50, 140);
             g.drawString("Player Health = " + player.getHealth(), 50, 170);
+            g.drawString("Time Seconds = " + seconds, 50, 200);
         }
 
-        for (int m = 0; m < monsters.length; m++) {
+        for (int m = 0; m < monsters.length && time%50 == 0; m++) {
             if (player.isTouching(monsters[m])){
-                player.setHealth(player.getHealth()-0.25);
+                player.setHealth(player.getHealth()-5);
             }
         }
 
@@ -182,6 +186,11 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         if (player.getHealth() <= 0) {
             this.gameOver(g);
         }
+
+        if (time % 50 == 0) {
+            seconds++;
+        }
+
     }
 
     public Projectile[] getBullets() {
