@@ -169,6 +169,18 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             g.drawString("# of bullets = " + bullets.length, 50, 80);
             g.drawString("Player x = " + player.getX(), 50, 110);
             g.drawString("Player y = " + player.getY(), 50, 140);
+            g.drawString("Player Health = " + player.getHealth(), 50, 170);
+        }
+
+        for (int m = 0; m < monsters.length; m++) {
+            if (player.isTouching(monsters[m])){
+                player.setHealth(player.getHealth()-0.25);
+            }
+        }
+
+
+        if (player.getHealth() <= 0) {
+            this.gameOver(g);
         }
     }
 
@@ -182,5 +194,9 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
     public void appendBullet(Projectile p) {
         this.bullets = addBullet(bullets, p);
+    }
+
+    public void gameOver(Graphics g) {
+        setBackground(Color.black);
     }
 }

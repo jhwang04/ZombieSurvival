@@ -20,6 +20,7 @@ public class Player extends LivingEntity implements KeyListener {
     private Ranged gun; //player's equipped ranged weapon.
     private Image image;
 
+
     private static final int PLAYER_HEIGHT = 100; //constant, for the default height of the player
     private static final int PLAYER_WIDTH = 50; //constant, for the default width of the player
     private static final double PLAYER_MOVEMENT_SPEED = 5.0;
@@ -36,6 +37,8 @@ public class Player extends LivingEntity implements KeyListener {
         movingRight = false;
         movingUp = false;
         movingDown = false;
+
+
 
     }
 

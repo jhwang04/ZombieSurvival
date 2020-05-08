@@ -50,6 +50,7 @@ public abstract class LivingEntity extends Hitbox {
         return y;
     }
 
+
     //generic "set" methods
     public void setMaxHealth(double maxHealth) {this.maxHealth = maxHealth;}
 

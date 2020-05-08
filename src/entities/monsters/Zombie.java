@@ -1,6 +1,9 @@
 package entities.monsters;
 
+import entities.Hitbox;
+
 import java.awt.*;
+
 
 public class Zombie extends Monster {
 
@@ -8,6 +11,8 @@ public class Zombie extends Monster {
     public static final double ZOMBIE_MOVEMENT_SPEED = 5.0; //this number is arbitrary. Change as needed for functionality.
     public static final int ZOMBIE_WIDTH = 50;
     public static final int ZOMBIE_HEIGHT = 100;
+    //public static Hitbox hitbox;
+
 
     //custom zombie constructor (changing default zombie values)
     public Zombie(int x, int y, double maxHealth, double health, double movementSpeed, int targetX, int targetY) {
@@ -17,6 +22,7 @@ public class Zombie extends Monster {
     //default zombie constructor (normal zombie default values)
     public Zombie(int x, int y, int targetX, int targetY) {
         super(x, y, ZOMBIE_MAX_HEALTH, ZOMBIE_MAX_HEALTH, ZOMBIE_MOVEMENT_SPEED, targetX, targetY, x-ZOMBIE_WIDTH/2, y-ZOMBIE_HEIGHT/2, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
+        //hitbox = new Hitbox(x - 10, y - 10, 20, 20);
     }
 
     //Zombie draw method
@@ -34,5 +40,6 @@ public class Zombie extends Monster {
 
         g.fillOval((int) this.getX() - 10, (int) this.getY() - 10, 20, 20);
     }
+
 
 }
