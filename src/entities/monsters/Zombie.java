@@ -1,6 +1,7 @@
 package entities.monsters;
 
 import entities.Hitbox;
+import zombiesurvivalgame.ZombieSurvivalGame;
 
 import java.awt.*;
 
@@ -8,26 +9,57 @@ import java.awt.*;
 public class Zombie extends Monster {
 
     public static final double ZOMBIE_MAX_HEALTH = 100.0;
-    public static final double ZOMBIE_MOVEMENT_SPEED = 5.0; //this number is arbitrary. Change as needed for functionality.
+    public static final double ZOMBIE_MOVEMENT_SPEED = 3.0; //this number is arbitrary. Change as needed for functionality.
     public static final int ZOMBIE_WIDTH = 50;
     public static final int ZOMBIE_HEIGHT = 100;
     //public static Hitbox hitbox;
 
 
     //custom zombie constructor (changing default zombie values)
-    public Zombie(int x, int y, double maxHealth, double health, double movementSpeed, int targetX, int targetY) {
-        super(x, y, maxHealth, health, movementSpeed, targetX, targetY, x-ZOMBIE_WIDTH/2, y-ZOMBIE_HEIGHT/2, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
+    public Zombie(int x, int y, double maxHealth, double health, double movementSpeed, int targetX, int targetY, ZombieSurvivalGame game) {
+        super(x, y, maxHealth, health, movementSpeed, targetX, targetY, game, x-ZOMBIE_WIDTH/2, y-ZOMBIE_HEIGHT/2, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
     }
 
     //default zombie constructor (normal zombie default values)
-    public Zombie(int x, int y, int targetX, int targetY) {
-        super(x, y, ZOMBIE_MAX_HEALTH, ZOMBIE_MAX_HEALTH, ZOMBIE_MOVEMENT_SPEED, targetX, targetY, x-ZOMBIE_WIDTH/2, y-ZOMBIE_HEIGHT/2, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
+    public Zombie(int x, int y, int targetX, int targetY, ZombieSurvivalGame game) {
+        super(x, y, ZOMBIE_MAX_HEALTH, ZOMBIE_MAX_HEALTH, ZOMBIE_MOVEMENT_SPEED, targetX, targetY, game,x-ZOMBIE_WIDTH/2, y-ZOMBIE_HEIGHT/2, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
         //hitbox = new Hitbox(x - 10, y - 10, 20, 20);
+    }
+
+    public void move() {
+        //setting the target to be the player's location
+        setTargetX((int) game.getPlayer().getX());
+        setTargetY((int) game.getPlayer().getY());
+
+        int x = (int) getX();
+        int y = (int) getY();
+
+        //calculating the angle
+        int changeX = getTargetX() - x;
+        int changeY = y - getTargetY();
+
+        double hypotenuse = Math.sqrt(changeX * changeX + changeY * changeY);
+
+        if(hypotenuse != 0) {
+            double refAngle = Math.asin(changeY/hypotenuse) ;
+            double cosAngle = Math.acos(changeX/hypotenuse) ;
+
+            if(cosAngle > Math.PI/2) {
+                refAngle = Math.PI - refAngle;
+            }
+
+            setX(getX() + (getMovementSpeed() * Math.cos(refAngle)));
+            setY(getY() - (getMovementSpeed() * Math.sin(refAngle)));
+        }
+
+        setHx(getX() - ZOMBIE_WIDTH/2);
+        setHy(getY() - ZOMBIE_HEIGHT/2);
     }
 
     //Zombie draw method
     @Override
     public void draw(Graphics g) {
+        move();
         //This draw() method, as I have it set up now, is going to be the zombie moving itself
         //and then drawing itself at its new position. I haven't put in any movment or other
         //functional code yet, but you can put that here.
