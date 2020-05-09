@@ -178,7 +178,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
         for (int m = 0; m < monsters.length && time%50 == 0; m++) {
             if (player.isTouching(monsters[m])){
-                player.setHealth(player.getHealth()-100);
+                player.setHealth(player.getHealth()-5);
             }
         }
 

@@ -105,13 +105,10 @@ public class Player extends LivingEntity implements KeyListener {
 
         move();
 
-        int width = image.getWidth(null);
-        int height = image.getHeight(null);
-        g.drawImage(image, x - width/2, y - height/2, null);
-/*
         setHx(getX()-PLAYER_WIDTH/2);
         setHy(getY()-PLAYER_HEIGHT/2);
 
+        /*
         g.setColor(Color.BLACK);
         g.fillOval((int) this.getX() - 10, (int) this.getY() - 10, 20, 20);
 
@@ -119,13 +116,20 @@ public class Player extends LivingEntity implements KeyListener {
         g.setColor(Color.RED);
         g.fillOval((int) getX()-1, (int) getY()-1, 3, 3);
 
+         */
+        int width = image.getWidth(null);
+        int height = image.getHeight(null);
+        g.drawImage(image, x - width/2, y - height/2, null);
+
+
         if(gun != null) {
             gun.setX((int) getX());
             gun.setY((int) getY());
             gun.draw(g);
         }
 
- */
+
+
     }
 
     //generic "get" commands
