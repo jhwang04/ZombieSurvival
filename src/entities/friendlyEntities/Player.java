@@ -10,6 +10,7 @@ package entities.friendlyEntities;
 import entities.LivingEntity;
 import weapons.Ranged;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -18,7 +19,7 @@ public class Player extends LivingEntity implements KeyListener {
     private int points; //number of points the player has
     private int coins; //number of coins/currency the player has
     private Ranged gun; //player's equipped ranged weapon.
-    private Image image;
+    public Image image = (new ImageIcon("player.gif")).getImage();
 
 
     private static final int PLAYER_HEIGHT = 100; //constant, for the default height of the player
@@ -31,6 +32,9 @@ public class Player extends LivingEntity implements KeyListener {
     private boolean movingUp;
     private boolean movingDown;
 
+    private int x;
+    private int y;
+
     public Player(int x, int y, double maxHealth, double health) {
         super(x, y, maxHealth, health, PLAYER_MOVEMENT_SPEED, x - PLAYER_WIDTH/2, y-PLAYER_HEIGHT/2, PLAYER_WIDTH, PLAYER_HEIGHT);
         movingLeft = false;
@@ -38,7 +42,8 @@ public class Player extends LivingEntity implements KeyListener {
         movingUp = false;
         movingDown = false;
 
-
+        this.x = x;
+        this.y = y;
 
     }
 
@@ -97,8 +102,13 @@ public class Player extends LivingEntity implements KeyListener {
 
     @Override
     public void draw(Graphics g) {
+
         move();
 
+        int width = image.getWidth(null);
+        int height = image.getHeight(null);
+        g.drawImage(image, x - width/2, y - height/2, null);
+/*
         setHx(getX()-PLAYER_WIDTH/2);
         setHy(getY()-PLAYER_HEIGHT/2);
 
@@ -114,6 +124,8 @@ public class Player extends LivingEntity implements KeyListener {
             gun.setY((int) getY());
             gun.draw(g);
         }
+
+ */
     }
 
     //generic "get" commands

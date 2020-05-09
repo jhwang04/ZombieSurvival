@@ -178,7 +178,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
         for (int m = 0; m < monsters.length && time%50 == 0; m++) {
             if (player.isTouching(monsters[m])){
-                player.setHealth(player.getHealth()-5);
+                player.setHealth(player.getHealth()-100);
             }
         }
 
@@ -190,6 +190,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         if (time % 50 == 0) {
             seconds++;
         }
+
 
     }
 
@@ -207,5 +208,11 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
     public void gameOver(Graphics g) {
         setBackground(Color.black);
+        g.setColor(Color.BLACK);
+        g.drawRect(0, 0, 10000, 100000);
+        g.setColor(Color.white);
+
+        Font font = new Font("Impact", Font.BOLD, 12);
+        g.drawString("GAME OVER", 100, 100);
     }
 }
