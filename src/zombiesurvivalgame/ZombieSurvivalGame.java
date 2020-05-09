@@ -29,7 +29,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     ImageIcon tree1;
     public int kills;
     public int monsterCount;
-    public int monstersLeft;
 
     //Default constructor
     public ZombieSurvivalGame() {
@@ -60,7 +59,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         kills = 0;
         monsterCount = 0;
         waveNumber = 0;
-        monstersLeft = 0;
     }
 
     // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
@@ -78,7 +76,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     public void nextWave() {
         //int placeholderNumberOfZombies = 5;
         monsterCount += 2;
-        monstersLeft = monsterCount;
         waveNumber++;
         monsters = new Monster[0];
 
@@ -101,7 +98,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         g.setFont(new Font("Impact", Font.PLAIN, 25));
         g.drawString("Time: " + seconds, 10, 940);
         g.drawString("Kills: " + kills, 130, 940);
-        g.drawString("Monster Count: " + monstersLeft, 230, 940);
+        g.drawString("Monster Count: " + monsterCount, 230, 940);
         g.drawString("Wave Number: " + waveNumber, 450, 940);
         g.drawString("Health: " + player.getHealth(), 675, 940);
         this.drawNextFrame(g);
@@ -153,7 +150,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             }
             else {
                 kills++;
-                monstersLeft--;
             }
         }
         monsters = newMonsters.clone();
