@@ -19,10 +19,10 @@ public class Player extends LivingEntity implements KeyListener {
     private int points; //number of points the player has
     private int coins; //number of coins/currency the player has
     private Ranged gun; //player's equipped ranged weapon.
-    public Image image = (new ImageIcon("player.gif")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+    public Image image = (new ImageIcon("player.png")).getImage().getScaledInstance(56, 69, Image.SCALE_SMOOTH);
 
-    private static final int PLAYER_HEIGHT = 100; //constant, for the default height of the player
-    private static final int PLAYER_WIDTH = 50; //constant, for the default width of the player
+    private static final int PLAYER_HEIGHT = 69; //constant, for the default height of the player
+    private static final int PLAYER_WIDTH = 56; //constant, for the default width of the player
     private static final double PLAYER_MOVEMENT_SPEED = 5.0;
 
     //Directional variables, for which direction the input is telling the player to move
@@ -119,7 +119,7 @@ public class Player extends LivingEntity implements KeyListener {
 
         int width = image.getWidth(null);
         int height = image.getHeight(null);
-        g.drawImage(image, 0, 0, null);
+        g.drawImage(image, (int) getX() - width/2, (int) getY() - height/2, null);
 
 
         if(gun != null) {

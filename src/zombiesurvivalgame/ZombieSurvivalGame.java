@@ -51,6 +51,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         w.setVisible(true);
         w.setResizable(false);
 
+        //Becuase this is using a filepath from your computer, it won't work
         tree1 = new ImageIcon("C:/Users/jrmil/IdeaProjects/ZombieSurvival");
 
         //this allows player input
