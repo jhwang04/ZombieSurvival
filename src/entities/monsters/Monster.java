@@ -3,6 +3,7 @@
 package entities.monsters;
 
 import entities.LivingEntity;
+import zombiesurvivalgame.ZombieSurvivalGame;
 
 public abstract class Monster extends LivingEntity {
     private int targetX; //x-coordinate of the thing the monster is targeting
@@ -14,6 +15,15 @@ public abstract class Monster extends LivingEntity {
         this.targetX = targetX;
         this.targetY = targetY;
     }
+
+    /*
+    public void getTarget() {
+        int leg1 = this.getX()- ZombieSurvivalGame.player.getX();
+        int leg2 = this.getY()- ZombieSurvivalGame.player.getY();
+        double hyp = Math.sqrt((double)(leg1^2 * leg2^2));
+    }
+
+     */
 
     //generic "get" methods
     public int getTargetX() {

@@ -108,7 +108,7 @@ public class Player extends LivingEntity implements KeyListener {
         setHx(getX()-PLAYER_WIDTH/2);
         setHy(getY()-PLAYER_HEIGHT/2);
 
-        /*
+
         g.setColor(Color.BLACK);
         g.fillOval((int) this.getX() - 10, (int) this.getY() - 10, 20, 20);
 
@@ -116,7 +116,7 @@ public class Player extends LivingEntity implements KeyListener {
         g.setColor(Color.RED);
         g.fillOval((int) getX()-1, (int) getY()-1, 3, 3);
 
-         */
+
         int width = image.getWidth(null);
         int height = image.getHeight(null);
         g.drawImage(image, 0, 0, null);

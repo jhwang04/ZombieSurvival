@@ -20,13 +20,15 @@ import java.awt.event.ActionListener;
 public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
     private int time; //counts the number of game ticks since the start of the wave
-    private Player player = new Player(500, 500, 100.0, 100.0); //This is the player that the user can control.
+    public Player player = new Player(500, 500, 100.0, 100.0); //This is the player that the user can control.
     private int waveNumber; //Assuming we use the wave system, this will hold the wave number.
     public Monster[] monsters = new Monster[0]; //List of all monsters on screen
     private Projectile[] bullets = new Projectile[0];
     private boolean debugOn = true;
     public int seconds;
     ImageIcon tree1;
+    public int kills;
+    public int monsterCount;
 
     //Default constructor
     public ZombieSurvivalGame() {
@@ -54,6 +56,9 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         w.addMouseListener(player.getGun());
 
         seconds = 0;
+        kills = 0;
+        monsterCount = 0;
+        waveNumber = 0;
     }
 
     // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
@@ -69,12 +74,13 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
     // starts a new wave.  Will be called when all zombies are dead not functional yet)
     public void nextWave() {
-        int placeholderNumberOfZombies = 10;
-
+        //int placeholderNumberOfZombies = 5;
+        monsterCount += 2;
+        waveNumber++;
         monsters = new Monster[0];
 
-        for(int i = 0; i < placeholderNumberOfZombies; i++) {
-            monsters = addMonster(monsters, new Zombie(i * 100, 100, 500, 500));
+        for(int i = 0; i < monsterCount; i++) {
+            monsters = addMonster(monsters, new Zombie((int)(Math.random() * 900), (int)(Math.random() * 900), 500, 500));
         }
 
     }
@@ -83,10 +89,18 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Color background = new Color(60, 179, 113);
-
-
-
         setBackground(background);
+
+        g.setColor(Color.black);
+        g.fillRect(0, 900, 1000, 100);
+
+        g.setColor(Color.yellow);
+        g.setFont(new Font("Impact", Font.PLAIN, 25));
+        g.drawString("Time: " + seconds, 10, 940);
+        g.drawString("Kills: " + kills, 130, 940);
+        g.drawString("Monster Count: " + monsterCount, 230, 940);
+        g.drawString("Wave Number: " + waveNumber, 450, 940);
+        g.drawString("Health: " + player.getHealth(), 675, 940);
         this.drawNextFrame(g);
     }
 
@@ -134,6 +148,9 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             if(monsters[i].getHealth() > 0.0) {
                 newMonsters = addMonster(newMonsters, monsters[i]);
             }
+            else {
+                kills++;
+            }
         }
         monsters = newMonsters.clone();
 
@@ -174,6 +191,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             g.drawString("Player y = " + player.getY(), 50, 140);
             g.drawString("Player Health = " + player.getHealth(), 50, 170);
             g.drawString("Time Seconds = " + seconds, 50, 200);
+            g.drawString("Kills = " + kills, 50, 230);
         }
 
         for (int m = 0; m < monsters.length && time%50 == 0; m++) {
