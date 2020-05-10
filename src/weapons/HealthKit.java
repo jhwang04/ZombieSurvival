@@ -25,7 +25,7 @@ public class HealthKit {
         if (hitbox.isTouching(box)) {
             int keyCode = e.getKeyCode();
             switch (keyCode) {
-                case KeyEvent.VK_F:
+                case KeyEvent.VK_F:dddddd
                     pickedUp = true;
                     break;
             }

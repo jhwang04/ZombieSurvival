@@ -35,13 +35,6 @@ public class Player extends LivingEntity implements KeyListener {
     private boolean movingUp;
     private boolean movingDown;
 
-    private final int right = 90;
-    private final int left = 270;
-    private final int down = 180;
-    private final int up = 0;
-
-
-
     private int x;
     private int y;
 
