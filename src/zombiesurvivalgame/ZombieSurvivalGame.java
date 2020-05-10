@@ -9,6 +9,7 @@ package zombiesurvivalgame;
 import entities.friendlyEntities.Player;
 import entities.monsters.Monster;
 import entities.monsters.Zombie;
+import sun.reflect.generics.tree.Tree;
 import weapons.Pistol;
 import weapons.projectiles.Projectile;
 
@@ -26,7 +27,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     private Projectile[] bullets = new Projectile[0];
     private boolean debugOn = true;
     public int seconds;
-    ImageIcon tree1;
+    public Tree tree1;
     public int kills;
     public int monsterCount;
     public boolean isGameOver = false;
@@ -52,7 +53,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         w.setResizable(false);
 
         //Becuase this is using a filepath from your computer, it won't work
-        tree1 = new ImageIcon("C:/Users/jrmil/IdeaProjects/ZombieSurvival");
+
 
         //this allows player input
         w.addKeyListener(player);
@@ -62,6 +63,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         kills = 0;
         monsterCount = 0;
         waveNumber = 0;
+
     }
 
     // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
@@ -115,10 +117,12 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
 
         this.drawNextFrame(g);
+
     }
 
     //This event gets activated by the Clock, and repaints the screen.
     public void actionPerformed(ActionEvent e) {
+
         if(isGameOver == false) {
             time++;
         }
@@ -194,6 +198,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
             //Calls the draw method of the player
             player.draw(g);
+
             if(debugOn == true) {
                 player.drawHitbox(g);
             }

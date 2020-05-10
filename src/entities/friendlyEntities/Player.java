@@ -8,18 +8,22 @@ This is the class of the main character that the user controls.
 package entities.friendlyEntities;
 
 import entities.LivingEntity;
+import javafx.scene.transform.Rotate;
 import weapons.Ranged;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.AffineTransform;
+
 
 public class Player extends LivingEntity implements KeyListener {
     private int points; //number of points the player has
     private int coins; //number of coins/currency the player has
     private Ranged gun; //player's equipped ranged weapon.
     public Image image = (new ImageIcon("player.png")).getImage().getScaledInstance(56, 69, Image.SCALE_SMOOTH);
+
 
     private static final int PLAYER_HEIGHT = 69; //constant, for the default height of the player
     private static final int PLAYER_WIDTH = 56; //constant, for the default width of the player
@@ -30,6 +34,13 @@ public class Player extends LivingEntity implements KeyListener {
     private boolean movingRight;
     private boolean movingUp;
     private boolean movingDown;
+
+    private final int right = 90;
+    private final int left = 270;
+    private final int down = 180;
+    private final int up = 0;
+
+
 
     private int x;
     private int y;
@@ -177,9 +188,12 @@ public class Player extends LivingEntity implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
+
+
         switch(keyCode) {
             case KeyEvent.VK_W :
                 this.movingUp = true;
+
                 break;
             case KeyEvent.VK_A:
                 this.movingLeft = true;
