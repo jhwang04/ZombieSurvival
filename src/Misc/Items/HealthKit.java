@@ -1,4 +1,4 @@
-package weapons;
+package Misc.Items;
 import entities.*;
 
 import java.awt.event.ActionEvent;
@@ -19,19 +19,18 @@ public class HealthKit {
         Hitbox hitbox = new Hitbox(x, y, 25, 25);
     }
 
-    /*
-    public void pickUp(ActionEvent e, Hitbox box) {
+    public void pickUp(KeyEvent e, Hitbox box) {
 
         if (hitbox.isTouching(box)) {
             int keyCode = e.getKeyCode();
             switch (keyCode) {
-                case KeyEvent.VK_F:dddddd
+                case KeyEvent.VK_F:
                     pickedUp = true;
                     break;
             }
 
         }
     }
-    */
+
 
 }

@@ -1,4 +1,4 @@
-package weapons;
+package Misc.Items;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
