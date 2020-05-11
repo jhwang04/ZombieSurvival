@@ -6,6 +6,7 @@ Generic class for a living entity, which both Monster and Player will extend
 */
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public abstract class LivingEntity extends Hitbox {
     private double maxHealth; //maximum health for the entity
@@ -61,4 +62,6 @@ public abstract class LivingEntity extends Hitbox {
     public void setX(double x) {this.x = x;}
 
     public void setY(double y) {this.y = y;}
+
+    public abstract void pickUp(Hitbox hitbox, KeyEvent e);
 }

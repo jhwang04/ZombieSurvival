@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
+import entities.*;
 
 
 public class Player extends LivingEntity implements KeyListener {
@@ -221,6 +222,18 @@ public class Player extends LivingEntity implements KeyListener {
             default:
                 //do nothing, if it's not a meaningful input
                 break;
+        }
+    }
+
+    public void pickUp(Hitbox box, KeyEvent e) {
+        if (this.isTouching(box)) {
+            int keyCode = e.getKeyCode();
+            switch (keyCode) {
+                case KeyEvent.VK_F:
+                    setHealth(getHealth() + 15);
+                    break;
+            }
+
         }
     }
 }

@@ -1,4 +1,4 @@
-package Misc.Items;
+package misc.Items;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

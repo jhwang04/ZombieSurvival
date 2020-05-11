@@ -12,11 +12,13 @@ import entities.monsters.Zombie;
 import sun.reflect.generics.tree.Tree;
 import weapons.Pistol;
 import weapons.projectiles.Projectile;
+import misc.Items.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
@@ -32,6 +34,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     public int monsterCount;
     public boolean isGameOver = false;
     Timer clock;
+    private HealthKit kit;
 
     //Default constructor
     public ZombieSurvivalGame() {
@@ -59,11 +62,14 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         w.addKeyListener(player);
         w.addMouseListener(player.getGun());
 
+
+
         seconds = 0;
         kills = 0;
         monsterCount = 0;
         waveNumber = 0;
 
+        kit = new HealthKit(250, 250);
     }
 
     // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
@@ -129,6 +135,8 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         repaint();
     }
 
+
+
     //adds element to array
     public static Monster[] addMonster(Monster[] originalArray, Monster newMonster) {
         Monster[] newMonsterArray = new Monster[originalArray.length + 1];
@@ -161,6 +169,10 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             if(monsters.length == 0) {
                 nextWave();
             }
+
+            kit.draw(g);
+
+
 
             //checks if each monster is dead. If so, the monster is removed from monsters array.
             Monster[] newMonsters = new Monster[0];
