@@ -20,13 +20,9 @@ public class HealthKit {
         this.y = y;
         pickedUp = false;
 
-        Hitbox hitbox = new Hitbox(x - 15, y - 15, 70, 70);
+        Hitbox hitbox = new Hitbox(x - 15, y - 15, 40, 40);
     }
 
-    public void pickUp(KeyEvent e, Hitbox box) {
-
-        game.getPlayer().pickUp(box, e);
-    }
 
     public void draw(Graphics g) {
         int width = image.getWidth(null);

@@ -63,5 +63,5 @@ public abstract class LivingEntity extends Hitbox {
 
     public void setY(double y) {this.y = y;}
 
-    public abstract void pickUp(Hitbox hitbox, KeyEvent e);
+
 }

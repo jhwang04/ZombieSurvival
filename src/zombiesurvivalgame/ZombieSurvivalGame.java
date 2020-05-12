@@ -35,6 +35,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     public boolean isGameOver = false;
     Timer clock;
     private HealthKit kit;
+    private Armor armor;
 
     //Default constructor
     public ZombieSurvivalGame() {
@@ -70,6 +71,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         waveNumber = 0;
 
         kit = new HealthKit(250, 250);
+        armor = new Armor(750, 750);
     }
 
     // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
@@ -171,6 +173,14 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             }
 
             kit.draw(g);
+            armor.draw(g);
+
+
+         /*
+         if (player.isTouching(kit.hitbox))  {
+             player.setHealth(player.getHealth() + 15);
+         }
+        */
 
 
 

@@ -4,6 +4,7 @@ import entities.Hitbox;
 import zombiesurvivalgame.ZombieSurvivalGame;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 
 public class Zombie extends Monster {
@@ -72,6 +73,8 @@ public class Zombie extends Monster {
 
         g.fillOval((int) this.getX() - 10, (int) this.getY() - 10, 20, 20);
     }
+
+
 
 
 }

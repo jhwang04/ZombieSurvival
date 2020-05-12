@@ -225,15 +225,4 @@ public class Player extends LivingEntity implements KeyListener {
         }
     }
 
-    public void pickUp(Hitbox box, KeyEvent e) {
-        if (this.isTouching(box)) {
-            int keyCode = e.getKeyCode();
-            switch (keyCode) {
-                case KeyEvent.VK_F:
-                    setHealth(getHealth() + 15);
-                    break;
-            }
-
-        }
-    }
 }
