@@ -24,7 +24,7 @@ public class Armor {
 
         hitbox = new Hitbox(x, y, width, height);
         pickedUp = false;
-    }a
+    }
 
 
     public void draw(Graphics g) {
