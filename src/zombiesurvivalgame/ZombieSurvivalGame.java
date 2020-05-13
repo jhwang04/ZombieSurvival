@@ -36,6 +36,8 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     Timer clock;
     private HealthKit kit;
     private Armor armor;
+    private Graphics graphics;
+
 
     //Default constructor
     public ZombieSurvivalGame() {
@@ -72,6 +74,9 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
         kit = new HealthKit(250, 250);
         armor = new Armor(750, 750);
+        tree1 = new Tree((int)Math.random()*900, (int)Math.random()*900);
+
+        drawTrees();
     }
 
     // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
@@ -84,6 +89,9 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         player.setMaxHealth(100.0);
         player.setGun(new Pistol((int) player.getX(), (int) player.getY(), this));
         monsterCount = 2;
+
+        //drawTrees();
+
     }
 
     // starts a new wave.  Will be called when all zombies are dead not functional yet)
@@ -172,6 +180,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             if(monsters.length == 0) {
                 nextWave();
             }
+
 
             /*
             kit.draw(g);
@@ -296,6 +305,10 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void drawTrees() {
+        tree1.draw(graphics);
     }
 
     public void gameOver(Graphics g) {

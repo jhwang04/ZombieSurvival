@@ -114,6 +114,7 @@ public class Player extends LivingEntity implements KeyListener {
         setHy(getY()-PLAYER_HEIGHT/2);
 
 
+        /*
         g.setColor(Color.BLACK);
         g.fillOval((int) this.getX() - 10, (int) this.getY() - 10, 20, 20);
 
@@ -121,6 +122,8 @@ public class Player extends LivingEntity implements KeyListener {
         g.setColor(Color.RED);
         g.fillOval((int) getX()-1, (int) getY()-1, 3, 3);
 
+
+         */
 
         int width = image.getWidth(null);
         int height = image.getHeight(null);
@@ -187,16 +190,19 @@ public class Player extends LivingEntity implements KeyListener {
         switch(keyCode) {
             case KeyEvent.VK_W :
                 this.movingUp = true;
-
+                image =  (new ImageIcon("player.png")).getImage().getScaledInstance(56, 69, Image.SCALE_SMOOTH);
                 break;
             case KeyEvent.VK_A:
                 this.movingLeft = true;
+                image =  (new ImageIcon("SurvivorLeft.png")).getImage().getScaledInstance(69, 56, Image.SCALE_SMOOTH);
                 break;
             case KeyEvent.VK_D:
                 this.movingRight = true;
+                image =  (new ImageIcon("SurvivorRight.png")).getImage().getScaledInstance(69, 56, Image.SCALE_SMOOTH);
                 break;
             case KeyEvent.VK_S:
                 this.movingDown = true;
+                image =  (new ImageIcon("SurvivorDown.png")).getImage().getScaledInstance(56, 69, Image.SCALE_SMOOTH);
                 break;
             default:
                 //do nothing, if it's not a meaningful input
@@ -210,15 +216,19 @@ public class Player extends LivingEntity implements KeyListener {
         switch(keyCode) {
             case KeyEvent.VK_W:
                 movingUp = false;
+                image =  (new ImageIcon("player.png")).getImage().getScaledInstance(56, 69, Image.SCALE_SMOOTH);
                 break;
             case KeyEvent.VK_A:
                 movingLeft = false;
+                image =  (new ImageIcon("SurvivorLeft.png")).getImage().getScaledInstance(69, 56, Image.SCALE_SMOOTH);
                 break;
             case KeyEvent.VK_S:
                 movingDown = false;
+                image =  (new ImageIcon("SurvivorDown.png")).getImage().getScaledInstance(56, 69, Image.SCALE_SMOOTH);
                 break;
             case KeyEvent.VK_D:
                 movingRight = false;
+                image =  (new ImageIcon("SurvivorRight.png")).getImage().getScaledInstance(69, 56, Image.SCALE_SMOOTH);
             default:
                 //do nothing, if it's not a meaningful input
                 break;
