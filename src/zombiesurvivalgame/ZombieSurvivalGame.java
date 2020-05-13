@@ -9,7 +9,7 @@ package zombiesurvivalgame;
 import entities.friendlyEntities.Player;
 import entities.monsters.Monster;
 import entities.monsters.Zombie;
-import sun.reflect.generics.tree.Tree;
+import misc.*;
 import weapons.Pistol;
 import weapons.projectiles.Projectile;
 import misc.Items.*;
@@ -83,6 +83,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         player.setMaxHealth(100.0);
         player.setMaxHealth(100.0);
         player.setGun(new Pistol((int) player.getX(), (int) player.getY(), this));
+        monsterCount = 2;
     }
 
     // starts a new wave.  Will be called when all zombies are dead not functional yet)
@@ -172,8 +173,20 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
                 nextWave();
             }
 
+            /*
             kit.draw(g);
             armor.draw(g);
+
+
+             */
+            /*
+            if (player.isTouching(kit) || !(kit.getPickedUp())) {
+                player.setHealth(player.getHealth() + 15);
+                kit.setPickedUp(true);
+                kit.hide();
+
+            }
+            */
 
 
          /*

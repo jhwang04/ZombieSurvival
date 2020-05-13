@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 
 import zombiesurvivalgame.*;
 
-public class HealthKit {
+public class HealthKit extends Hitbox{
     public Hitbox hitbox;
     private int x;
     private int y;
@@ -16,20 +16,39 @@ public class HealthKit {
     private ZombieSurvivalGame game;
 
     public HealthKit(int x, int y) {
-        this.x = x;
-        this.y = y;
+        super(x, y, 40, 40);
+
         pickedUp = false;
 
-        Hitbox hitbox = new Hitbox(x - 15, y - 15, 40, 40);
+
     }
 
 
     public void draw(Graphics g) {
+
         int width = image.getWidth(null);
         int height = image.getHeight(null);
-        g.drawImage(image, (int) x - width/2, (int) y - height/2, null);
+        g.drawImage(image, (int) x - width / 2, (int) y - height / 2, null);
 
     }
 
+    public void hide() {
+        image = (new ImageIcon("empty.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);;
+        this.x = -1000;
+        this.y = -1000;
+
+    }
+
+    public void unHide() {
+        image = (new ImageIcon("medKit.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);;
+    }
+
+    public void setPickedUp(boolean b) {
+        this.pickedUp = true;
+    }
+
+    public boolean getPickedUp() {
+        return this.pickedUp;
+    }
 
 }

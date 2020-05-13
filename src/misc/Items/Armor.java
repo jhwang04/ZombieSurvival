@@ -7,7 +7,7 @@ import entities.*;
 
 import javax.swing.*;
 
-public class Armor {
+public class Armor extends Hitbox {
 
     private int x;
     private int y;
@@ -18,11 +18,10 @@ public class Armor {
     public boolean pickedUp;
 
     public Armor(int x, int y) {
+        super(x, y, 40, 40);
         this.x = x;
         this.y = y;
 
-
-        hitbox = new Hitbox(x, y, width, height);
         pickedUp = false;
     }
 
@@ -35,6 +34,14 @@ public class Armor {
         g.drawImage(image, x - width / 2, y - height / 2, null);
 
 
+    }
+
+    public void hide() {
+        image = (new ImageIcon("empty.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);;
+    }
+
+    public void unHide() {
+        image = (new ImageIcon("vestIcon.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);;
     }
 
     public int getX() { return x; }
