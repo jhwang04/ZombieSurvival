@@ -1,7 +1,5 @@
-# CLASS LIST - ALPHA 1.1
-### 4/29/2020
-
-# OUTDATED!! REFER TO README.pdf FOR UPDATED INFO
+# CLASS LIST - Beta 1.3
+### 5/13/2020
 
 ## zombiesurvivalgame package
 
