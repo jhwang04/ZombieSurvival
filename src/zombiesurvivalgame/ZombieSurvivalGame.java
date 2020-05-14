@@ -64,8 +64,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         //this allows player input
         w.addKeyListener(player);
         w.addMouseListener(player.getGun());
-
-
+        w.addMouseMotionListener(player);
 
         seconds = 0;
         kills = 0;

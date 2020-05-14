@@ -1,6 +1,8 @@
 # CLASS LIST - ALPHA 1.1
 ### 4/29/2020
 
+# OUTDATED!! REFER TO README.pdf FOR UPDATED INFO
+
 ## zombiesurvivalgame package
 
 #### ZombieSurvivalMain.java
@@ -227,6 +229,8 @@
     * default movement speed of a player
   * boolean movingUp, movingDown, movingLeft, movingRight
     * private variables, used for determining player movement
+  * BufferedImage image
+    * the image of the player
 
 **Does:**
   * _inherits methods from LivingEntity class_
@@ -236,3 +240,4 @@
   * generic "get" commands to query points and coins
   * "set" methods, both to set the amount of coins & points the player has, but also "add" methods to increment the amount.
   * uses the keyPressed and keyReleased events to take player input
+  * rotateImageByRadians(BufferedImage image) will return a new buffered image, that's been rotated by the given number of radians.

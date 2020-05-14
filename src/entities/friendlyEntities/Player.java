@@ -8,23 +8,24 @@ This is the class of the main character that the user controls.
 package entities.friendlyEntities;
 
 import entities.LivingEntity;
-import javafx.scene.transform.Rotate;
 import weapons.Ranged;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.awt.geom.AffineTransform;
-import entities.*;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
-public class Player extends LivingEntity implements KeyListener {
+public class Player extends LivingEntity implements KeyListener, MouseMotionListener {
     private int points; //number of points the player has
     private int coins; //number of coins/currency the player has
     private Ranged gun; //player's equipped ranged weapon.
-    public Image image = (new ImageIcon("player.png")).getImage().getScaledInstance(56, 69, Image.SCALE_SMOOTH);
-
+    public BufferedImage image;
 
     private static final int PLAYER_HEIGHT = 69; //constant, for the default height of the player
     private static final int PLAYER_WIDTH = 56; //constant, for the default width of the player
@@ -36,8 +37,8 @@ public class Player extends LivingEntity implements KeyListener {
     private boolean movingUp;
     private boolean movingDown;
 
-    private int x;
-    private int y;
+    private int mouseX = 0;
+    private int mouseY = 0;
 
     public Player(int x, int y, double maxHealth, double health) {
         super(x, y, maxHealth, health, PLAYER_MOVEMENT_SPEED, x - PLAYER_WIDTH/2, y-PLAYER_HEIGHT/2, PLAYER_WIDTH, PLAYER_HEIGHT);
@@ -46,13 +47,24 @@ public class Player extends LivingEntity implements KeyListener {
         movingUp = false;
         movingDown = false;
 
-        this.x = x;
-        this.y = y;
-
+        BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB); //unused image, just to get rid of error
+        try {
+            originalImage = ImageIO.read(new File("player.png"));
+        } catch (IOException e) {
+            //should never happen
+            e.printStackTrace();
+        }
+        image = new BufferedImage(56, 69, BufferedImage.TYPE_INT_ARGB);
+        AffineTransform t = AffineTransform.getScaleInstance(0.04, 0.04); //divides by 25
+        AffineTransformOp to = new AffineTransformOp(t, AffineTransformOp.TYPE_BILINEAR);
+        image = to.filter(originalImage, image);
     }
 
     //this is called by the draw method, to determine where the player should be drawn
     private void move() {
+        double oldX = getX();
+        double oldY = getY();
+
         int leftRightDir = 0; //0 = no movement. 1 = left. 2 = right
         int upDownDir = 0; //0 = no movement. 1 = up. 2 = down.
 
@@ -100,8 +112,6 @@ public class Player extends LivingEntity implements KeyListener {
             setX(getX() - diagonalX);
             setY(getY() + diagonalY);
         }
-
-
     }
 
     @Override
@@ -113,22 +123,21 @@ public class Player extends LivingEntity implements KeyListener {
         setHx(getX()-PLAYER_WIDTH/2);
         setHy(getY()-PLAYER_HEIGHT/2);
 
+        //this determines the angle, in radians, that the player should be facing
+        int changeX = mouseX - (int) getX();
+        int changeY = (int) getY() - mouseY;
 
-        /*
-        g.setColor(Color.BLACK);
-        g.fillOval((int) this.getX() - 10, (int) this.getY() - 10, 20, 20);
+        double hypotenuse = Math.sqrt(changeX * changeX + changeY * changeY);
 
-        //temporary dot, showing where the true x and y coords are
-        g.setColor(Color.RED);
-        g.fillOval((int) getX()-1, (int) getY()-1, 3, 3);
+        double refAngle = Math.asin(changeY/hypotenuse) ;
+        double cosAngle = Math.acos(changeX/hypotenuse) ;
 
+        if(cosAngle > Math.PI/2) {
+            refAngle = Math.PI - refAngle;
+        }
 
-         */
-
-        int width = image.getWidth(null);
-        int height = image.getHeight(null);
-        g.drawImage(image, (int) getX() - width/2, (int) getY() - height/2, null);
-
+        BufferedImage rotatedImage = rotateImageByRadians(image, 0-refAngle + Math.PI/2);
+        g.drawImage(rotatedImage, (int) getX() - rotatedImage.getWidth()/2, (int) getY() - rotatedImage.getHeight()/2, null);
 
         if(gun != null) {
             gun.setX((int) getX());
@@ -190,19 +199,15 @@ public class Player extends LivingEntity implements KeyListener {
         switch(keyCode) {
             case KeyEvent.VK_W :
                 this.movingUp = true;
-                image =  (new ImageIcon("player.png")).getImage().getScaledInstance(56, 69, Image.SCALE_SMOOTH);
                 break;
             case KeyEvent.VK_A:
                 this.movingLeft = true;
-                image =  (new ImageIcon("SurvivorLeft.png")).getImage().getScaledInstance(69, 56, Image.SCALE_SMOOTH);
                 break;
             case KeyEvent.VK_D:
                 this.movingRight = true;
-                image =  (new ImageIcon("SurvivorRight.png")).getImage().getScaledInstance(69, 56, Image.SCALE_SMOOTH);
                 break;
             case KeyEvent.VK_S:
                 this.movingDown = true;
-                image =  (new ImageIcon("SurvivorDown.png")).getImage().getScaledInstance(56, 69, Image.SCALE_SMOOTH);
                 break;
             default:
                 //do nothing, if it's not a meaningful input
@@ -216,23 +221,51 @@ public class Player extends LivingEntity implements KeyListener {
         switch(keyCode) {
             case KeyEvent.VK_W:
                 movingUp = false;
-                image =  (new ImageIcon("player.png")).getImage().getScaledInstance(56, 69, Image.SCALE_SMOOTH);
                 break;
             case KeyEvent.VK_A:
                 movingLeft = false;
-                image =  (new ImageIcon("SurvivorLeft.png")).getImage().getScaledInstance(69, 56, Image.SCALE_SMOOTH);
                 break;
             case KeyEvent.VK_S:
                 movingDown = false;
-                image =  (new ImageIcon("SurvivorDown.png")).getImage().getScaledInstance(56, 69, Image.SCALE_SMOOTH);
                 break;
             case KeyEvent.VK_D:
                 movingRight = false;
-                image =  (new ImageIcon("SurvivorRight.png")).getImage().getScaledInstance(69, 56, Image.SCALE_SMOOTH);
             default:
                 //do nothing, if it's not a meaningful input
                 break;
         }
     }
 
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        //do nothing
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        mouseX = e.getX();
+        mouseY = e.getY();
+    }
+
+    public BufferedImage rotateImageByRadians(BufferedImage image, double rad) {
+        int w = image.getWidth();
+        int h = image.getHeight();
+        double sin = Math.abs(Math.sin(rad));
+        double cos = Math.abs(Math.cos(rad));
+        int newWidth = (int) (w * cos + h * sin);
+        int newHeight = (int) (h * cos + w * sin);
+
+        BufferedImage rotatedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = rotatedImage.createGraphics();
+        AffineTransform transform = new AffineTransform();
+        transform.translate((newWidth - w) / 2, (newHeight - h) / 2);
+        int x = w/2;
+        int y = h/2;
+        transform.rotate(rad, x, y);
+        g.setTransform(transform);
+        g.drawImage(image, 0, 0, null);
+        g.dispose();
+
+        return rotatedImage;
+    }
 }
