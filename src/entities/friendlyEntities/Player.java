@@ -49,7 +49,7 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
 
         BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB); //unused image, just to get rid of error
         try {
-            originalImage = ImageIO.read(new File("player.png"));
+            originalImage = ImageIO.read(new File("playergun.png"));
         } catch (IOException e) {
             //should never happen
             e.printStackTrace();
@@ -139,10 +139,11 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         BufferedImage rotatedImage = rotateImageByRadians(image, 0-refAngle + Math.PI/2);
         g.drawImage(rotatedImage, (int) getX() - rotatedImage.getWidth()/2, (int) getY() - rotatedImage.getHeight()/2, null);
 
+
         if(gun != null) {
             gun.setX((int) getX());
             gun.setY((int) getY());
-            gun.draw(g);
+            //gun.draw(g);
         }
 
 
