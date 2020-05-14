@@ -33,12 +33,33 @@
     * Array that contains all the active bullets
   * boolean debugOn
     * setting that shows hitboxes & other debugging overlays
+  * int seconds
+    * number of seconds a game has been going on
+  * Tree[] trees
+    * array of trees
+  * int kills
+    * number of zombie kills the player has
+  * int monsterCount
+    * number of total monsters in the current wave
+  * boolean isGameOver
+    * is the game over?
+  * Timer clock
+    * the clock that refreshes the screen 50 times per second
+  * HealthKit kit
+    * the health package that can be picked up by the player
+  * Armor armor
+    * the player's armor
     
 **Does:**
   * starts a clock, that regulates the time between each game tick
   * creates new java window, the graphics display for the game itself
-  * repaints the window every game tick
+  * drawNextFrame()
+    * repaints the window every game tick
   * can add elements to the Monster[] and Projectile[] arrays
+  * startNewGame()
+    * starts a new game, resetting some variables to 0
+  * nextWave()
+    * starts a new wave of zombies
 
 ## weapons package
 
