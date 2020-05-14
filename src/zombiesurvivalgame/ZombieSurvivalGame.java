@@ -29,14 +29,13 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     private Projectile[] bullets = new Projectile[0];
     private boolean debugOn = true;
     public int seconds;
-    public Tree tree1;
+    public Tree[] trees = new Tree[0];
     public int kills;
     public int monsterCount;
     public boolean isGameOver = false;
     Timer clock;
     private HealthKit kit;
     private Armor armor;
-    private Graphics graphics;
 
 
     //Default constructor
@@ -58,24 +57,9 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         w.setVisible(true);
         w.setResizable(false);
 
-        //Becuase this is using a filepath from your computer, it won't work
-
-
-        //this allows player input
-        w.addKeyListener(player);
-        w.addMouseListener(player.getGun());
-        w.addMouseMotionListener(player);
-
-        seconds = 0;
-        kills = 0;
-        monsterCount = 0;
-        waveNumber = 0;
-
-        kit = new HealthKit(250, 250);
-        armor = new Armor(750, 750);
-        tree1 = new Tree((int)Math.random()*900, (int)Math.random()*900);
-
-        drawTrees();
+        w.addKeyListener(player); //allows player movement
+        w.addMouseListener(player.getGun()); //allows gun shooting
+        w.addMouseMotionListener(player); //allows player rotation
     }
 
     // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
@@ -89,7 +73,13 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         player.setGun(new Pistol((int) player.getX(), (int) player.getY(), this));
         monsterCount = 2;
 
-        //drawTrees();
+        seconds = 0;
+        kills = 0;
+        monsterCount = 0;
+        waveNumber = 0;
+        kit = new HealthKit(250, 250);
+        armor = new Armor(750, 750);
+        appendTree(new Tree((int)Math.random()*900, (int)Math.random()*900));
 
     }
 
@@ -147,6 +137,83 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
 
 
+
+
+    //This is the main "repaint" method that will redraw every single frame
+    private void drawNextFrame(Graphics g) {
+
+        if(this.isGameOver == false) {
+            //moves onto next wave if all monsters are dead
+            if(monsters.length == 0) {
+                nextWave();
+            }
+
+            /*kit.draw(g);
+            armor.draw(g);
+
+            if (player.isTouching(kit) || !(kit.getPickedUp())) {
+                player.setHealth(player.getHealth() + 15);
+                kit.setPickedUp(true);
+                kit.hide();
+
+            }
+
+            if (player.isTouching(kit.hitbox))  {
+                player.setHealth(player.getHealth() + 15);
+            }*/
+
+            //draws all trees
+            drawTrees(g);
+
+
+            //draws all monsters
+            drawMonsters(g);
+
+            //draws all bullets
+            drawBullets(g);
+
+            //draws player
+            drawPlayer(g);
+
+            //draws the debug overlay, only if debugOn == true
+            drawDebug(g);
+
+            if (time % 50 == 0) {
+                seconds++;
+            }
+
+            if (player.getHealth() <= 0) {
+                this.isGameOver = true;
+            }
+        } else { //if player is dead
+            player.setHealth(0.0);
+            this.gameOver(g);
+        }
+
+        //HUD at the bottom, displays on top of both game and game over
+        g.setColor(Color.black);
+        g.fillRect(0, 900, 1000, 100);
+
+        g.setColor(Color.yellow);
+        g.setFont(new Font("Impact", Font.PLAIN, 25));
+        g.drawString("Time: " + seconds, 30, 940);
+        g.drawString("Kills: " + kills, 180, 940);
+        g.drawString("Monster Count:  " + monsters.length + "/" + monsterCount, 300, 940);
+        g.drawString("Wave Number: " + waveNumber, 550, 940);
+        g.drawString("Health: " + player.getHealth(), 750, 940);
+    }
+
+
+
+
+    public Player getPlayer() {
+        return player;
+    }
+
+
+
+
+
     //adds element to array
     public static Monster[] addMonster(Monster[] originalArray, Monster newMonster) {
         Monster[] newMonsterArray = new Monster[originalArray.length + 1];
@@ -167,129 +234,19 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         return newArray;
     }
 
-
-
-
-
-    //This is the main "repaint" method that will redraw every single frame
-    private void drawNextFrame(Graphics g) {
-
-        if(this.isGameOver == false) {
-            //moves onto next wave if all monsters are dead
-            if(monsters.length == 0) {
-                nextWave();
-            }
-
-
-            /*
-            kit.draw(g);
-            armor.draw(g);
-
-
-             */
-            /*
-            if (player.isTouching(kit) || !(kit.getPickedUp())) {
-                player.setHealth(player.getHealth() + 15);
-                kit.setPickedUp(true);
-                kit.hide();
-
-            }
-            */
-
-
-         /*
-         if (player.isTouching(kit.hitbox))  {
-             player.setHealth(player.getHealth() + 15);
-         }
-        */
-
-
-
-            //checks if each monster is dead. If so, the monster is removed from monsters array.
-            Monster[] newMonsters = new Monster[0];
-            for(int i = 0; i < monsters.length; i++) {
-                if(monsters[i].getHealth() > 0.0) {
-                    newMonsters = addMonster(newMonsters, monsters[i]);
-                }
-                else {
-                    kills++;
-                }
-            }
-            monsters = newMonsters.clone();
-
-            //checks if each bullet is dead. If so, the projectile is removed from the array.
-            Projectile[] newProjectiles = new Projectile[0];
-            for(int i = 0; i < bullets.length; i++) {
-                if(bullets[i].getDespawned() == false) {
-                    newProjectiles = addBullet(newProjectiles, bullets[i]);
-                }
-            }
-            bullets = newProjectiles.clone();
-
-            for(int i = 0; i < monsters.length; i++) {
-                monsters[i].draw(g);
-                if(debugOn == true) {
-                    monsters[i].drawHitbox(g);
-                }
-            }
-            for(int i = 0; i < bullets.length; i++) {
-                bullets[i].draw(g);
-                if(debugOn == true) {
-                    bullets[i].drawHitbox(g);
-                }
-            }
-
-            //Calls the draw method of the player
-            player.draw(g);
-
-            if(debugOn == true) {
-                player.drawHitbox(g);
-            }
-
-            //debug screen, more text can be added as needed
-            if(debugOn == true) {
-                g.setColor(Color.WHITE);
-                g.setFont(new Font("Impact", Font.PLAIN, 15));
-                g.drawString("Ticks = " + time, 50, 50);
-                g.drawString("# of bullets = " + bullets.length, 50, 80);
-                g.drawString("Player x = " + player.getX(), 50, 110);
-                g.drawString("Player y = " + player.getY(), 50, 140);
-                g.drawString("Player Health = " + player.getHealth(), 50, 170);
-                g.drawString("Time Seconds = " + seconds, 50, 200);
-                g.drawString("Kills = " + kills, 50, 230);
-            }
-
-            for (int m = 0; m < monsters.length && time%50 == 0; m++) {
-                if (player.isTouching(monsters[m])){
-                    player.setHealth(player.getHealth()-5);
-                }
-            }
-
-            if (time % 50 == 0) {
-                seconds++;
-            }
-
-            if (player.getHealth() <= 0) {
-                this.isGameOver = true;
-            }
-        } else {
-            player.setHealth(0.0);
-            this.gameOver(g);
+    public static Tree[] addTree(Tree[] original, Tree newTree) {
+        Tree[] newArray = new Tree[original.length + 1];
+        for(int i = 0; i < original.length; i++) {
+            newArray[i] = original[i];
         }
-
-        //HUD at the bottom, displays on top of both game and game over
-        g.setColor(Color.black);
-        g.fillRect(0, 900, 1000, 100);
-
-        g.setColor(Color.yellow);
-        g.setFont(new Font("Impact", Font.PLAIN, 25));
-        g.drawString("Time: " + seconds, 30, 940);
-        g.drawString("Kills: " + kills, 180, 940);
-        g.drawString("Monster Count:  " + monsters.length + "/" + monsterCount, 300, 940);
-        g.drawString("Wave Number: " + waveNumber, 550, 940);
-        g.drawString("Health: " + player.getHealth(), 750, 940);
+        newArray[original.length] = newTree;
+        return newArray;
     }
 
+
+
+
+    //generic methods for the arrays
     public Projectile[] getBullets() {
         return bullets;
     }
@@ -302,13 +259,102 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         this.bullets = addBullet(bullets, p);
     }
 
-    public Player getPlayer() {
-        return player;
+
+
+    public Tree[] getTrees() {
+        return trees;
     }
 
-    public void drawTrees() {
-        tree1.draw(graphics);
+    public void setTrees(Tree[] t) {
+        this.trees = t;
     }
+
+    public void appendTree(Tree t) {
+        this.trees = addTree(trees, t);
+    }
+
+
+
+
+
+    public void drawTrees(Graphics g) {
+        for(int i = 0; i < trees.length; i++) {
+            trees[i].draw(g);
+        }
+    }
+
+    public void drawMonsters(Graphics g) {
+        //checks if each monster is dead. If so, the monster is removed from monsters array.
+        Monster[] newMonsters = new Monster[0];
+        for(int i = 0; i < monsters.length; i++) {
+            if(monsters[i].getHealth() > 0.0) {
+                newMonsters = addMonster(newMonsters, monsters[i]);
+            }
+            else {
+                kills++;
+            }
+        }
+        monsters = newMonsters.clone();
+
+        //draws all the monsters
+        for(int i = 0; i < monsters.length; i++) {
+            monsters[i].draw(g);
+            if(debugOn == true) {
+                monsters[i].drawHitbox(g);
+            }
+        }
+        for(int i = 0; i < bullets.length; i++) {
+            bullets[i].draw(g);
+            if(debugOn == true) {
+                bullets[i].drawHitbox(g);
+            }
+        }
+    }
+
+    public void drawBullets(Graphics g) {
+        //checks if each bullet is dead. If so, the projectile is removed from the array.
+        Projectile[] newProjectiles = new Projectile[0];
+        for(int i = 0; i < bullets.length; i++) {
+            if(bullets[i].getDespawned() == false) {
+                newProjectiles = addBullet(newProjectiles, bullets[i]);
+            }
+        }
+        bullets = newProjectiles.clone();
+    }
+
+    public void drawPlayer(Graphics g) {
+        //Calls the draw method of the player
+        player.draw(g);
+
+        if(debugOn == true) {
+            player.drawHitbox(g);
+        }
+
+        //reduces player health if it's they're a zombie
+        for (int m = 0; m < monsters.length && time%50 == 0; m++) {
+            if (player.isTouching(monsters[m])){
+                player.setHealth(player.getHealth()-5);
+            }
+        }
+    }
+
+    public void drawDebug(Graphics g) {
+        //debug overlay, more text can be added as needed
+        if(debugOn == true) {
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Impact", Font.PLAIN, 15));
+            g.drawString("Ticks = " + time, 50, 50);
+            g.drawString("# of bullets = " + bullets.length, 50, 80);
+            g.drawString("Player x = " + player.getX(), 50, 110);
+            g.drawString("Player y = " + player.getY(), 50, 140);
+            g.drawString("Player Health = " + player.getHealth(), 50, 170);
+            g.drawString("Time Seconds = " + seconds, 50, 200);
+            g.drawString("Kills = " + kills, 50, 230);
+        }
+    }
+
+
+
 
     public void gameOver(Graphics g) {
         setBackground(Color.black);
