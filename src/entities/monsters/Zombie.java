@@ -3,9 +3,15 @@ package entities.monsters;
 import entities.Hitbox;
 import zombiesurvivalgame.ZombieSurvivalGame;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
 public class Zombie extends Monster {
@@ -15,17 +21,46 @@ public class Zombie extends Monster {
     public static final int ZOMBIE_WIDTH = 50;
     public static final int ZOMBIE_HEIGHT = 100;
 
-    //public static final Image image = (new ImageIcon("resources/zombie.png")).getImage().getScaledInstance(36, 45,Image.SCALE_SMOOTH);;
+    public Image image;
 
 
     //custom zombie constructor (changing default zombie values)
     public Zombie(int x, int y, double maxHealth, double health, double movementSpeed, int targetX, int targetY, ZombieSurvivalGame game) {
         super(x, y, maxHealth, health, movementSpeed, targetX, targetY, game, x-ZOMBIE_WIDTH/2, y-ZOMBIE_HEIGHT/2, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
+
+        /*
+        BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB); //unused image, just to get rid of error
+        try {
+            originalImage = ImageIO.read(new File("resources/Zombie.png"));
+        } catch (IOException e) {
+            //should never happen
+            e.printStackTrace();
+        }
+        image = new BufferedImage(56, 69, BufferedImage.TYPE_INT_ARGB);
+        AffineTransform t = AffineTransform.getScaleInstance(0.04, 0.04); //divides by 25
+        AffineTransformOp to = new AffineTransformOp(t, AffineTransformOp.TYPE_BILINEAR);
+        image = to.filter(originalImage, (BufferedImage) image);
+        */
     }
 
     //default zombie constructor (normal zombie default values)
     public Zombie(int x, int y, int targetX, int targetY, ZombieSurvivalGame game) {
         super(x, y, ZOMBIE_MAX_HEALTH, ZOMBIE_MAX_HEALTH, ZOMBIE_MOVEMENT_SPEED, targetX, targetY, game,x-ZOMBIE_WIDTH/2, y-ZOMBIE_HEIGHT/2, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
+
+        /*
+        BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB); //unused image, just to get rid of error
+        try {
+            originalImage = ImageIO.read(new File("resources/Zombie.png"));
+        } catch (IOException e) {
+            //should never happen
+            e.printStackTrace();
+        }
+        image = new BufferedImage(56, 69, BufferedImage.TYPE_INT_ARGB);
+        AffineTransform t = AffineTransform.getScaleInstance(0.04, 0.04); //divides by 25
+        AffineTransformOp to = new AffineTransformOp(t, AffineTransformOp.TYPE_BILINEAR);
+        image = to.filter(originalImage, (BufferedImage) image);
+
+         */
     }
 
     public void move() {
@@ -67,7 +102,7 @@ public class Zombie extends Monster {
         //functional code yet, but you can put that here.
         int randInt = (int)(Math.random() * 2);
 
-        //g.drawImage(image, (int) this.getX() - 10, (int) this.getY() - 10, Color.BLACK, null);
+       // g.drawImage(image, (int) this.getX() - 10, (int) this.getY() - 10, Color.BLACK, null);
 
 
         Color zombieColor = new Color(0, 100, 0);
