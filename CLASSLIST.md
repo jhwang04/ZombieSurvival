@@ -55,11 +55,25 @@
   * creates new java window, the graphics display for the game itself
   * drawNextFrame()
     * repaints the window every game tick
-  * can add elements to the Monster[] and Projectile[] arrays
+  * can append elements to the Monster[], Projectile[], and Tree[] arrays
+    * addBullet(), addMonster(), addTree()
   * startNewGame()
     * starts a new game, resetting some variables to 0
   * nextWave()
     * starts a new wave of zombies
+  * drawTrees(Graphics g)
+    * draws all trees
+  * drawPlayer(Graphics g)
+    * draws player, and checks if it's dead
+  * drawMonsters(Graphics g)
+    * draws all monsters, checks if they're dead
+  * drawBullets
+    * draws all bullets, checks if it's despawned
+  * drawDebug
+    * draws the debug text in the top left
+  * gameOver
+    * runs when the player is dead, changes the gameOver flag
+    
 
 ## weapons package
 
@@ -81,6 +95,7 @@
   * can shoot a projectile
   * can draw itself
   * has generic "get" methods to query the current state of instance variables
+  * generic "set" methods to change its fields
   * Uses the mousePressed event to shoot bullets
 
 #### Pistol.java
@@ -116,6 +131,8 @@
     * how far the bullet can go before it despawns
   * boolean despawned
     * whether or not the bullet is despawned
+  * double distanceTraveled
+    * amount of pixels the bullet has traveled
   * Image image
     * the picture of the bullet
   * double trajectory
@@ -192,6 +209,8 @@
 
 **Does:**
   * isTouching, can check if two Hitboxes are in contact with each other
+  * drawHitbox(Graphics g)
+    * draws the hitbox
   * generic "get" methods to query the current values of instance variables
   * generic "set" methods to change the values of the variables
 
@@ -207,6 +226,8 @@
     * current x-coordinate of the monster's target, where it wants to go to.
   * int targetY
 	* current y-coordinate of the monster's target, where it wants to go to.
+  * ZombieSurvivalGame game
+    * the game that the monster is inside
 
 **Does:**
   * _inherits methods from LivingEntity class_
@@ -226,6 +247,12 @@
     * static final int, the default width of a zombie
   * int _ZOMBIE\_HEIGHT_
     * static final int, the default height of a zombie
+
+**Does:**
+  * move()
+    * moves the zombie closer to the player
+  * draw()
+    * draws the zombie
 
 ## entities.friendlyEntities package
 
@@ -262,3 +289,84 @@
   * "set" methods, both to set the amount of coins & points the player has, but also "add" methods to increment the amount.
   * uses the keyPressed and keyReleased events to take player input
   * rotateImageByRadians(BufferedImage image) will return a new buffered image, that's been rotated by the given number of radians.
+
+## misc package
+
+#### Tree.java
+
+**Is a:**
+  * Is a tree, that represents a tree. Will maybe be a hitbox in the future.
+  
+**Has a:**
+  * int x
+    * x coordinate of tree
+  * int y 
+    * y coordinate of tree
+  * Image image
+    * tree image
+
+**Does:**
+  * draw(Graphics g)
+    * draws the tree at the location given
+
+
+
+## misc.items package
+
+#### Armor.java
+
+**Is a:**
+  * An item for the player, that makes the player take less damage
+  * Is also a hitbox
+
+**Has a:**
+  * int x
+    * x coordinate of armor item
+  * int y
+    * y coordinate of armor item
+  * int width
+    * width of armor item
+  * int height
+    * height of armor item
+  * boolean pickedUp
+    * whether or not the armor has been picked up
+
+**Does:**
+  * generic "get" methods
+  * generic "set" methods
+  * hide()
+    * hides the Armor
+  * unHide()
+    * shows the Armor
+  * draw()
+    * draws the Armor
+    
+#### HealthKit.java
+
+**Is a:**
+  * is an item that the player can pick up to heal themselves
+  * is also a hitbox
+
+**Has a:**
+  * int x
+    * x coordinate of item
+  * int y
+    * y coordinate of item
+  * boolean pickedUp
+    * whether or not the item is picked up
+  * Image image
+    * image of the item
+  * ZombieSurvivalGame game
+    * the game that the item is inside
+    
+**Does:**
+  * draw(Graphics g)
+    * draws the healthkit
+  * hide()
+    * hides the healthkit
+  * unhide()
+    * shows the healthkit
+  * "get" methods
+    * query the current state of the variables
+  * "set" methods
+    * set the current state of the variables
