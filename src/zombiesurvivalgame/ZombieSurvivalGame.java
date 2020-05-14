@@ -26,7 +26,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     private int waveNumber; //Assuming we use the wave system, this will hold the wave number.
     public Monster[] monsters = new Monster[0]; //List of all monsters on screen
     private Projectile[] bullets = new Projectile[0];
-    private boolean debugOn = true;
+    private boolean debugOn = false;
     public int seconds;
     public Tree[] trees = new Tree[0];
     public int kills;

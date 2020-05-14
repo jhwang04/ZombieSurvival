@@ -3,6 +3,7 @@ package entities.monsters;
 import entities.Hitbox;
 import zombiesurvivalgame.ZombieSurvivalGame;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -13,6 +14,8 @@ public class Zombie extends Monster {
     public static final double ZOMBIE_MOVEMENT_SPEED = 2.5; //this number is arbitrary. Change as needed for functionality.
     public static final int ZOMBIE_WIDTH = 50;
     public static final int ZOMBIE_HEIGHT = 100;
+
+    //public static final Image image = (new ImageIcon("resources/zombie.png")).getImage().getScaledInstance(36, 45,Image.SCALE_SMOOTH);;
 
 
     //custom zombie constructor (changing default zombie values)
@@ -64,12 +67,17 @@ public class Zombie extends Monster {
         //functional code yet, but you can put that here.
         int randInt = (int)(Math.random() * 2);
 
+        //g.drawImage(image, (int) this.getX() - 10, (int) this.getY() - 10, Color.BLACK, null);
+
+
         Color zombieColor = new Color(0, 100, 0);
 
         g.setColor(zombieColor);
 
 
-        g.fillOval((int) this.getX() - 10, (int) this.getY() - 10, 20, 20);
+        g.fillOval((int) this.getX() - 10, (int) this.getY() - 10, 40, 40);
+
+
     }
 
 
