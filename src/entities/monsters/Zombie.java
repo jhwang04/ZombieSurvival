@@ -13,7 +13,6 @@ public class Zombie extends Monster {
     public static final double ZOMBIE_MOVEMENT_SPEED = 2.5; //this number is arbitrary. Change as needed for functionality.
     public static final int ZOMBIE_WIDTH = 50;
     public static final int ZOMBIE_HEIGHT = 100;
-    //public static Hitbox hitbox;
 
 
     //custom zombie constructor (changing default zombie values)
@@ -24,7 +23,6 @@ public class Zombie extends Monster {
     //default zombie constructor (normal zombie default values)
     public Zombie(int x, int y, int targetX, int targetY, ZombieSurvivalGame game) {
         super(x, y, ZOMBIE_MAX_HEALTH, ZOMBIE_MAX_HEALTH, ZOMBIE_MOVEMENT_SPEED, targetX, targetY, game,x-ZOMBIE_WIDTH/2, y-ZOMBIE_HEIGHT/2, ZOMBIE_WIDTH, ZOMBIE_HEIGHT);
-        //hitbox = new Hitbox(x - 10, y - 10, 20, 20);
     }
 
     public void move() {

@@ -1,7 +1,6 @@
-package misc.Items;
+package misc.items;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
 import entities.*;
 
@@ -14,7 +13,6 @@ public class Armor extends Hitbox {
     private Image image = (new ImageIcon("vestIcon.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);;
     private int width;
     private int height;
-    public Hitbox hitbox;
     public boolean pickedUp;
 
     public Armor(int x, int y) {

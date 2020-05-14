@@ -1,14 +1,12 @@
-package misc.Items;
+package misc.items;
 import entities.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
 import zombiesurvivalgame.*;
 
 public class HealthKit extends Hitbox{
-    public Hitbox hitbox;
     private int x;
     private int y;
     private boolean pickedUp;
