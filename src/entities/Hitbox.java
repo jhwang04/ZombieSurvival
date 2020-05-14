@@ -2,7 +2,7 @@ package entities;
 
 import java.awt.*;
 
-public class Hitbox {
+public abstract class Hitbox {
     private double hx; //x coordinate of the top left corner of the hitbox
     private double hy; //y coordinate of the top left corner of the hitbox
     private int hw; //width of the hitbox
