@@ -16,7 +16,6 @@ public abstract class Projectile extends Hitbox {
     private Image image;
     private double trajectory; //angle of the projectile, measured in degrees
     private ZombieSurvivalGame game;
-    public static Hitbox hitbox;
 
     //default constructor
     public Projectile(double x, double y, double speed, double damage, int range, Image image, double trajectory, ZombieSurvivalGame game, int hx, int hy, int hw, int hh) {
@@ -30,8 +29,6 @@ public abstract class Projectile extends Hitbox {
         this.trajectory = trajectory;
         this.distanceTraveled = 0.0;
         this.game = game;
-
-        hitbox = new Hitbox(x , y, 20, 20);
     }
 
     //move and draw method
@@ -61,10 +58,6 @@ public abstract class Projectile extends Hitbox {
             setHy(y - 10);
             g.fillOval((int) x - 10, (int) y - 10, 20, 20);
         }
-    }
-
-    public boolean hit(Hitbox box) {
-        return hitbox.isTouching(box);
     }
 
     //generic "get" methods
