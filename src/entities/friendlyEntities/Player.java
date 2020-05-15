@@ -182,6 +182,21 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         this.gun = gun;
     }
 
+    public void setArmor() {
+        int r = (int)Math.random()*1;
+
+        /*
+        if (r == 0) {
+            image = ImageIO.read(new File("resources/redskingun.png"));
+        }
+        else if (r == 1) {
+            image = ImageIO.read(new File("resources/camoskingun.png"));
+        }
+
+         */
+
+    }
+
 
 
     //These are taking key input in order to move the player.

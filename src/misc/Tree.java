@@ -13,9 +13,7 @@ public class Tree {
         this.y = y;
     }
     public void draw(Graphics g) {
-        int width = image.getWidth(null);
-        int height = image.getHeight(null);
-        //g.drawImage(image, (int)x - width/2, (int)y - height/2, null);
+        //g.drawImage(image, (int)(Math.random()*900), (int)(Math.random()*900), null);
     }
 }
 

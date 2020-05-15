@@ -26,15 +26,16 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     private int waveNumber; //Assuming we use the wave system, this will hold the wave number.
     public Monster[] monsters = new Monster[0]; //List of all monsters on screen
     private Projectile[] bullets = new Projectile[0];
-    private boolean debugOn = false;
+    private boolean debugOn = true;
     public int seconds;
-    public Tree[] trees = new Tree[0];
+    public Tree[] trees = new Tree[4];
     public int kills;
     public int monsterCount;
     public boolean isGameOver = false;
     Timer clock;
     private HealthKit kit;
     private Armor armor;
+    private int z = 1;
 
 
     //Default constructor
@@ -59,6 +60,9 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         w.addKeyListener(player); //allows player movement
         w.addMouseListener(player.getGun()); //allows gun shooting
         w.addMouseMotionListener(player); //allows player rotation
+
+        kit = new HealthKit(750, 750);
+        armor = new Armor(250, 250);
     }
 
     // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
@@ -112,6 +116,12 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             monsters = addMonster(monsters, new Zombie(zombieX, zombieY, 500, 500, this));
         }
 
+        if (kit.pickedUp == true) {
+            kit.unHide();
+            kit.setX((int)(Math.random() * 900));
+            kit.setY((int)(Math.random() * 900));
+        }
+
     }
 
     // This draws the scene every frame.
@@ -147,23 +157,27 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
                 nextWave();
             }
 
-            /*kit.draw(g);
+            kit.draw(g);
+            kit.drawHitbox(g);
+
             armor.draw(g);
+            armor.drawHitbox(g);
 
-            if (player.isTouching(kit) || !(kit.getPickedUp())) {
+            if (player.isTouching(kit) && (kit.pickedUp == false)) {
                 player.setHealth(player.getHealth() + 15);
-                kit.setPickedUp(true);
                 kit.hide();
-
             }
 
-            if (player.isTouching(kit.hitbox))  {
-                player.setHealth(player.getHealth() + 15);
-            }*/
+            if (player.isTouching(armor) && (armor.pickedUp == false)) {
+                player.setArmor();
+                armor.hide();
+            }
+
+
+
 
             //draws all trees
-            drawTrees(g);
-
+            //adrawTrees(g);
 
             //draws all monsters
             drawMonsters(g);

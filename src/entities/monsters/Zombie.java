@@ -110,7 +110,7 @@ public class Zombie extends Monster {
         g.setColor(zombieColor);
 
 
-        g.fillOval((int) this.getX() - 10, (int) this.getY() - 10, 40, 40);
+        g.fillOval((int) this.getX() - 10, (int) this.getY() - 10, 20, 20);
 
 
     }

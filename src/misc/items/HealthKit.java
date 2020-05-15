@@ -9,8 +9,11 @@ import zombiesurvivalgame.*;
 public class HealthKit extends Hitbox{
     private int x;
     private int y;
-    private boolean pickedUp;
-    public Image image = (new ImageIcon("medKit.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+    private int hideCords;
+    private int unHideCordsX;
+    private int unHideCordsY;
+    public boolean pickedUp;
+    public Image image = (new ImageIcon("resources/medKit.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
     private ZombieSurvivalGame game;
 
     public HealthKit(int x, int y) {
@@ -18,29 +21,48 @@ public class HealthKit extends Hitbox{
 
         pickedUp = false;
 
+        hideCords = -10000;
+        unHideCordsX = x;
+        unHideCordsY = y;
+
+        this.x = x;
+        this.y = y;
 
     }
 
 
     public void draw(Graphics g) {
 
-        int width = image.getWidth(null);
-        int height = image.getHeight(null);
-        g.drawImage(image, (int) x - width / 2, (int) y - height / 2, null);
+        g.drawImage(image, (int) x, (int) y, null);
+
+        this.setHx(this.x);
+        this.setHy(this.y);
 
     }
 
     public void hide() {
         image = (new ImageIcon("empty.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);;
-        this.x = -1000;
-        this.y = -1000;
+        this.x = hideCords;
+        this.y = hideCords;
+        pickedUp = true;
 
     }
 
     public void unHide() {
-        image = (new ImageIcon("medKit.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);;
+        image = (new ImageIcon("resources/medKit.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);;
+        pickedUp = false;
+
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    /*
     public void setPickedUp(boolean b) {
         this.pickedUp = true;
     }
@@ -48,5 +70,5 @@ public class HealthKit extends Hitbox{
     public boolean getPickedUp() {
         return this.pickedUp;
     }
-
+*/
 }
