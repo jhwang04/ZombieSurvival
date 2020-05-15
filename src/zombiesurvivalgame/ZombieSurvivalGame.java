@@ -207,12 +207,13 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         g.fillRect(0, 900, 1000, 100);
 
         g.setColor(Color.yellow);
-        g.setFont(new Font("Impact", Font.PLAIN, 25));
+        g.setFont(new Font("Impact", Font.PLAIN, 24));
         g.drawString("Time: " + seconds, 30, 940);
-        g.drawString("Kills: " + kills, 180, 940);
-        g.drawString("Monster Count:  " + monsters.length + "/" + monsterCount, 300, 940);
-        g.drawString("Wave Number: " + waveNumber, 550, 940);
-        g.drawString("Health: " + player.getHealth(), 750, 940);
+        g.drawString("Kills: " + kills, 130, 940);
+        g.drawString("Monster Count:  " + monsters.length + "/" + monsterCount, 230,  940);
+        g.drawString("Wave Number: " + waveNumber, 450, 940);
+        g.drawString("Health: " + player.getHealth(), 630, 940);
+        g.drawString("Armor Level: " + player.getArmorLevel(), 775, 940);
     }
 
 
