@@ -17,10 +17,10 @@ import java.io.IOException;
 public class Zombie extends Monster {
 
     public static final double ZOMBIE_MAX_HEALTH = 100.0;
-    public static final double ZOMBIE_MOVEMENT_SPEED = 2.5; //this number is arbitrary. Change as needed for functionality.
+    public static final double ZOMBIE_MOVEMENT_SPEED = 1.5; //this number is arbitrary. Change as needed for functionality.
     public static final int ZOMBIE_WIDTH = 56;
     public static final int ZOMBIE_HEIGHT = 69;
-    public static final double ZOMBIE_BASE_DAMAGE = 10.0;
+    public static final double ZOMBIE_BASE_DAMAGE = 5.0;
 
     public static BufferedImage image;
 

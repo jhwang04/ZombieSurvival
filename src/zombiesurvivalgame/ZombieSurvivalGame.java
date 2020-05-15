@@ -117,7 +117,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             }
 
             //increases base damage every other round
-            int baseDamageIncrease = waveNumber/2;
+            int baseDamageIncrease = waveNumber/5;
 
             monsters = addMonster(monsters, new Zombie(zombieX, zombieY, 500, 500, baseDamageIncrease, this));
         }
@@ -125,14 +125,14 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         if(waveNumber%3 == 0) { //spawns a health kit and armor pack every third wave, for balancing purposes
             if (kit.pickedUp == true) {
                 kit.unHide();
-                kit.setX((int)(Math.random() * 900));
-                kit.setY((int)(Math.random() * 900));
+                kit.setX((int)(Math.random() * 850));
+                kit.setY((int)(Math.random() * 850));
             }
 
             if (armor.pickedUp == true) {
                 armor.unHide();
-                armor.setX((int)(Math.random() * 900));
-                armor.setY((int)(Math.random() * 900));
+                armor.setX((int)(Math.random() * 850));
+                armor.setY((int)(Math.random() * 850));
             }
         }
 
