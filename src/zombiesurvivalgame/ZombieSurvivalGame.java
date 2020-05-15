@@ -41,8 +41,9 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     //Default constructor
     public ZombieSurvivalGame() {
 
-        time = 0;
         startNewGame();
+
+        time = 0;
         //Clock inserts a delay between redrawing each frame. For testing, the delay can be modified.
         //The delay is in milliseconds. If you set delay to 20, that's 50 fps.
         clock = new Timer(20, this);
@@ -60,9 +61,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         w.addKeyListener(player); //allows player movement
         w.addMouseListener(player.getGun()); //allows gun shooting
         w.addMouseMotionListener(player); //allows player rotation
-
-        kit = new HealthKit(750, 750);
-        armor = new Armor(250, 250);
     }
 
     // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
@@ -76,13 +74,17 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         player.setGun(new Pistol((int) player.getX(), (int) player.getY(), this));
         monsterCount = 2;
 
+        Zombie.setZombieImage();
+
         seconds = 0;
         kills = 0;
         monsterCount = 0;
         waveNumber = 0;
         kit = new HealthKit(250, 250);
         armor = new Armor(750, 750);
-        appendTree(new Tree((int)Math.random()*900, (int)Math.random()*900));
+        kit.hide();
+        armor.hide();
+        //appendTree(new Tree((int)Math.random()*900, (int)Math.random()*900));
 
     }
 
@@ -93,6 +95,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         waveNumber++;
         monsters = new Monster[0];
 
+        //spawns lots of zombies
         for(int i = 0; i < monsterCount; i++) {
 
             //makes sure that a zombie can't spawn too close to the player
@@ -113,19 +116,24 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
                 }
             }
 
-            monsters = addMonster(monsters, new Zombie(zombieX, zombieY, 500, 500, this));
+            //increases base damage every other round
+            int baseDamageIncrease = waveNumber/2;
+
+            monsters = addMonster(monsters, new Zombie(zombieX, zombieY, 500, 500, baseDamageIncrease, this));
         }
 
-        if (kit.pickedUp == true) {
-            kit.unHide();
-            kit.setX((int)(Math.random() * 900));
-            kit.setY((int)(Math.random() * 900));
-        }
+        if(waveNumber%3 == 0) { //spawns a health kit and armor pack every third wave, for balancing purposes
+            if (kit.pickedUp == true) {
+                kit.unHide();
+                kit.setX((int)(Math.random() * 900));
+                kit.setY((int)(Math.random() * 900));
+            }
 
-        if (armor.pickedUp == true) {
-            armor.unHide();
-            armor.setX((int)(Math.random() * 900));
-            armor.setY((int)(Math.random() * 900));
+            if (armor.pickedUp == true) {
+                armor.unHide();
+                armor.setX((int)(Math.random() * 900));
+                armor.setY((int)(Math.random() * 900));
+            }
         }
 
     }
@@ -163,24 +171,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
                 nextWave();
             }
 
-            kit.draw(g);
-            kit.drawHitbox(g);
-
-            armor.draw(g);
-            armor.drawHitbox(g);
-
-            if (player.isTouching(kit) && (kit.pickedUp == false)) {
-                player.setHealth(player.getHealth() + 15);
-                kit.hide();
-            }
-
-            if (player.isTouching(armor) && (armor.pickedUp == false)) {
-                player.setArmor();
-                armor.hide();
-            }
-
-
-
 
             //draws all trees
             //adrawTrees(g);
@@ -193,6 +183,9 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
             //draws player
             drawPlayer(g);
+
+            //draws health kit and armor
+            drawItems(g);
 
             //draws the debug overlay, only if debugOn == true
             drawDebug(g);
@@ -341,6 +334,27 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         bullets = newProjectiles.clone();
     }
 
+    public void drawItems(Graphics g) {
+        kit.draw(g);
+
+        armor.draw(g);
+
+        if(debugOn == true) {
+            armor.drawHitbox(g);
+            kit.drawHitbox(g);
+        }
+
+        if (player.isTouching(kit) && (kit.pickedUp == false)) {
+            player.setHealth(player.getHealth() + 15);
+            kit.hide();
+        }
+
+        if (player.isTouching(armor) && (armor.pickedUp == false)) {
+            player.increaseArmorLevel();
+            armor.hide();
+        }
+    }
+
     public void drawPlayer(Graphics g) {
         //Calls the draw method of the player
         player.draw(g);
@@ -349,15 +363,20 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             player.drawHitbox(g);
         }
 
-        //reduces player health if it's they're a zombie
+        //reduces player health if it's touching a zombie
         for (int m = 0; m < monsters.length && time%50 == 0; m++) {
             if (player.isTouching(monsters[m])){
-                if (player.getHasArmor() == false) {
-                    player.setHealth(player.getHealth()-5);
+                double damage = monsters[m].getBaseDamage();
+                int armorLevel = player.getArmorLevel();
+
+                double healthDecrease = damage - armorLevel; //damage decreases by 1 per armor level
+
+                if(healthDecrease < 0.0) {
+                    healthDecrease = 0.0;
                 }
-                else {
-                    player.setHealth(player.getHealth()-2.5);
-                }
+
+                player.setHealth(player.getHealth() - healthDecrease);
+
             }
         }
     }

@@ -8,6 +8,7 @@ import zombiesurvivalgame.ZombieSurvivalGame;
 public abstract class Monster extends LivingEntity {
     private int targetX; //x-coordinate of the thing the monster is targeting
     private int targetY; //y-coordinate of the thing the monster is targeting
+    private double baseDamage;
     public ZombieSurvivalGame game;
 
     //default constructor
@@ -36,6 +37,8 @@ public abstract class Monster extends LivingEntity {
         return targetY;
     }
 
+    public double getBaseDamage() {return baseDamage;}
+
     //generic "set" methods
     public void setTargetX(int x) {
         this.targetX = x;
@@ -44,4 +47,6 @@ public abstract class Monster extends LivingEntity {
     public void setTargetY(int y) {
         this.targetY = y;
     }
+
+    public void setBaseDamage(double x) {this.baseDamage = x;}
 }

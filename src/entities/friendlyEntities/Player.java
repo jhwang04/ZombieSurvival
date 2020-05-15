@@ -25,7 +25,9 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
     private int points; //number of points the player has
     private int coins; //number of coins/currency the player has
     private Ranged gun; //player's equipped ranged weapon.
+    private int armorLevel; //armor level, can be increased/upgraded over time
     public BufferedImage image;
+    public BufferedImage armorImage;
 
     private static final int PLAYER_HEIGHT = 69; //constant, for the default height of the player
     private static final int PLAYER_WIDTH = 56; //constant, for the default width of the player
@@ -39,8 +41,6 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
 
     private int mouseX = 0;
     private int mouseY = 0;
-
-    private boolean hasArmor = false;
 
     public Player(int x, int y, double maxHealth, double health) {
         super(x, y, maxHealth, health, PLAYER_MOVEMENT_SPEED, x - PLAYER_WIDTH/2, y-PLAYER_HEIGHT/2, PLAYER_WIDTH, PLAYER_HEIGHT);
@@ -60,6 +60,16 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         AffineTransform t = AffineTransform.getScaleInstance(0.04, 0.04); //divides by 25
         AffineTransformOp to = new AffineTransformOp(t, AffineTransformOp.TYPE_BILINEAR);
         image = to.filter(originalImage, image);
+
+        BufferedImage originalArmorImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        try {
+            originalArmorImage = ImageIO.read(new File("resources/camoskingun.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        armorImage = new BufferedImage(56, 69, BufferedImage.TYPE_INT_ARGB);
+        to = new AffineTransformOp(t, AffineTransformOp.TYPE_BILINEAR);
+        armorImage = to.filter(originalArmorImage, armorImage);
     }
 
     //this is called by the draw method, to determine where the player should be drawn
@@ -138,14 +148,18 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
             refAngle = Math.PI - refAngle;
         }
 
-        BufferedImage rotatedImage = rotateImageByRadians(image, 0-refAngle + Math.PI/2);
+        BufferedImage rotatedImage;
+        if(armorLevel <= 4) {
+            rotatedImage = rotateImageByRadians(image, 0-refAngle + Math.PI/2);
+        } else {
+            rotatedImage = rotateImageByRadians(armorImage, 0-refAngle + Math.PI/2);
+        }
         g.drawImage(rotatedImage, (int) getX() - rotatedImage.getWidth()/2, (int) getY() - rotatedImage.getHeight()/2, null);
 
 
         if(gun != null) {
             gun.setX((int) getX());
             gun.setY((int) getY());
-            //gun.draw(g);
         }
 
 
@@ -163,7 +177,7 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
 
     public Ranged getGun() { return gun; }
 
-    public boolean getHasArmor() { return hasArmor; }
+    public int getArmorLevel() { return armorLevel; }
 
     //"set" methods
     public void setPoints(int points) {
@@ -186,20 +200,12 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         this.gun = gun;
     }
 
-    public void setArmor() {
-        hasArmor = true;
-        int r = (int)Math.random()*1;
+    public void setArmorLevel(int i) {
+        armorLevel = i;
+    }
 
-        /*
-        if (r == 0) {
-            image = ImageIO.read(new File("resources/redskingun.png"));
-        }
-        else if (r == 1) {
-            image = ImageIO.read(new File("resources/camoskingun.png"));
-        }
-
-         */
-
+    public void increaseArmorLevel() {
+        armorLevel += 1;
     }
 
 
