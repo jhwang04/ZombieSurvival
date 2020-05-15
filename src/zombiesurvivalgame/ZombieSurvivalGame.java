@@ -122,6 +122,12 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             kit.setY((int)(Math.random() * 900));
         }
 
+        if (armor.pickedUp == true) {
+            armor.unHide();
+            armor.setX((int)(Math.random() * 900));
+            armor.setY((int)(Math.random() * 900));
+        }
+
     }
 
     // This draws the scene every frame.
@@ -346,7 +352,12 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         //reduces player health if it's they're a zombie
         for (int m = 0; m < monsters.length && time%50 == 0; m++) {
             if (player.isTouching(monsters[m])){
-                player.setHealth(player.getHealth()-5);
+                if (player.getHasArmor() == false) {
+                    player.setHealth(player.getHealth()-5);
+                }
+                else {
+                    player.setHealth(player.getHealth()-2.5);
+                }
             }
         }
     }

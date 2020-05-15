@@ -40,6 +40,8 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
     private int mouseX = 0;
     private int mouseY = 0;
 
+    private boolean hasArmor = false;
+
     public Player(int x, int y, double maxHealth, double health) {
         super(x, y, maxHealth, health, PLAYER_MOVEMENT_SPEED, x - PLAYER_WIDTH/2, y-PLAYER_HEIGHT/2, PLAYER_WIDTH, PLAYER_HEIGHT);
         movingLeft = false;
@@ -161,6 +163,8 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
 
     public Ranged getGun() { return gun; }
 
+    public boolean getHasArmor() { return hasArmor; }
+
     //"set" methods
     public void setPoints(int points) {
         this.points = points;
@@ -183,6 +187,7 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
     }
 
     public void setArmor() {
+        hasArmor = true;
         int r = (int)Math.random()*1;
 
         /*
