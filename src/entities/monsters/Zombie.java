@@ -22,6 +22,7 @@ public class Zombie extends Monster {
     public static final int ZOMBIE_HEIGHT = 69;
     public static final double ZOMBIE_BASE_DAMAGE = 5.0;
 
+
     public static BufferedImage image;
 
 
