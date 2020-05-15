@@ -93,11 +93,18 @@ public class Zombie extends Monster {
 
         double hypotenuse = Math.sqrt(changeX * changeX + changeY * changeY);
 
-        double refAngle = Math.asin(changeY/hypotenuse) ;
-        double cosAngle = Math.acos(changeX/hypotenuse) ;
+        double refAngle = Math.PI/2;
 
-        if(cosAngle > Math.PI/2) {
-            refAngle = Math.PI - refAngle;
+        if(hypotenuse != 0) {
+            refAngle = Math.asin(changeY/hypotenuse) ;
+            double cosAngle = Math.acos(changeX/hypotenuse) ;
+
+            if(cosAngle > Math.PI/2) {
+                refAngle = Math.PI - refAngle;
+            }
+
+            setX(getX() + (getMovementSpeed() * Math.cos(refAngle)));
+            setY(getY() - (getMovementSpeed() * Math.sin(refAngle)));
         }
 
         BufferedImage rotatedImage;
