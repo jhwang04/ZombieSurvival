@@ -32,25 +32,44 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     public int kills;
     public int monsterCount;
     public boolean isGameOver = false;
-    Timer clock;
+    //Timer clock; //no longer used
     private HealthKit kit;
     private Armor armor;
     private int z = 1;
 
+    private JFrame window;
+    private StartScreen startScreen;
+    private GameOverScreen gameOverScreen;
+    private int screen; //the screen that should be displayed, e.g. start screen, game screen, pause screen, etc
+
+    //constants for picking a screen
+    public static final int START_SCREEN = 0;
+    public static final int GAME_SCREEN = 1;
+    public static final int PAUSE_SCREEN = 2;
+    public static final int NEXT_WAVE_SCREEN = 3;
+    public static final int HOW_TO_PLAY_SCREEN = 4;
+    public static final int GAME_OVER_SCREEN = 5;
+
 
     //Default constructor
     public ZombieSurvivalGame() {
-
-        startNewGame();
+        startScreen = new StartScreen(this);
+        gameOverScreen = new GameOverScreen(this);
+        this.screen = START_SCREEN;
 
         time = 0;
         //Clock inserts a delay between redrawing each frame. For testing, the delay can be modified.
         //The delay is in milliseconds. If you set delay to 20, that's 50 fps.
-        clock = new Timer(20, this);
-        clock.start();
+        //clock = new Timer(20, this);
+        //clock.start();
 
         //sets up the window
         JFrame w = new JFrame("ZombieSurvival - by the SavannahBananas");
+        this.window = w;
+
+        w.addMouseListener(startScreen);
+        w.addMouseMotionListener(startScreen);
+
         w.setBounds(200, 0, 1000, 1000);
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container c = w.getContentPane();
@@ -58,14 +77,22 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         w.setVisible(true);
         w.setResizable(false);
 
-        w.addKeyListener(player); //allows player movement
-        w.addMouseListener(player.getGun()); //allows gun shooting
-        w.addMouseMotionListener(player); //allows player rotation
+        long timer = System.currentTimeMillis();
+        while(true) {
+            if(System.currentTimeMillis() - timer > 20) {
+                timer += 20;
+                time++;
+                repaint();
+            }
+        }
+
     }
 
     // start a game. Once we have a "restart" or "Try again" or something, this will be called to restart the game
     // (without restarting the program)
     public void startNewGame() {
+        Zombie.setZombieImage();
+
         time = 0;
         player.setX(500.0);
         player.setY(500.0);
@@ -73,8 +100,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         player.setMaxHealth(100.0);
         player.setGun(new Pistol((int) player.getX(), (int) player.getY(), this));
         monsterCount = 2;
-
-        Zombie.setZombieImage();
 
         seconds = 0;
         kills = 0;
@@ -165,15 +190,13 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     //This is the main "repaint" method that will redraw every single frame
     private void drawNextFrame(Graphics g) {
 
-        if(this.isGameOver == false) {
+        if(screen == START_SCREEN) {
+            startScreen.draw(g);
+        } else if(screen == GAME_SCREEN) {
             //moves onto next wave if all monsters are dead
             if(monsters.length == 0) {
                 nextWave();
             }
-
-
-            //draws all trees
-            //adrawTrees(g);
 
             //draws all monsters
             drawMonsters(g);
@@ -195,25 +218,15 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             }
 
             if (player.getHealth() <= 0) {
-                this.isGameOver = true;
+                changeScreen(GAME_OVER_SCREEN);
             }
-        } else { //if player is dead
+
+            drawHUD(g);
+        } else if(screen == GAME_OVER_SCREEN) { //if player is dead
             player.setHealth(0.0);
-            this.gameOver(g);
+
+            gameOverScreen.draw(g);
         }
-
-        //HUD at the bottom, displays on top of both game and game over
-        g.setColor(Color.black);
-        g.fillRect(0, 900, 1000, 100);
-
-        g.setColor(Color.yellow);
-        g.setFont(new Font("Impact", Font.PLAIN, 24));
-        g.drawString("Time: " + seconds, 30, 940);
-        g.drawString("Kills: " + kills, 130, 940);
-        g.drawString("Monster Count:  " + monsters.length + "/" + monsterCount, 230,  940);
-        g.drawString("Wave Number: " + waveNumber, 450, 940);
-        g.drawString("Health: " + player.getHealth(), 630, 940);
-        g.drawString("Armor Level: " + player.getArmorLevel(), 775, 940);
     }
 
 
@@ -397,8 +410,52 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         }
     }
 
+    public void drawHUD(Graphics g) {
+        //heads up display at the bottom, displays on top of both game and game over
+        g.setColor(Color.black);
+        g.fillRect(0, 900, 1000, 100);
 
+        g.setColor(Color.yellow);
+        g.setFont(new Font("Impact", Font.PLAIN, 24));
+        g.drawString("Time: " + seconds, 30, 940);
+        g.drawString("Kills: " + kills, 130, 940);
+        g.drawString("Monster Count:  " + monsters.length + "/" + monsterCount, 230,  940);
+        g.drawString("Wave Number: " + waveNumber, 450, 940);
+        g.drawString("Health: " + player.getHealth(), 630, 940);
+        g.drawString("Armor Level: " + player.getArmorLevel(), 775, 940);
+    }
 
+    public void changeScreen(int newScreen) {
+        //removes mouse and key listeners for current screen
+        if(screen == START_SCREEN) {
+            window.removeMouseListener(startScreen);
+            window.removeMouseMotionListener(startScreen);
+        } else if(screen == GAME_SCREEN) {
+            window.removeKeyListener(player); //allows player movement
+            window.removeMouseListener(player.getGun()); //allows gun shooting
+            window.removeMouseMotionListener(player); //allows player rotation
+        } else if(screen == GAME_OVER_SCREEN) {
+            window.removeMouseMotionListener(gameOverScreen);
+            window.removeMouseListener(gameOverScreen);
+        }
+
+        //adds mouse and key listeners for new screen, and sets screen variable to be current screen
+        if(newScreen == START_SCREEN) {
+            screen = START_SCREEN;
+            window.addMouseListener(startScreen);
+            window.addMouseMotionListener(startScreen);
+        } else if(newScreen == GAME_SCREEN) {
+            screen = GAME_SCREEN;
+            startNewGame();
+            window.addKeyListener(player);
+            window.addMouseListener(player.getGun());
+            window.addMouseMotionListener(player);
+        } else if(newScreen == GAME_OVER_SCREEN) {
+            screen = GAME_OVER_SCREEN;
+            window.addMouseMotionListener(gameOverScreen);
+            window.addMouseListener(gameOverScreen);
+        }
+    }
 
     public void gameOver(Graphics g) {
         setBackground(Color.black);
@@ -406,6 +463,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         g.drawRect(0, 0, 1000, 1000);
         g.setColor(Color.RED);
         g.setFont(new Font("Impact", Font.BOLD, 150));
-        g.drawString("GAME OVER", 125, 550);
+        g.drawString("GAME OVER", 125, 400);
     }
 }
