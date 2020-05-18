@@ -32,7 +32,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     public int kills;
     public int monsterCount;
     public boolean isGameOver = false;
-    //Timer clock; //no longer used
+    //Timer clock; //no longer used, infinite while is used instead.
     private HealthKit kit;
     private Armor armor;
     private int z = 1;
@@ -94,10 +94,11 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         Zombie.setZombieImage();
 
         time = 0;
+        isGameOver = false;
         player.setX(500.0);
         player.setY(500.0);
         player.setMaxHealth(100.0);
-        player.setMaxHealth(100.0);
+        player.setHealth(100.0);
         player.setGun(new Pistol((int) player.getX(), (int) player.getY(), this));
         monsterCount = 2;
 
@@ -109,8 +110,11 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         armor = new Armor(750, 750);
         kit.hide();
         armor.hide();
-        //appendTree(new Tree((int)Math.random()*900, (int)Math.random()*900));
+        monsters = new Monster[0];
+        bullets = new Projectile[0];
+        //trees = new Tree[0];
 
+        //appendTree(new Tree((int)Math.random()*900, (int)Math.random()*900));
     }
 
     // starts a new wave.  Will be called when all zombies are dead not functional yet)
@@ -198,6 +202,9 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
                 nextWave();
             }
 
+            //draws health kit and armor
+            drawItems(g);
+
             //draws all monsters
             drawMonsters(g);
 
@@ -206,9 +213,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
             //draws player
             drawPlayer(g);
-
-            //draws health kit and armor
-            drawItems(g);
 
             //draws the debug overlay, only if debugOn == true
             drawDebug(g);
@@ -235,10 +239,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     public Player getPlayer() {
         return player;
     }
-
-
-
-
 
     //adds element to array
     public static Monster[] addMonster(Monster[] originalArray, Monster newMonster) {
@@ -419,7 +419,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         g.setFont(new Font("Impact", Font.PLAIN, 24));
         g.drawString("Time: " + seconds, 30, 940);
         g.drawString("Kills: " + kills, 130, 940);
-        g.drawString("Monster Count:  " + monsters.length + "/" + monsterCount, 230,  940);
+        g.drawString("Monsters left:  " + monsters.length + "/" + monsterCount, 230,  940);
         g.drawString("Wave Number: " + waveNumber, 450, 940);
         g.drawString("Health: " + player.getHealth(), 630, 940);
         g.drawString("Armor Level: " + player.getArmorLevel(), 775, 940);
