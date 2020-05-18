@@ -10,7 +10,7 @@ public class Armor extends Hitbox {
 
     private int x;
     private int y;
-    private Image image = (new ImageIcon("resources/vestIcon.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);;
+    private Image image = (new ImageIcon("resources/vestIcon.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);
     private int hideCords;
     private int unHideCordsX;
     private int unHideCordsY;
