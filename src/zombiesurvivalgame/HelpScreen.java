@@ -38,6 +38,7 @@ public class HelpScreen implements MouseMotionListener, MouseListener {
         g.drawString("This is a health kit, for +15 health.", 100, 440);
         g.drawString("This is an armor kit, for +1 armor each.", 100, 520);
         g.drawString("If you get 5 armor, you get a new outfit!", 100, 600);
+        g.drawString("Zombies do more and more damage as time goes on.", 100, 680);
 
         g.drawImage(healthKitImage, 30, 400, null);
         g.fillRect(20, 475, 60, 60);
