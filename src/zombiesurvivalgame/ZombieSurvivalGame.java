@@ -40,6 +40,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     private JFrame window;
     private StartScreen startScreen;
     private GameOverScreen gameOverScreen;
+    private HelpScreen helpScreen;
     private int screen; //the screen that should be displayed, e.g. start screen, game screen, pause screen, etc
 
     //constants for picking a screen
@@ -55,6 +56,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     public ZombieSurvivalGame() {
         startScreen = new StartScreen(this);
         gameOverScreen = new GameOverScreen(this);
+        helpScreen = new HelpScreen(this);
         this.screen = START_SCREEN;
 
         time = 0;
@@ -230,6 +232,8 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             player.setHealth(0.0);
 
             gameOverScreen.draw(g);
+        } else if(screen == HOW_TO_PLAY_SCREEN) {
+            helpScreen.draw(g);
         }
     }
 
@@ -437,6 +441,9 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         } else if(screen == GAME_OVER_SCREEN) {
             window.removeMouseMotionListener(gameOverScreen);
             window.removeMouseListener(gameOverScreen);
+        } else if(screen == HOW_TO_PLAY_SCREEN) {
+            window.removeMouseListener(helpScreen);
+            window.removeMouseMotionListener(helpScreen);
         }
 
         //adds mouse and key listeners for new screen, and sets screen variable to be current screen
@@ -454,6 +461,10 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             screen = GAME_OVER_SCREEN;
             window.addMouseMotionListener(gameOverScreen);
             window.addMouseListener(gameOverScreen);
+        } else if(newScreen == HOW_TO_PLAY_SCREEN) {
+            screen = HOW_TO_PLAY_SCREEN;
+            window.addMouseListener(helpScreen);
+            window.addMouseMotionListener(helpScreen);
         }
     }
 
@@ -464,5 +475,9 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         g.setColor(Color.RED);
         g.setFont(new Font("Impact", Font.BOLD, 150));
         g.drawString("GAME OVER", 125, 400);
+
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Impact", Font.BOLD, 40));
+        g.drawString("You died on wave " + waveNumber + ", with " + kills + " kills.", 200, 525);
     }
 }
