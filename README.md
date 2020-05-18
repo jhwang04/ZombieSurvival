@@ -4,18 +4,20 @@
 
 **Team Members:** Jeremy Mills, Justin Hwang, Rishi Zamvar
 
-**Revision Date:** 4/27 Rev #1
+**Revision Date:** 5/17 Rev #6
 
 **Program Purpose:** After running this program, users will be able to play a zombie survival game, where waves of zombies come at you, while you try to survive.
 
-**Target User Profile:** Our Target User Profile is people who like to play video games, and one who does not enjoy playing cooperatively
+**Target User Profile:** Our Target User Profile is people who like to play games, and for people who want a challenge.
 
-**Feature List:** Some features for our game include zombie waves, finding items on the floor that spawn randomly, healing from certain items, powerups, and more.
+**Feature List:** Some features for our game include zombie waves, shooting, finding items on the floor that spawn randomly, healing from certain items, powerups, and more.
 
-**Instructions:**
-  * Main class is ZombieSurvivalMain.java in the zombiesurvivalgame package
-  * To run the program, copy the source files into an eclipse or IntelliJ project folder, and run the program.
-  * Move by using W, A, S and D. Use the mouse to aim, and click to shoot a bullet.
+**Instructions:** To run the program, copy the source files into Eclipse or IntelliJ and run the folder as a java application.  
+
+Controls:
+  * Move by using W, A, S and D
+  * Left click to fire a weapon
+  * Run over items to pick them up
 
 
 ### Class List:
@@ -24,6 +26,10 @@ For a more detailed class list, go to https://docs.google.com/document/d/1MDbLgl
 
   * ZombieSurvivalMain.java
   * ZombieSurvivalGame.java
+  * Button.java
+  * GameOverScreen.java
+  * HelpScreen.java
+  * StartScreen.java
   * Ranged.java
   * LivingEntity.java
   * Monster.java
@@ -44,9 +50,12 @@ For a more detailed class list, go to https://docs.google.com/document/d/1MDbLgl
 			    Rishi Zamvar - Classes for Zombies, etc.
  
 **Known Bugs/ Workarounds:**
-  * Clock runs slightly slow (about 1 second slow ever 30-35 seconds)
+  * ~~Clock runs slightly slow (about 1 second slow ever 30-35 seconds)~~
+    * Fixed by redoing clock system with System.getTimeInMillis() instead of java.swing.Timer
   * ~~Images won’t show, and/or wont rotate~~
     * Fixed by using AffineTransform and BufferedImage
+  * Mouse alignment with buttons and gun aiming is slightly off
+    * Caused by the thickness of the title bar at the top, and it's different for mac and windows.
 
 
 **Key Learnings:** Learning how to link Github and IntelliJ so making changes is easier.
