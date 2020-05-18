@@ -19,7 +19,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ZombieSurvivalGame extends JPanel implements ActionListener {
+public class ZombieSurvivalGame extends JPanel {
 
     private int time; //counts the number of game ticks since the start of the wave
     public Player player = new Player(500, 500, 100.0, 100.0); //This is the player that the user can control.
@@ -28,14 +28,11 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     private Projectile[] bullets = new Projectile[0];
     private boolean debugOn = true;
     public int seconds;
-    public Tree[] trees = new Tree[4];
+    public Tree[] trees = new Tree[0];
     public int kills;
     public int monsterCount;
-    public boolean isGameOver = false;
-    //Timer clock; //no longer used, infinite while is used instead.
     private HealthKit kit;
     private Armor armor;
-    private int z = 1;
 
     private JFrame window;
     private StartScreen startScreen;
@@ -96,7 +93,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         Zombie.setZombieImage();
 
         time = 0;
-        isGameOver = false;
         player.setX(500.0);
         player.setY(500.0);
         player.setMaxHealth(100.0);
@@ -178,15 +174,6 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
         this.drawNextFrame(g);
 
-    }
-
-    //This event gets activated by the Clock, and repaints the screen.
-    public void actionPerformed(ActionEvent e) {
-
-        if(isGameOver == false) {
-            time++;
-        }
-        repaint();
     }
 
 
