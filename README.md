@@ -22,7 +22,7 @@ Controls:
 
 ### Class List:
 
-For a more detailed class list, go to https://docs.google.com/document/d/1MDbLglAYKyxKVmhb2yUt1ZBj3xgNUlgOH-Qv8g3KdzE/edit?usp=sharing
+For a more detailed class list, go to https://github.com/jhwang04/ZombieSurvival/blob/master/CLASSLIST.md
 
   * ZombieSurvivalMain.java
   * ZombieSurvivalGame.java
