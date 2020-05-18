@@ -141,11 +141,15 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
 
         double hypotenuse = Math.sqrt(changeX * changeX + changeY * changeY);
 
-        double refAngle = Math.asin(changeY/hypotenuse) ;
-        double cosAngle = Math.acos(changeX/hypotenuse) ;
+        double refAngle = Math.PI/2;
 
-        if(cosAngle > Math.PI/2) {
-            refAngle = Math.PI - refAngle;
+        if(hypotenuse != 0) {
+            refAngle = Math.asin(changeY/hypotenuse) ;
+            double cosAngle = Math.acos(changeX/hypotenuse) ;
+
+            if(cosAngle > Math.PI/2) {
+                refAngle = Math.PI - refAngle;
+            }
         }
 
         BufferedImage rotatedImage;
@@ -265,13 +269,13 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        //do nothing
+        mouseMoved(e);
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
-        mouseY = e.getY();
+        mouseY = e.getY() - 32;
     }
 
     public BufferedImage rotateImageByRadians(BufferedImage image, double rad) {

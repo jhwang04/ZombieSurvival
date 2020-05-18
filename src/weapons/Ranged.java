@@ -34,18 +34,22 @@ public class Ranged implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         int mouseX = e.getX();
-        int mouseY = e.getY() - 30;
+        int mouseY = e.getY() - 32;
 
         int changeX = mouseX - x;
         int changeY = y - mouseY;
 
         double hypotenuse = Math.sqrt(changeX * changeX + changeY * changeY);
 
-        double refAngle = Math.asin(changeY/hypotenuse) ;
-        double cosAngle = Math.acos(changeX/hypotenuse) ;
+        double refAngle = Math.PI/2;
 
-        if(cosAngle > Math.PI/2) {
-            refAngle = Math.PI - refAngle;
+        if(hypotenuse != 0) {
+            refAngle = Math.asin(changeY/hypotenuse) ;
+            double cosAngle = Math.acos(changeX/hypotenuse) ;
+
+            if(cosAngle > Math.PI/2) {
+                refAngle = Math.PI - refAngle;
+            }
         }
 
         shoot(refAngle);
