@@ -461,10 +461,10 @@ public class ZombieSurvivalGame extends JPanel {
         g.drawRect(0, 0, 1000, 1000);
         g.setColor(Color.RED);
         g.setFont(new Font("Impact", Font.BOLD, 150));
-        g.drawString("GAME OVER", 125, 400);
+        g.drawString("GAME OVER", 175, 400);
 
         g.setColor(Color.WHITE);
         g.setFont(new Font("Impact", Font.BOLD, 40));
-        g.drawString("You died on wave " + waveNumber + ", with " + kills + " kills.", 200, 525);
+        g.drawString("You died on wave " + waveNumber + ", with " + kills + " kills.", 225, 525);
     }
 }
