@@ -124,6 +124,20 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
             setX(getX() - diagonalX);
             setY(getY() + diagonalY);
         }
+
+        //prevent player from leaving the screen
+        if(getX() > 1000 - getHw()/2) {
+            setX(1000 - getHw()/2);
+        }
+        if(getY() > 900 - getHh()/2) {
+            setY(900 - getHh()/2);
+        }
+        if(getX() < getHw()/2) {
+            setX(getHw() / 2);
+        }
+        if(getY() < getHh()/2) {
+            setY(getHh()/2);
+        }
     }
 
     @Override
