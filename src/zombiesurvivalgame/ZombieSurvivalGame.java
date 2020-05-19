@@ -100,6 +100,7 @@ public class ZombieSurvivalGame extends JPanel {
         player.setMaxHealth(100.0);
         player.setHealth(100.0);
         player.setGun(new Pistol((int) player.getX(), (int) player.getY(), this));
+        player.setArmorLevel(0);
         monsterCount = 2;
 
         seconds = 0;
