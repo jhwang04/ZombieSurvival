@@ -22,7 +22,7 @@ import java.awt.event.ActionListener;
 public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
     private int time; //counts the number of game ticks since the start of the wave
-    public Player player = new Player(500, 500, 100.0, 100.0); //This is the player that the user can control.
+    public Player player = new Player(500, 500, 100.0, 100.0, this); //This is the player that the user can control.
     private int waveNumber; //Assuming we use the wave system, this will hold the wave number.
     public Monster[] monsters = new Monster[0]; //List of all monsters on screen
     private Projectile[] bullets = new Projectile[0];
@@ -41,6 +41,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
     private StartScreen startScreen;
     private GameOverScreen gameOverScreen;
     private HelpScreen helpScreen;
+    private PauseScreen pauseScreen;
     private int screen; //the screen that should be displayed, e.g. start screen, game screen, pause screen, etc
 
     //constants for picking a screen
@@ -57,6 +58,7 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
         startScreen = new StartScreen(this);
         gameOverScreen = new GameOverScreen(this);
         helpScreen = new HelpScreen(this);
+        pauseScreen = new PauseScreen(this);
         this.screen = START_SCREEN;
 
         time = 0;
@@ -234,6 +236,8 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
             gameOverScreen.draw(g);
         } else if(screen == HOW_TO_PLAY_SCREEN) {
             helpScreen.draw(g);
+        } else if(screen == PAUSE_SCREEN) {
+            pauseScreen.draw(g);
         }
     }
 
@@ -431,40 +435,63 @@ public class ZombieSurvivalGame extends JPanel implements ActionListener {
 
     public void changeScreen(int newScreen) {
         //removes mouse and key listeners for current screen
-        if(screen == START_SCREEN) {
-            window.removeMouseListener(startScreen);
-            window.removeMouseMotionListener(startScreen);
-        } else if(screen == GAME_SCREEN) {
-            window.removeKeyListener(player); //allows player movement
-            window.removeMouseListener(player.getGun()); //allows gun shooting
-            window.removeMouseMotionListener(player); //allows player rotation
-        } else if(screen == GAME_OVER_SCREEN) {
-            window.removeMouseMotionListener(gameOverScreen);
-            window.removeMouseListener(gameOverScreen);
-        } else if(screen == HOW_TO_PLAY_SCREEN) {
-            window.removeMouseListener(helpScreen);
-            window.removeMouseMotionListener(helpScreen);
+        switch(screen) {
+            case START_SCREEN:
+                window.removeMouseListener(startScreen);
+                window.removeMouseMotionListener(startScreen);
+                break;
+            case GAME_SCREEN:
+                window.removeKeyListener(player); //allows player movement
+                window.removeMouseListener(player.getGun()); //allows gun shooting
+                window.removeMouseMotionListener(player); //allows player rotation
+                break;
+            case GAME_OVER_SCREEN:
+                window.removeMouseMotionListener(gameOverScreen);
+                window.removeMouseListener(gameOverScreen);
+                break;
+            case HOW_TO_PLAY_SCREEN:
+                window.removeMouseListener(helpScreen);
+                window.removeMouseMotionListener(helpScreen);
+                break;
+            case PAUSE_SCREEN:
+                window.removeMouseListener(pauseScreen);
+                window.removeMouseMotionListener(pauseScreen);
+                break;
         }
 
+
         //adds mouse and key listeners for new screen, and sets screen variable to be current screen
-        if(newScreen == START_SCREEN) {
-            screen = START_SCREEN;
-            window.addMouseListener(startScreen);
-            window.addMouseMotionListener(startScreen);
-        } else if(newScreen == GAME_SCREEN) {
-            screen = GAME_SCREEN;
-            startNewGame();
-            window.addKeyListener(player);
-            window.addMouseListener(player.getGun());
-            window.addMouseMotionListener(player);
-        } else if(newScreen == GAME_OVER_SCREEN) {
-            screen = GAME_OVER_SCREEN;
-            window.addMouseMotionListener(gameOverScreen);
-            window.addMouseListener(gameOverScreen);
-        } else if(newScreen == HOW_TO_PLAY_SCREEN) {
-            screen = HOW_TO_PLAY_SCREEN;
-            window.addMouseListener(helpScreen);
-            window.addMouseMotionListener(helpScreen);
+        switch(newScreen) {
+            case START_SCREEN:
+                screen = START_SCREEN;
+                window.addMouseListener(startScreen);
+                window.addMouseMotionListener(startScreen);
+                break;
+            case GAME_SCREEN:
+                if(screen == START_SCREEN) {
+                    startNewGame(); //only restarts game if going from start screen
+                }
+                screen = GAME_SCREEN;
+                window.addKeyListener(player);
+                window.addMouseListener(player.getGun());
+                window.addMouseMotionListener(player);
+                break;
+            case GAME_OVER_SCREEN:
+                screen = GAME_OVER_SCREEN;
+                window.addMouseMotionListener(gameOverScreen);
+                window.addMouseListener(gameOverScreen);
+                break;
+            case HOW_TO_PLAY_SCREEN:
+                screen = HOW_TO_PLAY_SCREEN;
+                window.addMouseListener(helpScreen);
+                window.addMouseMotionListener(helpScreen);
+                break;
+            case PAUSE_SCREEN:
+                screen = PAUSE_SCREEN;
+                window.addMouseListener(pauseScreen);
+                window.addMouseMotionListener(pauseScreen);
+                break;
+
         }
     }
 

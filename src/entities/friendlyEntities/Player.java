@@ -9,6 +9,7 @@ package entities.friendlyEntities;
 
 import entities.LivingEntity;
 import weapons.Ranged;
+import zombiesurvivalgame.ZombieSurvivalGame;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -28,6 +29,7 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
     private int armorLevel; //armor level, can be increased/upgraded over time
     public BufferedImage image;
     public BufferedImage armorImage;
+    private ZombieSurvivalGame game;
 
     private static final int PLAYER_HEIGHT = 69; //constant, for the default height of the player
     private static final int PLAYER_WIDTH = 56; //constant, for the default width of the player
@@ -42,12 +44,13 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
     private int mouseX = 0;
     private int mouseY = 0;
 
-    public Player(int x, int y, double maxHealth, double health) {
+    public Player(int x, int y, double maxHealth, double health, ZombieSurvivalGame game) {
         super(x, y, maxHealth, health, PLAYER_MOVEMENT_SPEED, x - PLAYER_WIDTH/2, y-PLAYER_HEIGHT/2, PLAYER_WIDTH, PLAYER_HEIGHT);
         movingLeft = false;
         movingRight = false;
         movingUp = false;
         movingDown = false;
+        this.game = game;
 
         BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB); //unused image, just to get rid of error
         try {
@@ -275,6 +278,9 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
                 break;
             case KeyEvent.VK_D:
                 movingRight = false;
+                break;
+            case KeyEvent.VK_ESCAPE:
+                game.changeScreen(ZombieSurvivalGame.PAUSE_SCREEN);
             default:
                 //do nothing, if it's not a meaningful input
                 break;
