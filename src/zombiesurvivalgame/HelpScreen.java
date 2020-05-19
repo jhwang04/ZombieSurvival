@@ -32,14 +32,14 @@ public class HelpScreen implements MouseMotionListener, MouseListener {
         g.setColor(Color.WHITE);
         g.setFont(new Font("Impact", Font.BOLD, 40));
 
-        g.drawString("Move with the W, A, S and D keys.", 100, 180);
-        g.drawString("Use the mouse to aim, and click to shoot.", 100, 260);
-        g.drawString("Watch out for zombies!", 100, 340);
-        g.drawString("This is a health kit, for +15 health.", 100, 420);
-        g.drawString("This is an armor kit, for +1 armor each.", 100, 500);
-        g.drawString("If you get 5 armor, you get a new outfit!", 100, 580);
-        g.drawString("You can pause at any time with the ESC key.", 100, 660);
-        g.drawString("Zombies do more damage as time goes on.", 100, 730);
+        g.drawString("Move with the W, A, S and D keys.", 100, 160);
+        g.drawString("Use the mouse to aim, and click to shoot.", 100, 240);
+        g.drawString("Watch out for zombies!", 100, 320);
+        g.drawString("This is a health kit, for +15 health.", 100, 400);
+        g.drawString("This is an armor kit, for +1 armor each.", 100, 480);
+        g.drawString("If you get 5 armor, you get a new outfit!", 100, 560);
+        g.drawString("You can pause at any time with the ESC key.", 100, 640);
+        g.drawString("Zombies do more damage as time goes on.", 100, 720);
 
         g.drawImage(healthKitImage, 30, 400, null);
         g.fillRect(20, 475, 60, 60);

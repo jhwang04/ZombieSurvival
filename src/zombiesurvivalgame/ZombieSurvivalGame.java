@@ -33,6 +33,7 @@ public class ZombieSurvivalGame extends JPanel {
     public int monsterCount;
     private HealthKit kit;
     private Armor armor;
+    private int titleBarThickness;
 
     private JFrame window;
     private StartScreen startScreen;
@@ -159,7 +160,7 @@ public class ZombieSurvivalGame extends JPanel {
                 kit.setY((int)(Math.random() * 850));
             }
 
-            if (armor.pickedUp == true) {
+            if (armor.pickedUp == true && player.getArmorLevel() <= 9) {
                 armor.unHide();
                 armor.setX((int)(Math.random() * 850));
                 armor.setY((int)(Math.random() * 850));
@@ -379,13 +380,13 @@ public class ZombieSurvivalGame extends JPanel {
                 double damage = monsters[m].getBaseDamage();
                 int armorLevel = player.getArmorLevel();
 
-                double healthDecrease = damage - armorLevel; //damage decreases by 1 per armor level
+                double healthDecrease = damage * (1 - (armorLevel/10.0)); //damage decreases by 1 per armor level
 
                 if(healthDecrease < 0.0) {
                     healthDecrease = 0.0;
                 }
 
-                player.setHealth(player.getHealth() - healthDecrease);
+                //player.setHealth(player.getHealth() - healthDecrease);
 
             }
         }
