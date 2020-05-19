@@ -6,20 +6,20 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public class HelpScreen implements MouseMotionListener, MouseListener {
+public class PauseScreen implements MouseMotionListener, MouseListener {
     private int mouseX;
     private int mouseY;
     private boolean isMousePressed;
     private ZombieSurvivalGame game;
-    private static Image healthKitImage = (new ImageIcon("resources/medKit.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-    private static Image armorKitImage = (new ImageIcon("resources/vestIcon.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);
 
+    private Button resumeButton;
     private Button menuButton;
 
 
-    public HelpScreen(ZombieSurvivalGame game) {
+    public PauseScreen(ZombieSurvivalGame game) {
         this.game = game;
-        menuButton = new Button(250, 750, 500, 150, Color.BLUE, Color.RED);
+        resumeButton = new Button(250, 400, 500, 150, Color.BLUE, Color.RED);
+        menuButton = new Button(250, 600, 500, 150, Color.BLUE, Color.RED);
     }
 
 
@@ -27,38 +27,28 @@ public class HelpScreen implements MouseMotionListener, MouseListener {
         g.setColor(Color.BLACK);
         g.fillRect(-1, -1, 1002, 1002);
 
+        resumeButton.draw(g);
         menuButton.draw(g);
-
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("Impact", Font.BOLD, 40));
-
-        g.drawString("Move with the W, A, S and D keys.", 100, 180);
-        g.drawString("Use the mouse to aim, and click to shoot.", 100, 260);
-        g.drawString("Watch out for zombies!", 100, 340);
-        g.drawString("This is a health kit, for +15 health.", 100, 420);
-        g.drawString("This is an armor kit, for +1 armor each.", 100, 500);
-        g.drawString("If you get 5 armor, you get a new outfit!", 100, 580);
-        g.drawString("You can pause at any time with the ESC key.", 100, 660);
-        g.drawString("Zombies do more damage as time goes on.", 100, 730);
-
-        g.drawImage(healthKitImage, 30, 400, null);
-        g.fillRect(20, 475, 60, 60);
-        g.drawImage(armorKitImage, 30, 485, null);
 
         g.setFont(new Font("Impact", Font.BOLD, 70));
         g.setColor(Color.WHITE);
-        g.drawString("Main Menu", 330, 850);
-        g.drawString("How to play", 310, 100);
+        g.drawString("Continue", 350, 500);
+        g.drawString("Game Paused", 290, 100);
+        g.drawString("Quit", 430, 700);
 
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         isMousePressed = false;
+        resumeButton.setPressed(false);
+        resumeButton.setHovered(false);
         menuButton.setPressed(false);
         menuButton.setHovered(false);
-        if(menuButton.isTouchedBy(mouseX, mouseY)) {
-            game.changeScreen(game.START_SCREEN);
+        if(resumeButton.isTouchedBy(mouseX, mouseY)) {
+            game.changeScreen(ZombieSurvivalGame.GAME_SCREEN);
+        } else if(menuButton.isTouchedBy(mouseX, mouseY)) {
+            game.changeScreen(ZombieSurvivalGame.START_SCREEN);
         }
     }
 
@@ -66,6 +56,16 @@ public class HelpScreen implements MouseMotionListener, MouseListener {
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
         mouseY = e.getY() - 32;
+
+        if(resumeButton.isTouchedBy(mouseX, mouseY)) {
+            resumeButton.setHovered(true);
+            if(isMousePressed == true) {
+                resumeButton.setPressed(true);
+            }
+        } else {
+            resumeButton.setHovered(false);
+            resumeButton.setPressed(false);
+        }
 
         if(menuButton.isTouchedBy(mouseX, mouseY)) {
             menuButton.setHovered(true);
@@ -81,10 +81,10 @@ public class HelpScreen implements MouseMotionListener, MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         isMousePressed = true;
-        if(menuButton.isTouchedBy(mouseX, mouseY)) {
-            menuButton.setPressed(true);
+        if(resumeButton.isTouchedBy(mouseX, mouseY)) {
+            resumeButton.setPressed(true);
         } else {
-            menuButton.setPressed(false);
+            resumeButton.setPressed(false);
         }
     }
 
