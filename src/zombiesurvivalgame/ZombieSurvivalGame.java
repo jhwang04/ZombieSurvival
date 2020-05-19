@@ -386,7 +386,7 @@ public class ZombieSurvivalGame extends JPanel {
                     healthDecrease = 0.0;
                 }
 
-                //player.setHealth(player.getHealth() - healthDecrease);
+                player.setHealth(player.getHealth() - healthDecrease);
 
             }
         }
