@@ -229,6 +229,8 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         armorLevel += 1;
     }
 
+    public void resetImage() throws IOException { image = ImageIO.read(new File("resources/playergun.png")); }
+
 
 
     //These are taking key input in order to move the player.

@@ -26,7 +26,7 @@ public class ZombieSurvivalGame extends JPanel {
     private int waveNumber; //Assuming we use the wave system, this will hold the wave number.
     public Monster[] monsters = new Monster[0]; //List of all monsters on screen
     private Projectile[] bullets = new Projectile[0];
-    private boolean debugOn = true;
+    private boolean debugOn = false;
     public int seconds;
     public Tree[] trees = new Tree[0];
     public int kills;
@@ -108,6 +108,7 @@ public class ZombieSurvivalGame extends JPanel {
         kills = 0;
         monsterCount = 0;
         waveNumber = 0;
+        player.setArmorLevel(0);
         kit = new HealthKit(250, 250);
         armor = new Armor(750, 750);
         kit.hide();
@@ -159,7 +160,6 @@ public class ZombieSurvivalGame extends JPanel {
                 kit.setX((int)(Math.random() * 850));
                 kit.setY((int)(Math.random() * 850));
             }
-
             if (armor.pickedUp == true && player.getArmorLevel() <= 9) {
                 armor.unHide();
                 armor.setX((int)(Math.random() * 850));
