@@ -29,7 +29,7 @@ public class StartScreen implements MouseMotionListener, MouseListener {
 
         g.setFont(new Font("Impact", Font.BOLD, 100));
         g.setColor(Color.WHITE);
-        g.drawString("ZombieSurvival", 150, 175);
+        g.drawString("ZombieSurvival", 200, 175);
 
         startButton.draw(g);
         helpButton.draw(g);

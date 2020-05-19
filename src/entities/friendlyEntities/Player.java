@@ -280,6 +280,10 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
                 movingRight = false;
                 break;
             case KeyEvent.VK_ESCAPE:
+                movingRight = false;
+                movingLeft = false;
+                movingUp = false;
+                movingDown = false;
                 game.changeScreen(ZombieSurvivalGame.PAUSE_SCREEN);
             default:
                 //do nothing, if it's not a meaningful input
