@@ -30,7 +30,7 @@ public class HelpScreen implements MouseMotionListener, MouseListener {
         menuButton.draw(g);
 
         g.setColor(Color.WHITE);
-        g.setFont(new Font("Impact", Font.BOLD, 40));
+        g.setFont(new Font("Impact", Font.PLAIN, 40));
 
         g.drawString("Move with the W, A, S and D keys.", 100, 160);
         g.drawString("Use the mouse to aim, and click to shoot.", 100, 240);

@@ -1,3 +1,4 @@
+//Manually change the variable "debugOn" to show hitboxes and other details
 /*
 Savannah Bananas
 4/28/2020
@@ -39,6 +40,7 @@ public class ZombieSurvivalGame extends JPanel {
     private GameOverScreen gameOverScreen;
     private HelpScreen helpScreen;
     private PauseScreen pauseScreen;
+    private WaveCompleteScreen waveScreen;
     private int screen; //the screen that should be displayed, e.g. start screen, game screen, pause screen, etc
 
     //constants for picking a screen
@@ -56,6 +58,7 @@ public class ZombieSurvivalGame extends JPanel {
         gameOverScreen = new GameOverScreen(this);
         helpScreen = new HelpScreen(this);
         pauseScreen = new PauseScreen(this);
+        waveScreen = new WaveCompleteScreen(this);
         this.screen = START_SCREEN;
 
         time = 0;
@@ -115,6 +118,8 @@ public class ZombieSurvivalGame extends JPanel {
         armor.hide();
         monsters = new Monster[0];
         bullets = new Projectile[0];
+
+        nextWave();
         //trees = new Tree[0];
 
         //appendTree(new Tree((int)Math.random()*900, (int)Math.random()*900));
@@ -126,6 +131,8 @@ public class ZombieSurvivalGame extends JPanel {
         monsterCount += 2;
         waveNumber++;
         monsters = new Monster[0];
+
+        player.stopMoving();
 
         //spawns lots of zombies
         for(int i = 0; i < monsterCount; i++) {
@@ -193,6 +200,7 @@ public class ZombieSurvivalGame extends JPanel {
             //moves onto next wave if all monsters are dead
             if(monsters.length == 0) {
                 nextWave();
+                changeScreen(NEXT_WAVE_SCREEN);
             }
 
             //draws health kit and armor
@@ -221,12 +229,14 @@ public class ZombieSurvivalGame extends JPanel {
             drawHUD(g);
         } else if(screen == GAME_OVER_SCREEN) { //if player is dead
             player.setHealth(0.0);
-
             gameOverScreen.draw(g);
         } else if(screen == HOW_TO_PLAY_SCREEN) {
             helpScreen.draw(g);
         } else if(screen == PAUSE_SCREEN) {
             pauseScreen.draw(g);
+        } else if(screen == NEXT_WAVE_SCREEN) {
+            waveScreen.draw(g);
+            drawHUD(g);
         }
     }
 
@@ -236,6 +246,10 @@ public class ZombieSurvivalGame extends JPanel {
     public Player getPlayer() {
         return player;
     }
+
+    public int getWave() {return waveNumber;}
+
+    public int getMonsterCount() {return monsterCount;}
 
     //adds element to array
     public static Monster[] addMonster(Monster[] originalArray, Monster newMonster) {
@@ -312,9 +326,11 @@ public class ZombieSurvivalGame extends JPanel {
         for(int i = 0; i < monsters.length; i++) {
             if(monsters[i].getHealth() > 0.0) {
                 newMonsters = addMonster(newMonsters, monsters[i]);
-            }
-            else {
+            } else {
                 kills++;
+                player.addPoints(10);
+                int coinsToAdd = 5 + (int)(10 * Math.random()); //gives player 5-15 coins each kill
+                player.addCoins(coinsToAdd);
             }
         }
         monsters = newMonsters.clone();
@@ -449,6 +465,10 @@ public class ZombieSurvivalGame extends JPanel {
                 window.removeMouseListener(pauseScreen);
                 window.removeMouseMotionListener(pauseScreen);
                 break;
+            case NEXT_WAVE_SCREEN:
+                window.removeMouseListener(waveScreen);
+                window.removeMouseMotionListener(waveScreen);
+                break;
         }
 
 
@@ -462,6 +482,8 @@ public class ZombieSurvivalGame extends JPanel {
             case GAME_SCREEN:
                 if(screen == START_SCREEN) {
                     startNewGame(); //only restarts game if going from start screen
+                } else if(screen == NEXT_WAVE_SCREEN) {
+                    //nextWave();
                 }
                 screen = GAME_SCREEN;
                 window.addKeyListener(player);
@@ -483,7 +505,11 @@ public class ZombieSurvivalGame extends JPanel {
                 window.addMouseListener(pauseScreen);
                 window.addMouseMotionListener(pauseScreen);
                 break;
-
+            case NEXT_WAVE_SCREEN:
+                screen = NEXT_WAVE_SCREEN;
+                window.addMouseMotionListener(waveScreen);
+                window.addMouseListener(waveScreen);
+                break;
         }
     }
 

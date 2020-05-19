@@ -30,6 +30,8 @@ For a more detailed class list, go to https://github.com/jhwang04/ZombieSurvival
   * GameOverScreen.java
   * HelpScreen.java
   * StartScreen.java
+  * PauseScreen.java
+  * WaveCompleteScreen.java
   * Ranged.java
   * LivingEntity.java
   * Monster.java

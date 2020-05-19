@@ -53,6 +53,10 @@
     * the black "GAME OVER" screen
   * HelpScreen helpScreen
     * the "how to play" screen
+  * PauseScreen pauseScreen
+    * the "paused" screen when the user clicks "ESC"
+  * WaveCompleteScreen waveScreen
+    * the "wave complete" screen when the user defeats a wave of zombies
   * int screen
     * which screen the user is on (main game screen, help, etc)
   * static final int _START\_SCREEN_ = 0
@@ -170,7 +174,7 @@
   * MouseEvent methods
     * mousePressed, mouseReleased, mouseMoved, for mouse clicks and movement
 
-### HelpScreen.java
+### PauseScreen.java
 **Is a:**
   * Display for the "paused" screen of the game
   * implements MouseListener and MouseMotionListener
@@ -185,6 +189,26 @@
     * back to main menu button
   * Button resumeButton
     * button to resume the game
+
+**Methods:**
+  * draw(Graphics g)
+    * draws the screen
+  * MouseEvent methods
+    * mousePressed, mouseReleased, mouseMoved, for detecting clicking/moving
+
+### WaveCompleteScreen.java
+**Is a:**
+  * Display for the "Wave complete" screen of the game
+  * implements MouseListener and MouseMotionListener
+  
+**Fields:**
+  * int mouseX
+  * int mouseY
+  * boolean isMousePressed
+  * ZombieSurvivalGame game
+    * game window that the display is inside of
+  * Button nextWaveButton
+    * button to advance to the next wave
 
 **Methods:**
   * draw(Graphics g)
@@ -440,6 +464,8 @@
     * moves the player to the location for the next frame (using keyboard input)
   * draw() (overrides the LivingEntity's draw method)
   * generic "get" commands to query points and coins
+  * stopMoving()
+    * stops all player movement
   * "set" methods, both to set the amount of coins & points the player has, but also "add" methods to increment the amount.
   * uses the keyPressed and keyReleased events to take player input
   * rotateImageByRadians(BufferedImage image) will return a new buffered image, that's been rotated by the given number of radians.
