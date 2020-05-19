@@ -301,7 +301,7 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
-        mouseY = e.getY() - 32;
+        mouseY = e.getY();
     }
 
     public BufferedImage rotateImageByRadians(BufferedImage image, double rad) {

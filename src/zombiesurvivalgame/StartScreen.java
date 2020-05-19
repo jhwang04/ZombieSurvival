@@ -13,12 +13,14 @@ public class StartScreen implements MouseMotionListener, MouseListener {
 
     private Button startButton;
     private Button helpButton;
+    private Button quitButton;
 
 
     public StartScreen(ZombieSurvivalGame game) {
         this.game = game;
-        this.startButton = new Button(250, 400, 500, 150, Color.BLUE, Color.RED);
-        this.helpButton = new Button(250, 600, 500, 150, Color.BLUE, Color.RED);
+        this.startButton = new Button(250, 300, 500, 150, Color.BLUE, Color.RED);
+        this.helpButton = new Button(250, 500, 500, 150, Color.BLUE, Color.RED);
+        this.quitButton = new Button(250, 700, 500, 150, Color.BLUE, Color.RED);
         isMousePressed = false;
     }
 
@@ -33,11 +35,13 @@ public class StartScreen implements MouseMotionListener, MouseListener {
 
         startButton.draw(g);
         helpButton.draw(g);
+        quitButton.draw(g);
 
         g.setFont(new Font("Impact", Font.BOLD, 70));
         g.setColor(Color.WHITE);
-        g.drawString("Start Game", 330, 500);
-        g.drawString("How to play", 320, 700);
+        g.drawString("Start Game", 330, 400);
+        g.drawString("How to play", 320, 600);
+        g.drawString("Quit Game", 340, 800);
     }
 
     @Override
@@ -46,8 +50,10 @@ public class StartScreen implements MouseMotionListener, MouseListener {
 
         helpButton.setPressed(false);
         startButton.setPressed(false);
+        quitButton.setPressed(false);
         helpButton.setHovered(false);
         startButton.setHovered(false);
+        quitButton.setHovered(false);
 
         if(startButton.isTouchedBy(mouseX, mouseY)) {
             game.changeScreen(game.GAME_SCREEN);
@@ -56,12 +62,16 @@ public class StartScreen implements MouseMotionListener, MouseListener {
         if(helpButton.isTouchedBy(mouseX, mouseY)) {
             game.changeScreen(game.HOW_TO_PLAY_SCREEN);
         }
+
+        if(quitButton.isTouchedBy(mouseX, mouseY)) {
+            System.exit(0);
+        }
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
-        mouseY = e.getY() - 32;
+        mouseY = e.getY();
 
         if(startButton.isTouchedBy(mouseX, mouseY)) {
             startButton.setHovered(true);
@@ -82,6 +92,16 @@ public class StartScreen implements MouseMotionListener, MouseListener {
             helpButton.setHovered(false);
             helpButton.setPressed(false);
         }
+
+        if(quitButton.isTouchedBy(mouseX, mouseY)) {
+            quitButton.setHovered(true);
+            if(isMousePressed == true) {
+                quitButton.setPressed(true);
+            }
+        } else {
+            quitButton.setHovered(false);
+            quitButton.setPressed(false);
+        }
     }
 
     @Override
@@ -97,6 +117,12 @@ public class StartScreen implements MouseMotionListener, MouseListener {
             helpButton.setPressed(true);
         } else {
             helpButton.setPressed(false);
+        }
+
+        if(quitButton.isTouchedBy(mouseX, mouseY)) {
+            quitButton.setPressed(true);
+        } else {
+            quitButton.setPressed(false);
         }
     }
 

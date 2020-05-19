@@ -33,7 +33,6 @@ public class ZombieSurvivalGame extends JPanel {
     public int monsterCount;
     private HealthKit kit;
     private Armor armor;
-    private int titleBarThickness;
 
     private JFrame window;
     private StartScreen startScreen;
@@ -76,6 +75,7 @@ public class ZombieSurvivalGame extends JPanel {
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container c = w.getContentPane();
         c.add(this);
+        window.setUndecorated(true);
         w.setVisible(true);
         w.setResizable(false);
 

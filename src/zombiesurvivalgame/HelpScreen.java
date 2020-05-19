@@ -65,7 +65,7 @@ public class HelpScreen implements MouseMotionListener, MouseListener {
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
-        mouseY = e.getY() - 32;
+        mouseY = e.getY();
 
         if(menuButton.isTouchedBy(mouseX, mouseY)) {
             menuButton.setHovered(true);

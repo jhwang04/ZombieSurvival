@@ -34,7 +34,7 @@ public class PauseScreen implements MouseMotionListener, MouseListener {
         g.setColor(Color.WHITE);
         g.drawString("Continue", 350, 500);
         g.drawString("Game Paused", 290, 100);
-        g.drawString("Quit", 430, 700);
+        g.drawString("Main Menu", 340, 700);
 
     }
 
@@ -55,7 +55,7 @@ public class PauseScreen implements MouseMotionListener, MouseListener {
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
-        mouseY = e.getY() - 32;
+        mouseY = e.getY();
 
         if(resumeButton.isTouchedBy(mouseX, mouseY)) {
             resumeButton.setHovered(true);
