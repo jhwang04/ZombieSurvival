@@ -197,11 +197,13 @@ public class ZombieSurvivalGame extends JPanel {
         if(screen == START_SCREEN) {
             startScreen.draw(g);
         } else if(screen == GAME_SCREEN) {
+            /*
             //moves onto next wave if all monsters are dead
             if(monsters.length == 0) {
-                nextWave();
                 changeScreen(NEXT_WAVE_SCREEN);
+                nextWave();
             }
+             */
 
             //draws health kit and armor
             drawItems(g);
@@ -347,6 +349,12 @@ public class ZombieSurvivalGame extends JPanel {
             if(debugOn == true) {
                 bullets[i].drawHitbox(g);
             }
+        }
+
+        //moves onto next wave if all monsters are dead
+        if(monsters.length == 0) {
+            changeScreen(NEXT_WAVE_SCREEN);
+            nextWave();
         }
     }
 

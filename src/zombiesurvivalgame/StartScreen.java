@@ -1,5 +1,6 @@
 package zombiesurvivalgame;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -10,6 +11,7 @@ public class StartScreen implements MouseMotionListener, MouseListener {
     private int mouseY;
     private boolean isMousePressed;
     private ZombieSurvivalGame game;
+    private static Image banana = (new ImageIcon("resources/savannahbananas.png")).getImage().getScaledInstance(126, 161,Image.SCALE_SMOOTH);
 
     private Button startButton;
     private Button helpButton;
@@ -32,6 +34,9 @@ public class StartScreen implements MouseMotionListener, MouseListener {
         g.setFont(new Font("Impact", Font.BOLD, 100));
         g.setColor(Color.WHITE);
         g.drawString("ZombieSurvival", 180, 175);
+        g.drawImage(banana, 0, 839, null);
+        g.setFont(new Font("Impact", Font.PLAIN, 30));
+        g.drawString("By the SavannahBananas", 150, 980);
 
         startButton.draw(g);
         helpButton.draw(g);
