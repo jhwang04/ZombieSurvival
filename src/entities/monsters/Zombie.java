@@ -1,3 +1,14 @@
+/*
+Justin hwang and jeremy mills
+5/05/2020
+Rev: 04
+Notes:
+  - basic class
+  - Made zombies follow player
+  Jeremy: Changed zombie image
+  Jeremy: made zombie rotate by using the same code as Player.java
+*/
+
 package entities.monsters;
 
 import entities.Hitbox;

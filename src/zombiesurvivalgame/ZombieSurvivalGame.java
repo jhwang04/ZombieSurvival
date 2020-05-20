@@ -1,9 +1,16 @@
-//Manually change the variable "debugOn" to show hitboxes and other details
 /*
-Savannah Bananas
-4/28/2020
-This is the class that will contain all of the graphics, and will be added to the main class on startup
-*/
+Justin Hwang & Jeremy Mills
+05/19/2020
+Rev: 11
+Notes:
+    Justin: Added basic recursive loop
+    Justin: Added player and monster functionality
+    Jeremy: Added wave system
+    Jeremy: Added armor and health kit images
+    Jeremy: Added health kit
+    Justin: Changed clock system to eliminate unnecessary lag
+    Jeremy: Changed how armor works to be more balanced
+ */
 
 package zombiesurvivalgame;
 
@@ -104,7 +111,7 @@ public class ZombieSurvivalGame extends JPanel {
         player.setY(500.0);
         player.setMaxHealth(100.0);
         player.setHealth(100.0);
-        player.setGun(new SMG((int) player.getX(), (int) player.getY(), this));
+        player.setGun(new Pistol((int) player.getX(), (int) player.getY(), this));
         player.setArmorLevel(0);
         monsterCount = 2;
 

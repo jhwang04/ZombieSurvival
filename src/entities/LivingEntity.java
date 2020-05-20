@@ -1,8 +1,12 @@
 package entities;
 /*
-Savannah Bananas
-04/28/2020
-Generic class for a living entity, which both Monster and Player will extend
+Justin Hwang
+4/28/2020
+Rev: 03
+Notes:
+  - Basic class to be extended by players and zombies
+  - Added the movement speed variable
+  - Added all the "set" commands
 */
 
 import java.awt.*;

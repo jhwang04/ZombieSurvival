@@ -1,4 +1,11 @@
-//Generic abstract ranged weapon class. Extend for pistol, rifle, etc.
+/*
+jeremy and justin
+5/13/2020
+rev: 04
+Notes:
+  - Generic abstract ranged weapon class. Extend for pistol, rifle, etc.
+  - added the mouse listener to listen to clicks
+ */
 
 package weapons;
 

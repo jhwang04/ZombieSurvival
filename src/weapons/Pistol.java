@@ -1,3 +1,13 @@
+/*
+Justin Hwang and Jeremy Mills
+5/19/2020
+Rev: 03
+Notes:
+  - Added basic function
+  Jeremy: Changed how shoot function interacts with Ranged class
+  Jeremy: Removed use of Placeholder pistol image, it's no longer needed
+ */
+
 package weapons;
 
 import weapons.projectiles.PistolBullet;

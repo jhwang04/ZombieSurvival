@@ -1,3 +1,11 @@
+/*
+Justin Hwang
+5/29/2020
+Rev: 03
+Notes: Added functionality for secondary color when the button is hovered
+       Added gray color for a disabled button
+ */
+
 package zombiesurvivalgame;
 
 import java.awt.*;

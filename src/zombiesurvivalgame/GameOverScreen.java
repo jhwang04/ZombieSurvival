@@ -1,3 +1,10 @@
+/*
+Justin Hwang
+05/29/2020
+Rev: 02
+Notes: Added the bar with the player health at the bottom of the window.
+ */
+
 package zombiesurvivalgame;
 
 import java.awt.*;

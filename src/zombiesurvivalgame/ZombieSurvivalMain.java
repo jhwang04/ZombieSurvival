@@ -3,8 +3,12 @@ package zombiesurvivalgame;
 /*
 Savannah Bananas
 4/28/2020
-This class will likely have minimal code, similar to the main class in DanceStudio
-Keep comment headers, but most of what's included here will probably be seen in GitHub with commit messages.
+Rev: 02
+Notes:
+  - This class does pretty much nothing. It makes a new ZombieSurvivalGame,
+    and pretty much all of the computation happens over there.
+    This is similar to the DanceStudio series, where the main class just instantiated
+    a new window class.
 */
 //helo
 public class ZombieSurvivalMain {

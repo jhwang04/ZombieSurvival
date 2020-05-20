@@ -1,3 +1,12 @@
+/*
+Justin Hwang and Jeremy Mills
+5/19/2020
+Rev: 07
+Notes:
+  - Added armor and health kit icons to the screen
+  Jeremy: Added explanation of armor to the screen
+ */
+
 package zombiesurvivalgame;
 
 import javax.swing.*;

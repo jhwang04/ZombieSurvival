@@ -1,3 +1,12 @@
+/*
+Justin Hwang
+5/19/2020
+Rev: 03
+Notes:
+  - Added basic function
+  - Changed buttons to change color when hovered
+ */
+
 package zombiesurvivalgame;
 
 import javax.swing.*;

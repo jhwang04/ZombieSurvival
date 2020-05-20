@@ -1,3 +1,9 @@
+/*
+jeremy mills
+5/12/2020
+Rev: 01
+ */
+
 package misc.items;
 import entities.*;
 

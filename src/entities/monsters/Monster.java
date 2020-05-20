@@ -1,5 +1,12 @@
-//Generic monster class, extend for other monsters.
-
+/*
+justin hwang and jeremy mills
+4/28/2020
+Rev: 03
+Notes:
+  - basic class
+  Jeremy: added base damage
+  Jeremy: added targetx and targetY for motion
+ */
 package entities.monsters;
 
 import entities.LivingEntity;

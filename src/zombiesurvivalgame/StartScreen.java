@@ -1,3 +1,15 @@
+/*
+Justin Hwang and Jeremy Mills
+5/19/2020
+Rev: 06
+Notes:
+  - Added a start button
+  - Added a how to play button
+  - Added an exit button
+  - Added savannah bananas logo in the bottom left
+  - Renamed Exit to "Quit Program"
+ */
+
 package zombiesurvivalgame;
 
 import javax.swing.*;

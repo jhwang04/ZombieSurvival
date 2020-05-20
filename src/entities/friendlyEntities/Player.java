@@ -1,11 +1,18 @@
+package entities.friendlyEntities;
 
 /*
-Savannah Bananas
+Justin hwang and jeremy mills
 4/28/2020
-This is the class of the main character that the user controls.
-*/
-
-package entities.friendlyEntities;
+Rev: 07
+Notes:
+  - general player class, most stuff is basic get/set methods
+  - Added key listener
+  - Added mouse motion listener to be used for rotating the player
+  Jeremy: changed image to be a player instead of a dot
+  Jeremy: changed image to be a player with a gun, and no longer using a pistol image
+  Jeremy: started to use AffineTransform to rotate the player, but stopped for now
+  Justin: finished using AffineTransform, player now rotates
+ */
 
 import entities.LivingEntity;
 import weapons.Ranged;

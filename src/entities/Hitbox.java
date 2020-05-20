@@ -1,3 +1,12 @@
+/*
+Justin Hwang and jeremy
+5/05/2020
+Rev: 02
+Notes:
+  - Used for collisions, which includes bullets, players and zombies
+  Jeremy: changed to not include the borders
+ */
+
 package entities;
 
 import java.awt.*;

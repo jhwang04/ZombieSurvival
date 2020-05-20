@@ -1,3 +1,14 @@
+/*
+Justin Hwang and Jeremy Mills
+5/19/2020
+Rev: 04
+Notes:
+  - Made bare-bones class
+  - Changed button color when hovered
+  Jeremy: Added explanation of armor
+  Jeremy: Changed how the text is displayed
+ */
+
 package zombiesurvivalgame;
 
 import javax.swing.*;

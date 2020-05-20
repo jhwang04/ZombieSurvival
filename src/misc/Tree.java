@@ -1,3 +1,10 @@
+/*
+jeremy mills
+5/10/2020
+Rev: 02
+Notes: not used in the final project, this was experimentation but was abandoned
+ */
+
 package misc;
 
 import javax.swing.*;
