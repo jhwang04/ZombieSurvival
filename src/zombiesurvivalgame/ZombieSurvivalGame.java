@@ -12,6 +12,7 @@ import entities.monsters.Monster;
 import entities.monsters.Zombie;
 import misc.*;
 import weapons.Pistol;
+import weapons.SMG;
 import weapons.projectiles.Projectile;
 import misc.items.*;
 
@@ -103,7 +104,7 @@ public class ZombieSurvivalGame extends JPanel {
         player.setY(500.0);
         player.setMaxHealth(100.0);
         player.setHealth(100.0);
-        player.setGun(new Pistol((int) player.getX(), (int) player.getY(), this));
+        player.setGun(new SMG((int) player.getX(), (int) player.getY(), this));
         player.setArmorLevel(0);
         monsterCount = 2;
 
