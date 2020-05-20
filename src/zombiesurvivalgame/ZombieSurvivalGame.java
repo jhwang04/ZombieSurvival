@@ -197,13 +197,6 @@ public class ZombieSurvivalGame extends JPanel {
         if(screen == START_SCREEN) {
             startScreen.draw(g);
         } else if(screen == GAME_SCREEN) {
-            /*
-            //moves onto next wave if all monsters are dead
-            if(monsters.length == 0) {
-                changeScreen(NEXT_WAVE_SCREEN);
-                nextWave();
-            }
-             */
 
             //draws health kit and armor
             drawItems(g);
@@ -380,7 +373,11 @@ public class ZombieSurvivalGame extends JPanel {
         }
 
         if (player.isTouching(kit) && (kit.pickedUp == false)) {
-            player.setHealth(player.getHealth() + 15);
+            //player.increaseNumOfKits();
+            player.setHealth(player.getHealth() + 20.0);
+            if(player.getHealth() > 100.0) {
+                player.setHealth(100.0);
+            }
             kit.hide();
         }
 
@@ -405,10 +402,6 @@ public class ZombieSurvivalGame extends JPanel {
                 int armorLevel = player.getArmorLevel();
 
                 double healthDecrease = damage * (1 - (armorLevel/10.0)); //damage decreases by 1 per armor level
-
-                if(healthDecrease < 0.0) {
-                    healthDecrease = 0.0;
-                }
 
                 double newHealth = player.getHealth() - healthDecrease;
                 newHealth = ((int) (newHealth * 100))/100.0;
@@ -515,6 +508,7 @@ public class ZombieSurvivalGame extends JPanel {
                 break;
             case NEXT_WAVE_SCREEN:
                 screen = NEXT_WAVE_SCREEN;
+                waveScreen.resetTicks(); //disables buttons for 2 seconds
                 window.addMouseMotionListener(waveScreen);
                 window.addMouseListener(waveScreen);
                 break;

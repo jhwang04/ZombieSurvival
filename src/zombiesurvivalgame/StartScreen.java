@@ -33,7 +33,7 @@ public class StartScreen implements MouseMotionListener, MouseListener {
 
         g.setFont(new Font("Impact", Font.BOLD, 100));
         g.setColor(Color.WHITE);
-        g.drawString("ZombieSurvival", 180, 175);
+        g.drawString("ZombieSurvival", 160, 175);
         g.drawImage(banana, 0, 839, null);
         g.setFont(new Font("Impact", Font.PLAIN, 30));
         g.drawString("By the SavannahBananas", 150, 980);
@@ -46,7 +46,7 @@ public class StartScreen implements MouseMotionListener, MouseListener {
         g.setColor(Color.WHITE);
         g.drawString("Start Game", 330, 400);
         g.drawString("How to play", 320, 600);
-        g.drawString("Quit Game", 340, 800);
+        g.drawString("Stop Program", 280, 800);
     }
 
     @Override

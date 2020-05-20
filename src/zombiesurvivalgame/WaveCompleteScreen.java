@@ -12,15 +12,27 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
     private boolean isMousePressed;
     private ZombieSurvivalGame game;
     private Button nextWaveButton;
+    //private Button useHealthKitButton;
+    private int ticksOnScreen;
 
 
     public WaveCompleteScreen(ZombieSurvivalGame game) {
         this.game = game;
         nextWaveButton = new Button(250, 700, 500, 150, Color.BLUE, Color.RED);
+        nextWaveButton.setEnabled(false);
+        //useHealthKitButton = new Button(700, 700, 250, 100, Color.BLUE, Color.RED);
+        //useHealthKitButton.setEnabled(false);
     }
 
 
     public void draw(Graphics g) {
+        ticksOnScreen++;
+        if(ticksOnScreen >= 100) {
+            nextWaveButton.setEnabled(true);
+        } else {
+            nextWaveButton.setEnabled(false);
+        }
+
         g.setColor(Color.BLACK);
         g.fillRect(-1, -1, 1002, 1002);
 
@@ -37,8 +49,8 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
         text = text + "Wave " + game.getWave() + " will have " + game.getMonsterCount() + " zombies.\n";
         text = text + "Wave " + game.getWave() + " zombies will do " + game.monsters[0].getBaseDamage() + " damage.\n";
         text = text + "Your armor level of " + game.getPlayer().getArmorLevel() + " will protect you from " + (game.getPlayer().getArmorLevel()*10) + "% of damage.\n";
+        //text = text + "You have " + game.getPlayer().getNumOfKits() + " health kits, which heal 15 health each. Would you like to use one?\n";
 
-        //g.drawString(text, 100, 150);
 
         int lineNumber = 0;
         while(text.contains("\n")) {
@@ -63,7 +75,9 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
         isMousePressed = false;
         nextWaveButton.setPressed(false);
         nextWaveButton.setHovered(false);
-        if(nextWaveButton.isTouchedBy(mouseX, mouseY)) {
+        if(nextWaveButton.isTouchedBy(mouseX, mouseY) && nextWaveButton.getEnabled() == true) {
+            mouseX = -1;
+            mouseY = -1; //prevents mouse from activating it immediately again the next wave.
             game.changeScreen(ZombieSurvivalGame.GAME_SCREEN);
         }
     }
@@ -98,6 +112,10 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
     @Override
     public void mouseDragged(MouseEvent e) {
         mouseMoved(e);
+    }
+
+    public void resetTicks() {
+        this.ticksOnScreen = 0;
     }
 
 

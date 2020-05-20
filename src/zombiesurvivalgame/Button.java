@@ -12,6 +12,7 @@ public class Button {
     private Color secondaryColor;
     private boolean isHovered;
     private boolean isPressed;
+    private boolean isEnabled;
 
     public Button(int x, int y, int w, int h, Color defaultColor, Color secondaryColor) {
         this.x = x;
@@ -23,12 +24,16 @@ public class Button {
         this.currentColor = defaultColor;
         this.isHovered = false;
         this.isPressed = false;
+        this.isEnabled = true;
     }
 
     public void draw(Graphics g) {
         currentColor = defaultColor;
         if(isHovered == true) {
             currentColor = secondaryColor;
+        }
+        if(isEnabled == false) {
+            currentColor = Color.GRAY;
         }
 
         g.setColor(currentColor);
@@ -47,11 +52,19 @@ public class Button {
         }
     }
 
+    public boolean getEnabled() {
+        return isEnabled;
+    }
+
     public void setHovered(boolean b) {
         isHovered = b;
     }
 
     public void setPressed(boolean b) {
         isPressed = b;
+    }
+
+    public void setEnabled(boolean b) {
+        isEnabled = b;
     }
 }

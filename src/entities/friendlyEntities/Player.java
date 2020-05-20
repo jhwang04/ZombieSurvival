@@ -30,6 +30,7 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
     public BufferedImage image;
     public BufferedImage armorImage;
     private ZombieSurvivalGame game;
+    private int numOfKits; //the number of health kits the player has in storage
 
     private static final int PLAYER_HEIGHT = 69; //constant, for the default height of the player
     private static final int PLAYER_WIDTH = 56; //constant, for the default width of the player
@@ -200,6 +201,8 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
 
     public int getArmorLevel() { return armorLevel; }
 
+    public int getNumOfKits() {return numOfKits; }
+
     //"set" methods
     public void setPoints(int points) {
         this.points = points;
@@ -221,6 +224,10 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         this.gun = gun;
     }
 
+    public void setNumOfKits(int i) {
+        numOfKits = i;
+    }
+
     public void setArmorLevel(int i) {
         armorLevel = i;
     }
@@ -229,9 +236,16 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         armorLevel += 1;
     }
 
+    public void increaseNumOfKits() {
+        numOfKits += 1;
+    }
+
     public void resetImage() throws IOException { image = ImageIO.read(new File("resources/playergun.png")); }
 
     public void stopMoving() {
+        // this will halt all movement.
+        // This is used when the screen is paused, or the wave is over,
+        // and the key is never released while the player class is listening.
         movingLeft = false;
         movingRight = false;
         movingUp = false;

@@ -209,6 +209,8 @@
     * game window that the display is inside of
   * Button nextWaveButton
     * button to advance to the next wave
+  * Button useHealthKitButton
+    * button to use up one health kit
 
 **Methods:**
   * draw(Graphics g)
@@ -455,6 +457,8 @@
     * private variables, used for determining player movement
   * BufferedImage image
     * the image of the player
+  * int numOfKits
+    * number of health kits the player has in storage
   * ZombieSurvivalGame game
     * the game that the player is inside of
 
