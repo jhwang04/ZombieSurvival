@@ -17,7 +17,7 @@ public class Armor extends Hitbox {
 
     private int x;
     private int y;
-    private Image image = (new ImageIcon("resources/vestIcon.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);
+    private Image image = (new ImageIcon("vestIcon.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);
     private int hideCords;
     private int unHideCordsX;
     private int unHideCordsY;
@@ -54,7 +54,7 @@ public class Armor extends Hitbox {
     }
 
     public void unHide() {
-        image = (new ImageIcon("resources/vestIcon.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);;
+        image = (new ImageIcon("vestIcon.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);;
         pickedUp = false;
     }
 

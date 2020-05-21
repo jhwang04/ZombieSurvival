@@ -23,7 +23,7 @@ public class StartScreen implements MouseMotionListener, MouseListener {
     private int mouseY;
     private boolean isMousePressed;
     private ZombieSurvivalGame game;
-    private static Image banana = (new ImageIcon("resources/savannahbananas.png")).getImage().getScaledInstance(126, 161,Image.SCALE_SMOOTH);
+    private static Image banana = (new ImageIcon("savannahbananas.png")).getImage().getScaledInstance(126, 161,Image.SCALE_SMOOTH);
 
     private Button startButton;
     private Button helpButton;

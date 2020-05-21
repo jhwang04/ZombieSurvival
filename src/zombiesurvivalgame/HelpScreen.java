@@ -20,8 +20,8 @@ public class HelpScreen implements MouseMotionListener, MouseListener {
     private int mouseY;
     private boolean isMousePressed;
     private ZombieSurvivalGame game;
-    private static Image healthKitImage = (new ImageIcon("resources/medKit.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-    private static Image armorKitImage = (new ImageIcon("resources/vestIcon.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);
+    private static Image healthKitImage = (new ImageIcon("medKit.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+    private static Image armorKitImage = (new ImageIcon("vestIcon.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);
 
     private Button menuButton;
 

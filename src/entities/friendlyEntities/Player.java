@@ -62,7 +62,7 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
 
         BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB); //unused image, just to get rid of error
         try {
-            originalImage = ImageIO.read(new File("resources/playergun.png"));
+            originalImage = ImageIO.read(new File("playergun.png"));
         } catch (IOException e) {
             //should never happen
             e.printStackTrace();
@@ -74,7 +74,7 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
 
         BufferedImage originalArmorImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         try {
-            originalArmorImage = ImageIO.read(new File("resources/camoskingun.png"));
+            originalArmorImage = ImageIO.read(new File("camoskingun.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -247,7 +247,7 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         numOfKits += 1;
     }
 
-    public void resetImage() throws IOException { image = ImageIO.read(new File("resources/playergun.png")); }
+    public void resetImage() throws IOException { image = ImageIO.read(new File("playergun.png")); }
 
     public void stopMoving() {
         // this will halt all movement.

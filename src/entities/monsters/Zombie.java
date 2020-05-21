@@ -151,7 +151,7 @@ public class Zombie extends Monster {
     public static void setZombieImage() {
         BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB); //unused image, just to get rid of error
         try {
-            originalImage = ImageIO.read(new File("resources/zombie.png"));
+            originalImage = ImageIO.read(new File("zombie.png"));
         } catch (IOException e) {
             //should never happen
             e.printStackTrace();

@@ -19,7 +19,7 @@ public class HealthKit extends Hitbox{
     private int unHideCordsX;
     private int unHideCordsY;
     public boolean pickedUp;
-    public Image image = (new ImageIcon("resources/medKit.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+    public Image image = (new ImageIcon("medKit.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
     private ZombieSurvivalGame game;
 
     public HealthKit(int x, int y) {
@@ -55,7 +55,7 @@ public class HealthKit extends Hitbox{
     }
 
     public void unHide() {
-        image = (new ImageIcon("resources/medKit.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);;
+        image = (new ImageIcon("medKit.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);;
         pickedUp = false;
 
     }

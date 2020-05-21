@@ -11,13 +11,11 @@ Notes:
 package weapons;
 
 import weapons.projectiles.PistolBullet;
-import weapons.projectiles.Projectile;
 import zombiesurvivalgame.ZombieSurvivalGame;
 
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 public class Pistol extends Ranged {
 
