@@ -7,10 +7,7 @@ Notes:
   Jeremy: added base damage
   Jeremy: added targetx and targetY for motion
  */
-package entities.monsters;
 
-import entities.LivingEntity;
-import zombiesurvivalgame.ZombieSurvivalGame;
 
 public abstract class Monster extends LivingEntity {
     private int targetX; //x-coordinate of the thing the monster is targeting

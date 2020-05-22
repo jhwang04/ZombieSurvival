@@ -9,7 +9,6 @@ Notes:
   Jeremy: Changed how the text is displayed
  */
 
-package zombiesurvivalgame;
 
 import javax.swing.*;
 import java.awt.*;

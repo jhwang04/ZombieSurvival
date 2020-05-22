@@ -8,12 +8,6 @@ Notes:
   Jeremy: Changed zombie image
   Jeremy: made zombie rotate by using the same code as Player.java
 */
-
-package entities.monsters;
-
-import entities.Hitbox;
-import zombiesurvivalgame.ZombieSurvivalGame;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;

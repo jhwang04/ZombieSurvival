@@ -1,4 +1,3 @@
-package zombiesurvivalgame;
 
 /*
 Savannah Bananas

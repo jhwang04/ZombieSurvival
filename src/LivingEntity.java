@@ -1,4 +1,4 @@
-package entities;
+
 /*
 Justin Hwang
 4/28/2020

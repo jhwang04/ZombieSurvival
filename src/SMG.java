@@ -1,7 +1,9 @@
-package weapons;
-
-import weapons.projectiles.PistolBullet;
-import zombiesurvivalgame.ZombieSurvivalGame;
+/*
+Rishi Zamvar
+5/20/2020
+Rev: 02
+Notes: Added new gun class
+ */
 
 import javax.swing.*;
 import java.awt.*;

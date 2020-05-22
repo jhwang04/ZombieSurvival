@@ -10,7 +10,6 @@ Notes:
   - Renamed Exit to "Quit Program"
  */
 
-package zombiesurvivalgame;
 
 import javax.swing.*;
 import java.awt.*;

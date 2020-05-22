@@ -4,13 +4,9 @@ jeremy mills
 Rev: 01
  */
 
-package misc.items;
-import entities.*;
-
 import javax.swing.*;
 import java.awt.*;
 
-import zombiesurvivalgame.*;
 
 public class HealthKit extends Hitbox{
     private int x;

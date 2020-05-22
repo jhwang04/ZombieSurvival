@@ -7,7 +7,7 @@ Notes:
   - Changed buttons to change color when hovered
  */
 
-package zombiesurvivalgame;
+
 
 import javax.swing.*;
 import java.awt.*;

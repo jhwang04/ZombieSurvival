@@ -1,4 +1,3 @@
-package entities.friendlyEntities;
 
 /*
 Justin hwang and jeremy mills
@@ -14,9 +13,6 @@ Notes:
   Justin: finished using AffineTransform, player now rotates
  */
 
-import entities.LivingEntity;
-import weapons.Ranged;
-import zombiesurvivalgame.ZombieSurvivalGame;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

@@ -7,8 +7,6 @@ Notes:
   Jeremy: changed to not include the borders
  */
 
-package entities;
-
 import java.awt.*;
 
 public abstract class Hitbox {

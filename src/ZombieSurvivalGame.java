@@ -12,17 +12,6 @@ Notes:
     Jeremy: Changed how armor works to be more balanced
  */
 
-package zombiesurvivalgame;
-
-import entities.friendlyEntities.Player;
-import entities.monsters.Monster;
-import entities.monsters.Zombie;
-import misc.*;
-import weapons.Pistol;
-import weapons.SMG;
-import weapons.projectiles.Projectile;
-import misc.items.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

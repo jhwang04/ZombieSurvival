@@ -8,11 +8,6 @@ Notes:
   Jeremy: Removed use of Placeholder pistol image, it's no longer needed
  */
 
-package weapons;
-
-import weapons.projectiles.PistolBullet;
-import zombiesurvivalgame.ZombieSurvivalGame;
-
 
 import javax.swing.*;
 import java.awt.*;

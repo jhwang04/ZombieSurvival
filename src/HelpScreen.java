@@ -7,7 +7,6 @@ Notes:
   Jeremy: Added explanation of armor to the screen
  */
 
-package zombiesurvivalgame;
 
 import javax.swing.*;
 import java.awt.*;

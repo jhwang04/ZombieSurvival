@@ -6,8 +6,6 @@ Notes: Added functionality for secondary color when the button is hovered
        Added gray color for a disabled button
  */
 
-package zombiesurvivalgame;
-
 import java.awt.*;
 
 public class Button {

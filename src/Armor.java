@@ -4,12 +4,7 @@ jeremy mills
 rev: 01
  */
 
-
-package misc.items;
-
 import java.awt.*;
-
-import entities.*;
 
 import javax.swing.*;
 

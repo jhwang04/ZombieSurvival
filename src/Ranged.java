@@ -7,10 +7,6 @@ Notes:
   - added the mouse listener to listen to clicks
  */
 
-package weapons;
-
-import entities.monsters.Zombie;
-import zombiesurvivalgame.ZombieSurvivalGame;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

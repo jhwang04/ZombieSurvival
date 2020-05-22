@@ -1,6 +1,10 @@
-package weapons.projectiles;
+/*
+Justin hwang
+5/22/2020
+Rev: 02
+Notes: Added static final constants
+ */
 
-import zombiesurvivalgame.ZombieSurvivalGame;
 
 import java.awt.*;
 

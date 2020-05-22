@@ -1,8 +1,12 @@
-package weapons.projectiles;
-
-import entities.Hitbox;
-import zombiesurvivalgame.ZombieSurvivalGame;
-
+/*
+Justin hwang
+4/28/2020
+Rev: 03
+Notes:
+  - Generic projectile class to be extended for different bullets
+  - Added distance traveled and despawned fields, so the bullet won't fly off forever
+  - Added actual moving/shooting functionality for the bullets themselves
+ */
 import java.awt.*;
 
 public abstract class Projectile extends Hitbox {
