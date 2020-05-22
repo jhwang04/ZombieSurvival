@@ -18,15 +18,12 @@ import entities.friendlyEntities.Player;
 import entities.monsters.Monster;
 import entities.monsters.Zombie;
 import misc.*;
-import weapons.Pistol;
-import weapons.SMG;
+import weapons.Shotgun;
 import weapons.projectiles.Projectile;
 import misc.items.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ZombieSurvivalGame extends JPanel {
 
@@ -111,7 +108,7 @@ public class ZombieSurvivalGame extends JPanel {
         player.setY(500.0);
         player.setMaxHealth(100.0);
         player.setHealth(100.0);
-        player.setGun(new SMG((int) player.getX(), (int) player.getY(), this));
+        player.setGun(new Shotgun((int) player.getX(), (int) player.getY(), this));
         player.setArmorLevel(0);
         monsterCount = 2;
 
