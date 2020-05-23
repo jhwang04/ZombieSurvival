@@ -22,6 +22,7 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
     private boolean isMousePressed;
     private ZombieSurvivalGame game;
     private Button nextWaveButton;
+    private Button buyShotgunButton;
     //private Button useHealthKitButton;
     private int ticksOnScreen;
 
@@ -30,6 +31,8 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
         this.game = game;
         nextWaveButton = new Button(250, 700, 500, 150, Color.BLUE, Color.RED);
         nextWaveButton.setEnabled(false);
+        buyShotgunButton = new Button(250, 600, 500, 50, Color.BLUE, Color.RED);
+        buyShotgunButton.setEnabled(false);
         //useHealthKitButton = new Button(700, 700, 250, 100, Color.BLUE, Color.RED);
         //useHealthKitButton.setEnabled(false);
     }
@@ -43,10 +46,17 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
             nextWaveButton.setEnabled(false);
         }
 
+        if(game.getPlayer().getCoins() >= 1000 && !(game.getPlayer().getGun() instanceof Shotgun)) {
+            buyShotgunButton.setEnabled(true);
+        } else {
+            buyShotgunButton.setEnabled(false);
+        }
+
         g.setColor(Color.BLACK);
         g.fillRect(-1, -1, 1002, 1002);
 
         nextWaveButton.draw(g);
+        buyShotgunButton.draw(g);
 
         g.setColor(Color.WHITE);
         g.setFont(new Font("Impact", Font.PLAIN, 30));
@@ -60,6 +70,8 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
         text = text + "Wave " + game.getWave() + " zombies will do " + game.monsters[0].getBaseDamage() + " damage.\n";
         text = text + "Your armor level of " + game.getPlayer().getArmorLevel() + " will protect you from " + (game.getPlayer().getArmorLevel()*10) + "% of damage.\n";
         //text = text + "You have " + game.getPlayer().getNumOfKits() + " health kits, which heal 15 health each. Would you like to use one?\n";
+
+        g.drawString("Buy shotgun for 1000 coins?", 340, 635);
 
 
         int lineNumber = 0;
@@ -90,6 +102,15 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
             mouseY = -1; //prevents mouse from activating it immediately again the next wave.
             game.changeScreen(ZombieSurvivalGame.GAME_SCREEN);
         }
+
+        buyShotgunButton.setPressed(false);
+        buyShotgunButton.setHovered(false);
+        if(buyShotgunButton.isTouchedBy(mouseX, mouseY) && nextWaveButton.getEnabled() == true) {
+            mouseX = -1;
+            mouseY = -1; //prevents mouse from activating it immediately again the next wave.
+            game.getPlayer().setGun(new Shotgun((int) game.getPlayer().getX(), (int) game.getPlayer().getY(), game));
+            game.getPlayer().addCoins(-1000);
+        }
     }
 
     @Override
@@ -106,6 +127,16 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
             nextWaveButton.setHovered(false);
             nextWaveButton.setPressed(false);
         }
+
+        if(buyShotgunButton.isTouchedBy(mouseX, mouseY)) {
+            buyShotgunButton.setHovered(true);
+            if(isMousePressed == true) {
+                buyShotgunButton.setPressed(true);
+            }
+        } else {
+            buyShotgunButton.setHovered(false);
+            buyShotgunButton.setPressed(false);
+        }
     }
 
     @Override
@@ -115,6 +146,12 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
             nextWaveButton.setPressed(true);
         } else {
             nextWaveButton.setPressed(false);
+        }
+
+        if(buyShotgunButton.isTouchedBy(mouseX, mouseY)) {
+            buyShotgunButton.setPressed(true);
+        } else {
+            buyShotgunButton.setPressed(false);
         }
     }
 
