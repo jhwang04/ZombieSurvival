@@ -43,7 +43,7 @@ public class Button {
         }
 
         g.setColor(currentColor);
-        if(isPressed == true) {
+        if(isPressed == true && isEnabled == true) {
             g.fillRect(x + 20, y + 20, width - 40, height - 40);
         } else {
             g.fillRect(x, y, width, height);
