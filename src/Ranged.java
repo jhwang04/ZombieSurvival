@@ -37,7 +37,7 @@ public class Ranged implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         int mouseX = e.getX();
-        int mouseY = e.getY() - 32;
+        int mouseY = e.getY();
 
         int changeX = mouseX - x;
         int changeY = y - mouseY;
