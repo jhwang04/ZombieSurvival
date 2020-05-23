@@ -57,7 +57,7 @@ public class StartScreen implements MouseMotionListener, MouseListener {
         g.setColor(Color.WHITE);
         g.drawString("Start Game", 330, 400);
         g.drawString("How to play", 320, 600);
-        g.drawString("Stop Program", 280, 800);
+        g.drawString("Stop Program", 310, 800);
     }
 
     @Override
