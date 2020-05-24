@@ -25,8 +25,6 @@ public class Ranged implements MouseListener {
         this.y = y;
         this.weaponImage = image;
         this.game = game;
-
-
     }
 
     //useful methods

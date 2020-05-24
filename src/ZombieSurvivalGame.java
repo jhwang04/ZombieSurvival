@@ -164,7 +164,7 @@ public class ZombieSurvivalGame extends JPanel {
                 kit.setX((int)(Math.random() * 850));
                 kit.setY((int)(Math.random() * 850));
             }
-            if (armor.pickedUp == true && player.getArmorLevel() <= 9) {
+            if (armor.pickedUp == true && player.getArmorLevel() < 9) {
                 armor.unHide();
                 armor.setX((int)(Math.random() * 850));
                 armor.setY((int)(Math.random() * 850));
