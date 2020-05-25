@@ -1,7 +1,6 @@
-# CLASS LIST - PreRelease 1.0
-### 5/17/2020
-
-## zombiesurvivalgame package
+# CLASS LIST - ProductionRelease 1.0
+### 5/24/2020
+### No packages/folders
 
 ### ZombieSurvivalMain.java
 **Is a:**
@@ -252,9 +251,6 @@
   * setPressed
     * sets the isPressed variable
 
-    
-## weapons package
-
 ### Ranged.java
 **Is a:** Class, represents all ranged weapons. Will be extended to be "pistol" or "rifle" or "bow & arrow".
   * implements MouseListener so that it can take mouse input (to shoot the bullets)
@@ -282,14 +278,24 @@
 
 **Fields:**
   * _Inherits fields from Ranged.java_
-  * Image _PISTOL\_IMAGE_
+  * Image _PLACEHOLDER\_PISTOL\_IMAGE_
     * Is the default image for a pistol
 
 **Methods**
   * _Inherits methods from Ranged.java_
   * Overrides the Ranged "shoot" method (not necessary at the moment because of our lack of graphics)
 
-## weapons.projectiles package
+### Shotgun.java
+**Is a:**
+  * Is a Ranged weapon that sprays five, lower-damage, short-ranged bullets
+
+**Fields:**
+  * _Inherits fields from Ranged.java_
+  * Image _PLACEHOLDER\_SHOTGUN\_IMAGE_
+  
+**Methods**
+  * _Inherits methods from Ranged.java_
+  * Overrides the Ranged "shoot" method to shoot five ShotgunPellets
 
 ### Projectile.java
 **Is a:**
@@ -346,8 +352,22 @@
 **Methods**
   * _Inherits methods from Projectile.java_
   * Calls _super()_ constructor of Projectile.java
-
-## entities package
+  
+### ShotgunPellet.java
+**Is a:**
+  * _Inherits fields from Projectile.java_
+  * double _SHOTGUN\_BULLET\_SPEED_
+    * The default speed of a pistol bullet
+  * double _SHOTGUN\_BULLET\_DAMAGE_
+    * The default damage a pistol bullet does on impact
+  * int _SHOTGUN\_RANGE_
+    * The default range of a pistol bullet before it despawns
+  * int _SHOTGUN\_BULLET\_WIDTH_
+    * default width of the hitbox
+  * int _SHOTGUN\_BULLET\_HEIGHT_
+    * default height of the hitbox
+  * Image _SHOTGUN\_BULLET\_IMAGE_
+    * default image of the pistol bullet (null for now, basic circle is being used);
 
 ### LivingEntity.java
 **Is a:**
@@ -392,8 +412,6 @@
   * generic "get" methods to query the current values of instance variables
   * generic "set" methods to change the values of the variables
 
-## entities.monsters package
-
 ### Monster.java
 **Is a:**
   * Is a LivingEntity, but is also an abstract class to be extended by specific monsters, such as Zombies.
@@ -431,8 +449,6 @@
     * moves the zombie closer to the player
   * draw()
     * draws the zombie
-
-## entities.friendlyEntities package
 
 ### Player.java
 **Is a:**
@@ -474,8 +490,6 @@
   * uses the keyPressed and keyReleased events to take player input
   * rotateImageByRadians(BufferedImage image) will return a new buffered image, that's been rotated by the given number of radians.
 
-## misc package
-
 ### Tree.java
 
 **Is a:**
@@ -492,10 +506,6 @@
 **Methods**
   * draw(Graphics g)
     * draws the tree at the location given
-
-
-
-## misc.items package
 
 ### Armor.java
 
