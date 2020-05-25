@@ -355,6 +355,9 @@
   
 ### ShotgunPellet.java
 **Is a:**
+  * bullet that a shotgun fires
+
+**Fields:**
   * _Inherits fields from Projectile.java_
   * double _SHOTGUN\_BULLET\_SPEED_
     * The default speed of a pistol bullet
@@ -368,6 +371,10 @@
     * default height of the hitbox
   * Image _SHOTGUN\_BULLET\_IMAGE_
     * default image of the pistol bullet (null for now, basic circle is being used);
+
+**Methods:**
+  * _Inherits methods from Projectile.java
+  * Calles _super()_ constructor of Projectile.java
 
 ### LivingEntity.java
 **Is a:**
