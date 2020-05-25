@@ -15,28 +15,32 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class HelpScreen implements MouseMotionListener, MouseListener {
-    private int mouseX;
-    private int mouseY;
-    private boolean isMousePressed;
-    private ZombieSurvivalGame game;
-    private static Image healthKitImage = (new ImageIcon("medKit.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-    private static Image armorKitImage = (new ImageIcon("vestIcon.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH);
+    private int mouseX; //x coord of the mouse
+    private int mouseY; //y coord of the mouse
+    private boolean isMousePressed; //is the mouse pressed?
+    private ZombieSurvivalGame game; //game that the helpscreen is a part of
+    private static Image healthKitImage = (new ImageIcon("medKit.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH); //picture of the healthkit
+    private static Image armorKitImage = (new ImageIcon("vestIcon.png")).getImage().getScaledInstance(40, 40,Image.SCALE_SMOOTH); //picture of the armor
 
-    private Button menuButton;
+    private Button menuButton; //"back to main menu" button
 
 
+    //default constructor
     public HelpScreen(ZombieSurvivalGame game) {
         this.game = game;
         menuButton = new Button(250, 750, 500, 150, Color.BLUE, Color.RED);
     }
 
-
+    //draws the whole screen
     public void draw(Graphics g) {
+        //background (black)
         g.setColor(Color.BLACK);
         g.fillRect(-1, -1, 1002, 1002);
 
+        //draws the menu button
         menuButton.draw(g);
 
+        //draws all the text on the screen
         g.setColor(Color.WHITE);
         g.setFont(new Font("Impact", Font.PLAIN, 40));
 
@@ -49,10 +53,12 @@ public class HelpScreen implements MouseMotionListener, MouseListener {
         g.drawString("You can pause at any time with the ESC key.", 100, 640);
         g.drawString("Zombies do more damage as time goes on.", 100, 720);
 
+        //draws the healthkit and armor icons next to the correct lines
         g.drawImage(healthKitImage, 30, 360, null);
         g.fillRect(20, 435, 60, 60);
         g.drawImage(armorKitImage, 30, 445, null);
 
+        //draws the text on the button
         g.setFont(new Font("Impact", Font.BOLD, 70));
         g.setColor(Color.WHITE);
         g.drawString("Main Menu", 330, 850);
@@ -60,6 +66,7 @@ public class HelpScreen implements MouseMotionListener, MouseListener {
 
     }
 
+    //called when the mouse is released
     @Override
     public void mouseReleased(MouseEvent e) {
         isMousePressed = false;
@@ -70,6 +77,7 @@ public class HelpScreen implements MouseMotionListener, MouseListener {
         }
     }
 
+    //called when the mouse is moved
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
@@ -86,6 +94,7 @@ public class HelpScreen implements MouseMotionListener, MouseListener {
         }
     }
 
+    //called when the mouse is pressed down
     @Override
     public void mousePressed(MouseEvent e) {
         isMousePressed = true;
@@ -97,6 +106,7 @@ public class HelpScreen implements MouseMotionListener, MouseListener {
     }
 
 
+    //called when the mouse is pressed, and then moved
     @Override
     public void mouseDragged(MouseEvent e) {
         mouseMoved(e);

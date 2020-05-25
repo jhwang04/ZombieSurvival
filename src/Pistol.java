@@ -14,6 +14,7 @@ import java.awt.*;
 
 public class Pistol extends Ranged {
 
+    //default pistol image, not being used anymore
     public static final Image PLACEHOLDER_PISTOL_IMAGE = (new ImageIcon("pistol.png")).getImage();
 
     //default constructor
@@ -21,6 +22,7 @@ public class Pistol extends Ranged {
         super(x, y, PLACEHOLDER_PISTOL_IMAGE, game);
     }
 
+    //shoots the pistol
     @Override
     public void shoot(double angle) {
         PistolBullet bullet = new PistolBullet(getX(), getY(), angle, this.game);

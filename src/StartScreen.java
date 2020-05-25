@@ -18,17 +18,17 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class StartScreen implements MouseMotionListener, MouseListener {
-    private int mouseX;
-    private int mouseY;
-    private boolean isMousePressed;
-    private ZombieSurvivalGame game;
-    private static Image banana = (new ImageIcon("savannahbananas.png")).getImage().getScaledInstance(126, 161,Image.SCALE_SMOOTH);
+    private int mouseX; //x coordinate of the mouse
+    private int mouseY; //y coordinate of the mouse
+    private boolean isMousePressed; //whether or not the mouse is pressed
+    private ZombieSurvivalGame game; //the game that the screen is a part of
+    private static Image banana = (new ImageIcon("savannahbananas.png")).getImage().getScaledInstance(126, 161,Image.SCALE_SMOOTH); //image of the banana logo
 
-    private Button startButton;
-    private Button helpButton;
-    private Button quitButton;
+    private Button startButton; //start game button
+    private Button helpButton; //"help" button
+    private Button quitButton; //"stop program" button
 
-
+    //default constructor, creates new buttons
     public StartScreen(ZombieSurvivalGame game) {
         this.game = game;
         this.startButton = new Button(250, 300, 500, 150, Color.BLUE, Color.RED);
@@ -37,11 +37,13 @@ public class StartScreen implements MouseMotionListener, MouseListener {
         isMousePressed = false;
     }
 
-
+    //draws the whole screen
     public void draw(Graphics g) {
+        //sets the background to black
         g.setColor(Color.BLACK);
         g.fillRect(-1, -1, 1002, 1002);
 
+        //draws the title and labels
         g.setFont(new Font("Impact", Font.BOLD, 100));
         g.setColor(Color.WHITE);
         g.drawString("ZombieSurvival", 160, 175);
@@ -49,10 +51,12 @@ public class StartScreen implements MouseMotionListener, MouseListener {
         g.setFont(new Font("Impact", Font.PLAIN, 30));
         g.drawString("By the SavannahBananas", 150, 980);
 
+        //draws the buttons
         startButton.draw(g);
         helpButton.draw(g);
         quitButton.draw(g);
 
+        //draws the button text
         g.setFont(new Font("Impact", Font.BOLD, 70));
         g.setColor(Color.WHITE);
         g.drawString("Start Game", 330, 400);
@@ -60,6 +64,7 @@ public class StartScreen implements MouseMotionListener, MouseListener {
         g.drawString("Stop Program", 310, 800);
     }
 
+    //called when the mouse is released
     @Override
     public void mouseReleased(MouseEvent e) {
         isMousePressed = false;
@@ -84,11 +89,13 @@ public class StartScreen implements MouseMotionListener, MouseListener {
         }
     }
 
+    //called when the mouse is moved at all
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
         mouseY = e.getY();
 
+        //if buttons are touched, they'll change color
         if(startButton.isTouchedBy(mouseX, mouseY)) {
             startButton.setHovered(true);
             if(isMousePressed == true) {
@@ -120,6 +127,7 @@ public class StartScreen implements MouseMotionListener, MouseListener {
         }
     }
 
+    //called when the mouse is clicked
     @Override
     public void mousePressed(MouseEvent e) {
         isMousePressed = true;
@@ -142,7 +150,7 @@ public class StartScreen implements MouseMotionListener, MouseListener {
         }
     }
 
-
+    //called when the mouse is pressed and moved before being released
     @Override
     public void mouseDragged(MouseEvent e) {
         mouseMoved(e);

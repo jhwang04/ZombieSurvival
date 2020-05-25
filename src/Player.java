@@ -30,32 +30,37 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
     private int coins; //number of coins/currency the player has
     private Ranged gun; //player's equipped ranged weapon.
     private int armorLevel; //armor level, can be increased/upgraded over time
-    public BufferedImage image;
-    public BufferedImage armorImage;
-    private ZombieSurvivalGame game;
+    public BufferedImage image; //image of the player
+    public BufferedImage armorImage; //camo skin
+    private ZombieSurvivalGame game; //game that the player is inside of
     private int numOfKits; //the number of health kits the player has in storage
 
     private static final int PLAYER_HEIGHT = 69; //constant, for the default height of the player
     private static final int PLAYER_WIDTH = 56; //constant, for the default width of the player
-    private static final double PLAYER_MOVEMENT_SPEED = 5.0;
+    private static final double PLAYER_MOVEMENT_SPEED = 5.0; //how fast a default player will go
 
     //Directional variables, for which direction the input is telling the player to move
-    private boolean movingLeft;
-    private boolean movingRight;
-    private boolean movingUp;
-    private boolean movingDown;
+    private boolean movingLeft; //if player is moving left
+    private boolean movingRight; //is player moving right?
+    private boolean movingUp; //is player moving upwards?
+    private boolean movingDown; //is player moving downwards?
 
-    private int mouseX = 0;
-    private int mouseY = 0;
+    private int mouseX = 0; //x coordinate of the mouse
+    private int mouseY = 0; //y coordinate of the mouse
 
+    //default constructor
     public Player(int x, int y, double maxHealth, double health, ZombieSurvivalGame game) {
         super(x, y, maxHealth, health, PLAYER_MOVEMENT_SPEED, x - PLAYER_WIDTH/2, y-PLAYER_HEIGHT/2, PLAYER_WIDTH, PLAYER_HEIGHT);
+
+        //player is never moving when it's first created
         movingLeft = false;
         movingRight = false;
         movingUp = false;
         movingDown = false;
+
         this.game = game;
 
+        //this creates a scaled image, that can be rotated
         BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB); //unused image, just to get rid of error
         try {
             originalImage = ImageIO.read(new File("playergun.png"));
@@ -68,6 +73,7 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         AffineTransformOp to = new AffineTransformOp(t, AffineTransformOp.TYPE_BILINEAR);
         image = to.filter(originalImage, image);
 
+        //creates a scaled image of the camo skin, that can be rotated
         BufferedImage originalArmorImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         try {
             originalArmorImage = ImageIO.read(new File("camoskingun.png"));
@@ -147,12 +153,15 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         }
     }
 
+    //draws the player
     @Override
     public void draw(Graphics g) {
-
+        //every time draw() is called, the move() method determines where it should be
+        //as of now, the move() method is not called from outside this class, it's only
+        //called whenever the player is redrawn
         move();
 
-
+        //sets the hitbox coordinates to be at the new coordinates
         setHx(getX()-PLAYER_WIDTH/2);
         setHy(getY()-PLAYER_HEIGHT/2);
 
@@ -173,6 +182,7 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
             }
         }
 
+        //this rotates the image
         BufferedImage rotatedImage;
         if(armorLevel <= 4) {
             rotatedImage = rotateImageByRadians(image, 0-refAngle + Math.PI/2);
@@ -181,70 +191,83 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         }
         g.drawImage(rotatedImage, (int) getX() - rotatedImage.getWidth()/2, (int) getY() - rotatedImage.getHeight()/2, null);
 
-
+        //sets the gun x and y to be the player's
         if(gun != null) {
             gun.setX((int) getX());
             gun.setY((int) getY());
         }
-
-
-
     }
 
     //generic "get" commands
+    //gets the player's number of points
     public int getPoints() {
         return points;
     }
 
+    //gets the player's number of coins
     public int getCoins() {
         return coins;
     }
 
+    //gets the player's gun
     public Ranged getGun() { return gun; }
 
+    //gets the player's armor level
     public int getArmorLevel() { return armorLevel; }
 
+    //gets the number of health kits the player has (not used)
     public int getNumOfKits() {return numOfKits; }
 
     //"set" methods
+    //sets the number of points
     public void setPoints(int points) {
         this.points = points;
     }
 
+    //sets the number of coins the player has
     public void setCoins(int coins) {
         this.coins = coins;
     }
 
+    //adds a certain number to the current number of points
     public void addPoints(int amount) {
         this.points += amount;
     }
 
+    //adds some coins to the current amount
     public void addCoins(int amount) {
         this.coins += amount;
     }
 
+    //sets the player gun to be a new gun
     public void setGun(Ranged gun) {
         this.gun = gun;
     }
 
+    //sets the number of health kits the player has
     public void setNumOfKits(int i) {
         numOfKits = i;
     }
 
+    //sets the player's armor level
     public void setArmorLevel(int i) {
         armorLevel = i;
     }
 
+    //increases the player's armor level by one
     public void increaseArmorLevel() {
         armorLevel += 1;
     }
 
+    //increases the number of health kits the player has
     public void increaseNumOfKits() {
         numOfKits += 1;
     }
 
+    //resets the player image (not used)
     public void resetImage() throws IOException { image = ImageIO.read(new File("playergun.png")); }
 
+    //stops all player movement
     public void stopMoving() {
         // this will halt all movement.
         // This is used when the screen is paused, or the wave is over,
@@ -264,6 +287,7 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         //not used
     }
 
+    //called when the key is pressed down for the first time
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
@@ -288,6 +312,7 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         }
     }
 
+    //called when the key is released
     @Override
     public void keyReleased(KeyEvent e) {
         int keyCode = e.getKeyCode();
@@ -316,17 +341,20 @@ public class Player extends LivingEntity implements KeyListener, MouseMotionList
         }
     }
 
+    //called when the mouse is pressed and then moved
     @Override
     public void mouseDragged(MouseEvent e) {
         mouseMoved(e);
     }
 
+    //called when the mouse is moved
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
         mouseY = e.getY();
     }
 
+    //uses affine transform to rotate the image by some number of radians
     public BufferedImage rotateImageByRadians(BufferedImage image, double rad) {
         int w = image.getWidth();
         int h = image.getHeight();

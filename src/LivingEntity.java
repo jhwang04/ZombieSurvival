@@ -35,36 +35,46 @@ public abstract class LivingEntity extends Hitbox {
     }
 
     //Generic "get" methods
+    //returns max health
     public double getMaxHealth() {
         return maxHealth;
     }
 
+    //returns current health
     public double getHealth() {
         return health;
     }
 
+    //returns movement speed
     public double getMovementSpeed() {
         return movementSpeed;
     }
 
+    //returns x coord
     public double getX() {
         return x;
     }
 
+    //returns y coord
     public double getY() {
         return y;
     }
 
 
     //generic "set" methods
+    //sets the maximum health the player is at
     public void setMaxHealth(double maxHealth) {this.maxHealth = maxHealth;}
 
+    //sets the player health
     public void setHealth(double health) {this.health = health;}
 
+    //sets the movement speed of the living entity
     public void setMovementSpeed(double movementSpeed) {this.movementSpeed = movementSpeed;}
 
+    //sets the x coordinate
     public void setX(double x) {this.x = x;}
 
+    //sets the y coordinate
     public void setY(double y) {this.y = y;}
 
 

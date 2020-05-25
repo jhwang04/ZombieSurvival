@@ -16,7 +16,7 @@ public class Ranged implements MouseListener {
     private int x; //x coordinate of the weapon itself
     private int y; //y coordinate of the weapon itself
     private Image weaponImage; //picture of the weapon itself. If we're doing animations, you're gonna have to change the whole image system.
-    public ZombieSurvivalGame game;
+    public ZombieSurvivalGame game; //game the the gun is inside of
 
 
     //default contructor
@@ -28,12 +28,15 @@ public class Ranged implements MouseListener {
     }
 
     //useful methods
+    //shoots a projectile, overridden by the extension classes
     public void shoot(double angle) {
         //placeholder, change anything you'd like
     }
 
+    //called when the mouse button is pressed
     @Override
     public void mousePressed(MouseEvent e) {
+        //it gets the mouseX and mouseY, and uses some trig to calculate the angle
         int mouseX = e.getX();
         int mouseY = e.getY();
 
@@ -53,40 +56,48 @@ public class Ranged implements MouseListener {
             }
         }
 
+        //calls the shoot() method with the calculated angle
         shoot(refAngle);
     }
 
+    //draws the gun
     public void draw(Graphics g) {
         int width = weaponImage.getWidth(null);
         int height = weaponImage.getHeight(null);
         g.drawImage(weaponImage, x - width/2, y - height/2, null);
 
-        g.setColor(Color.RED);
-        g.fillOval(x - 1, y-1, 3, 3);
+        //g.setColor(Color.RED);
+        //g.fillOval(x - 1, y-1, 3, 3);
     }
 
     //generic "get" methods
+    //returns the gun x coord
     public int getX() {
         return x;
     }
 
+    //returns the gun y coord
     public int getY() {
         return y;
     }
 
+    //returns the image of the weapon
     public Image getWeaponImage() {
         return weaponImage;
     }
 
     //generic "set" methods
+    //sets the gun x coord
     public void setX(int x) {
         this.x = x;
     }
 
+    //sets the gun y coord
     public void setY(int y) {
         this.y = y;
     }
 
+    //sets the weapon image
     public void setWeaponImage(Image image) {
         this.weaponImage = image;
     }

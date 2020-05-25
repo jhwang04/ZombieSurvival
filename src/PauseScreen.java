@@ -16,29 +16,32 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class PauseScreen implements MouseMotionListener, MouseListener {
-    private int mouseX;
-    private int mouseY;
-    private boolean isMousePressed;
-    private ZombieSurvivalGame game;
+    private int mouseX; //sets the mouse x coordinate
+    private int mouseY; // sets the y coordinate of the mouse
+    private boolean isMousePressed; //if the mouse is pressed...
+    private ZombieSurvivalGame game; //game that the pause screen is a part of
 
-    private Button resumeButton;
-    private Button menuButton;
+    private Button resumeButton; //the "resume" button
+    private Button menuButton; // the "menu" button
 
-
+    //default constructor
     public PauseScreen(ZombieSurvivalGame game) {
         this.game = game;
         resumeButton = new Button(250, 400, 500, 150, Color.BLUE, Color.RED);
         menuButton = new Button(250, 600, 500, 150, Color.BLUE, Color.RED);
     }
 
-
+    //draws the screen
     public void draw(Graphics g) {
+        //draws the black background
         g.setColor(Color.BLACK);
         g.fillRect(-1, -1, 1002, 1002);
 
+        //draws the buttons
         resumeButton.draw(g);
         menuButton.draw(g);
 
+        //draws text on buttons
         g.setFont(new Font("Impact", Font.BOLD, 70));
         g.setColor(Color.WHITE);
         g.drawString("Continue", 350, 500);
@@ -47,6 +50,7 @@ public class PauseScreen implements MouseMotionListener, MouseListener {
 
     }
 
+    //called when the mouse button is released
     @Override
     public void mouseReleased(MouseEvent e) {
         isMousePressed = false;
@@ -61,6 +65,7 @@ public class PauseScreen implements MouseMotionListener, MouseListener {
         }
     }
 
+    //called when the mouse button is moved
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
@@ -87,6 +92,7 @@ public class PauseScreen implements MouseMotionListener, MouseListener {
         }
     }
 
+    //called when the mouse button is pressed down
     @Override
     public void mousePressed(MouseEvent e) {
         isMousePressed = true;
@@ -97,7 +103,7 @@ public class PauseScreen implements MouseMotionListener, MouseListener {
         }
     }
 
-
+    //called when the mouse is pressed down and moved before it's released
     @Override
     public void mouseDragged(MouseEvent e) {
         mouseMoved(e);

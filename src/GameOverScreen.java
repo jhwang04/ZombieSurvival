@@ -11,20 +11,21 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class GameOverScreen implements MouseMotionListener, MouseListener {
-    private int mouseX;
-    private int mouseY;
-    private boolean isMousePressed;
-    private ZombieSurvivalGame game;
+    private int mouseX; //x coord of the mouse
+    private int mouseY; //y coord of the mouse
+    private boolean isMousePressed; //if the mouse is pressed, this is true
+    private ZombieSurvivalGame game; //the game that the screen is a part of
 
-    private Button menuButton;
+    private Button menuButton; //main menu button
 
 
+    //default constructor
     public GameOverScreen(ZombieSurvivalGame game) {
         this.game = game;
         menuButton = new Button(250, 600, 500, 150, Color.BLUE, Color.RED);
     }
 
-
+    //draws the button
     public void draw(Graphics g) {
         game.gameOver(g);
 
@@ -37,6 +38,7 @@ public class GameOverScreen implements MouseMotionListener, MouseListener {
         game.drawHUD(g);
     }
 
+    //called when mouse button is released
     @Override
     public void mouseReleased(MouseEvent e) {
         isMousePressed = false;
@@ -47,6 +49,7 @@ public class GameOverScreen implements MouseMotionListener, MouseListener {
         }
     }
 
+    //called when the mouse is moved
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
@@ -63,6 +66,7 @@ public class GameOverScreen implements MouseMotionListener, MouseListener {
         }
     }
 
+    //called when the mouse is pressed down
     @Override
     public void mousePressed(MouseEvent e) {
         isMousePressed = true;
@@ -74,6 +78,7 @@ public class GameOverScreen implements MouseMotionListener, MouseListener {
     }
 
 
+    //called when the mouse is pressed down and then moved
     @Override
     public void mouseDragged(MouseEvent e) {
         mouseMoved(e);

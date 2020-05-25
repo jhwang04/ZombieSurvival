@@ -10,16 +10,16 @@ Notes:
 import java.awt.*;
 
 public abstract class Projectile extends Hitbox {
-    private double x;
-    private double y;
-    private double speed;
-    private double damage;
-    private int range;
-    private double distanceTraveled;
-    private boolean despawned = false;
-    private Image image;
+    private double x; //x coordinate of the projectile
+    private double y; //y coordinate of the projectile
+    private double speed; //speed of the projectile
+    private double damage; //damage of the projectile
+    private int range; //range of the projectile
+    private double distanceTraveled; //distance that the projectile has traveled
+    private boolean despawned = false; //whether or not the projectile should disappear on the next frame
+    private Image image; //image of the projectile
     private double trajectory; //angle of the projectile, measured in degrees
-    private ZombieSurvivalGame game;
+    private ZombieSurvivalGame game; //game the projectile is inside of
 
     //default constructor
     public Projectile(double x, double y, double speed, double damage, int range, Image image, double trajectory, ZombieSurvivalGame game, int hx, int hy, int hw, int hh) {
@@ -35,7 +35,7 @@ public abstract class Projectile extends Hitbox {
         this.game = game;
     }
 
-    //move and draw method
+    //moves the projectile for the next frame
     public void move() {
         double changeX = speed * Math.cos(trajectory);
         double changeY = speed * Math.sin(trajectory);
@@ -54,8 +54,9 @@ public abstract class Projectile extends Hitbox {
         }
     }
 
+    //draws the projectile
     public void draw(Graphics g) {
-        move();
+        move(); //it needs to move first, move() is not called from outside this class
         if(this.despawned == false) {
             g.setColor(Color.BLACK);
             setHx(x - 10);
@@ -65,38 +66,50 @@ public abstract class Projectile extends Hitbox {
     }
 
     //generic "get" methods
+    //gets the projectile x
     public double getX() {
         return x;
     }
 
+    //gets the projectile y
     public double getY() {
         return y;
     }
 
+    //gets the speed of the projectile
     public double getSpeed() {
         return speed;
     }
 
+    //gets the damage of the projectile
     public double getDamage() {
         return damage;
     }
 
+    //gets the distance the projectile has traveled
     public double getDistanceTraveled() {return distanceTraveled;}
 
+    //gets whether or not the projectile has despawned
     public boolean getDespawned() {return despawned;};
 
+    //gets the projectile range
     public int getRange() {
         return range;
     }
 
+    //gets the image of the projectile
     public Image getImage() {
         return image;
     }
 
+    //gets the trajectory of the projectile
     public double getTrajectory() {
         return trajectory;
     }
 
+
+    //generic "set" methods
+    //sets whether or not the projectile should disappear on the next frame
     public void setDespawned(boolean b) {
         this.despawned = b;
     }

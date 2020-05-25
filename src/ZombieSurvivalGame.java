@@ -19,25 +19,29 @@ import java.awt.event.ActionListener;
 
 public class ZombieSurvivalGame extends JPanel {
 
+
+    private boolean debugOn = false; //change this to true if you want to see the debug info
+
+
+
     private int time; //counts the number of game ticks since the start of the wave
     public Player player = new Player(500, 500, 100.0, 100.0, this); //This is the player that the user can control.
     private int waveNumber; //Assuming we use the wave system, this will hold the wave number.
     public Monster[] monsters = new Monster[0]; //List of all monsters on screen
-    private Projectile[] bullets = new Projectile[0];
-    private boolean debugOn = false;
-    public int seconds;
-    public Tree[] trees = new Tree[0];
-    public int kills;
-    public int monsterCount;
-    private HealthKit kit;
-    private Armor armor;
+    private Projectile[] bullets = new Projectile[0]; //list of all bullets shown
+    public int seconds; //number of seconds the game's been going
+    public Tree[] trees = new Tree[0]; //the list of trees (not used)
+    public int kills; //number of kills the player has
+    public int monsterCount; //number of monsters to be spawned in that wave
+    private HealthKit kit; //health kit on screen
+    private Armor armor; //armor on screen
 
-    private JFrame window;
-    private StartScreen startScreen;
-    private GameOverScreen gameOverScreen;
-    private HelpScreen helpScreen;
-    private PauseScreen pauseScreen;
-    private WaveCompleteScreen waveScreen;
+    private JFrame window; //the java window that's being run
+    private StartScreen startScreen; //start screen object
+    private GameOverScreen gameOverScreen; //game over screen object
+    private HelpScreen helpScreen; //help screen object
+    private PauseScreen pauseScreen; //pause screen object
+    private WaveCompleteScreen waveScreen; //next wave screen object
     private int screen; //the screen that should be displayed, e.g. start screen, game screen, pause screen, etc
 
     //constants for picking a screen
@@ -79,6 +83,7 @@ public class ZombieSurvivalGame extends JPanel {
         w.setVisible(true);
         w.setResizable(false);
 
+        //this while loop runs until the program exits.  if 20ms have passed since the last time it fired repaint(), it will fire the repaint() method.
         long timer = System.currentTimeMillis();
         while(true) {
             if(System.currentTimeMillis() - timer > 20) {
@@ -191,6 +196,7 @@ public class ZombieSurvivalGame extends JPanel {
     //This is the main "repaint" method that will redraw every single frame
     private void drawNextFrame(Graphics g) {
 
+        //draws the appropriate screen based off on the current state of the "screen" variable
         if(screen == START_SCREEN) {
             startScreen.draw(g);
         } else if(screen == GAME_SCREEN) {
@@ -210,37 +216,41 @@ public class ZombieSurvivalGame extends JPanel {
             //draws the debug overlay, only if debugOn == true
             drawDebug(g);
 
+            //if ticks is a multiple of 50, one second has passed
             if (time % 50 == 0) {
                 seconds++;
             }
 
+            //if player is dead, it switches to "game over"
             if (player.getHealth() <= 0) {
                 changeScreen(GAME_OVER_SCREEN);
             }
 
+            //draws the heads-up-display at the bottom, with player health, number of zombies, etc.
             drawHUD(g);
         } else if(screen == GAME_OVER_SCREEN) { //if player is dead
             player.setHealth(0.0);
             gameOverScreen.draw(g);
-        } else if(screen == HOW_TO_PLAY_SCREEN) {
+        } else if(screen == HOW_TO_PLAY_SCREEN) { //if user clicks "how to play"
             helpScreen.draw(g);
-        } else if(screen == PAUSE_SCREEN) {
+        } else if(screen == PAUSE_SCREEN) { // if user pauses game
             pauseScreen.draw(g);
-        } else if(screen == NEXT_WAVE_SCREEN) {
+        } else if(screen == NEXT_WAVE_SCREEN) { //if player completes a wave of zombies
             waveScreen.draw(g);
             drawHUD(g);
         }
     }
 
 
-
-
+    //returns the player in the game window
     public Player getPlayer() {
         return player;
     }
 
+    //returns the wave number
     public int getWave() {return waveNumber;}
 
+    //returns the number of monsters
     public int getMonsterCount() {return monsterCount;}
 
     //adds element to array
@@ -254,6 +264,7 @@ public class ZombieSurvivalGame extends JPanel {
         return newMonsterArray;
     }
 
+    //adds element to bullet array
     public static Projectile[] addBullet(Projectile[] original, Projectile newBullet) {
         Projectile[] newArray = new Projectile[original.length + 1];
         for(int i = 0; i < original.length; i++) {
@@ -263,6 +274,7 @@ public class ZombieSurvivalGame extends JPanel {
         return newArray;
     }
 
+    //adds element to tree array
     public static Tree[] addTree(Tree[] original, Tree newTree) {
         Tree[] newArray = new Tree[original.length + 1];
         for(int i = 0; i < original.length; i++) {
@@ -276,42 +288,47 @@ public class ZombieSurvivalGame extends JPanel {
 
 
     //generic methods for the arrays
+    //gets the bullet array
     public Projectile[] getBullets() {
         return bullets;
     }
 
+    //sets the bullet array to be a new array
     public void setBullets(Projectile[] p) {
         this.bullets = p;
     }
 
+    //adds a bullet to the end of the array
     public void appendBullet(Projectile p) {
         this.bullets = addBullet(bullets, p);
     }
 
 
-
+    //gets the list of trees
     public Tree[] getTrees() {
         return trees;
     }
 
+    //sets the list of trees to be a new one
     public void setTrees(Tree[] t) {
         this.trees = t;
     }
 
+    //adds a tree to the array
     public void appendTree(Tree t) {
         this.trees = addTree(trees, t);
     }
 
 
 
-
-
+    //draws all the trees
     public void drawTrees(Graphics g) {
         for(int i = 0; i < trees.length; i++) {
             trees[i].draw(g);
         }
     }
 
+    //draws all the monsters, removes them from the array if needed
     public void drawMonsters(Graphics g) {
         //checks if each monster is dead. If so, the monster is removed from monsters array.
         Monster[] newMonsters = new Monster[0];
@@ -334,12 +351,6 @@ public class ZombieSurvivalGame extends JPanel {
                 monsters[i].drawHitbox(g);
             }
         }
-        for(int i = 0; i < bullets.length; i++) {
-            bullets[i].draw(g);
-            if(debugOn == true) {
-                bullets[i].drawHitbox(g);
-            }
-        }
 
         //moves onto next wave if all monsters are dead
         if(monsters.length == 0) {
@@ -349,6 +360,15 @@ public class ZombieSurvivalGame extends JPanel {
     }
 
     public void drawBullets(Graphics g) {
+
+        //draws each bullet one by one
+        for(int i = 0; i < bullets.length; i++) {
+            bullets[i].draw(g);
+            if(debugOn == true) {
+                bullets[i].drawHitbox(g);
+            }
+        }
+
         //checks if each bullet is dead. If so, the projectile is removed from the array.
         Projectile[] newProjectiles = new Projectile[0];
         for(int i = 0; i < bullets.length; i++) {
@@ -359,16 +379,19 @@ public class ZombieSurvivalGame extends JPanel {
         bullets = newProjectiles.clone();
     }
 
+    //draws all the items on the screen
     public void drawItems(Graphics g) {
-        kit.draw(g);
+        kit.draw(g); //draws health kit
 
-        armor.draw(g);
+        armor.draw(g); //draws armor kit
 
+        //draws hitboxes, if debug mode is on
         if(debugOn == true) {
             armor.drawHitbox(g);
             kit.drawHitbox(g);
         }
 
+        //lets player pick up kit and armor
         if (player.isTouching(kit) && (kit.pickedUp == false)) {
             //player.increaseNumOfKits();
             player.setHealth(player.getHealth() + 20.0);
@@ -384,10 +407,12 @@ public class ZombieSurvivalGame extends JPanel {
         }
     }
 
+    //draws the player, checks for collisions
     public void drawPlayer(Graphics g) {
         //Calls the draw method of the player
         player.draw(g);
 
+        //draws hitbox if debug mode is on
         if(debugOn == true) {
             player.drawHitbox(g);
         }
@@ -409,6 +434,7 @@ public class ZombieSurvivalGame extends JPanel {
         }
     }
 
+    //draws debug screen in the top left
     public void drawDebug(Graphics g) {
         //debug overlay, more text can be added as needed
         if(debugOn == true) {
@@ -424,6 +450,7 @@ public class ZombieSurvivalGame extends JPanel {
         }
     }
 
+    //draws heads up display at the bottom of the screen, with health, number of zombies, etc
     public void drawHUD(Graphics g) {
         //heads up display at the bottom, displays on top of both game and game over
         g.setColor(Color.black);
@@ -439,6 +466,7 @@ public class ZombieSurvivalGame extends JPanel {
         g.drawString("Armor Level: " + player.getArmorLevel(), 775, 940);
     }
 
+    //changes the current screen by changing the variable, and changing the mouse/key listeners of the window
     public void changeScreen(int newScreen) {
         //removes mouse and key listeners for current screen
         switch(screen) {
@@ -512,6 +540,7 @@ public class ZombieSurvivalGame extends JPanel {
         }
     }
 
+    //game over, called when the player dies
     public void gameOver(Graphics g) {
         setBackground(Color.black);
         g.setColor(Color.BLACK);

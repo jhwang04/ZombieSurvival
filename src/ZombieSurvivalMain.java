@@ -9,9 +9,9 @@ Notes:
     This is similar to the DanceStudio series, where the main class just instantiated
     a new window class.
 */
-//helo
-public class ZombieSurvivalMain {
 
+public class ZombieSurvivalMain {
+    //creates a new zombie survival game
     public static void main(String args[]) {
         ZombieSurvivalGame gameWindow = new ZombieSurvivalGame();
     }

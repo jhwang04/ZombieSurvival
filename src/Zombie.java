@@ -21,14 +21,14 @@ import java.io.IOException;
 
 public class Zombie extends Monster {
 
-    public static final double ZOMBIE_MAX_HEALTH = 100.0;
+    public static final double ZOMBIE_MAX_HEALTH = 100.0; //default maximum health of the zombie
     public static final double ZOMBIE_MOVEMENT_SPEED = 1.5; //this number is arbitrary. Change as needed for functionality.
-    public static final int ZOMBIE_WIDTH = 56;
-    public static final int ZOMBIE_HEIGHT = 69;
-    public static final double ZOMBIE_BASE_DAMAGE = 5.0;
+    public static final int ZOMBIE_WIDTH = 56; //default width of a zombie hitbox
+    public static final int ZOMBIE_HEIGHT = 69; //default heigh of the zombie hitbox
+    public static final double ZOMBIE_BASE_DAMAGE = 5.0; //base damage of the hitbox
 
 
-    public static BufferedImage image;
+    public static BufferedImage image; //zombie image
 
 
     //custom zombie constructor (changing default zombie values)
@@ -43,6 +43,7 @@ public class Zombie extends Monster {
         setBaseDamage(ZOMBIE_BASE_DAMAGE + baseDamageIncrease);
     }
 
+    //moves the zombie towards the player
     public void move() {
         //setting the target to be the player's location
         setTargetX((int) game.getPlayer().getX());
@@ -69,6 +70,7 @@ public class Zombie extends Monster {
             setY(getY() - (getMovementSpeed() * Math.sin(refAngle)));
         }
 
+        //sets the hitbox coords to be at the new zombie coords
         setHx(getX() - ZOMBIE_WIDTH/2);
         setHy(getY() - ZOMBIE_HEIGHT/2);
     }
@@ -76,7 +78,9 @@ public class Zombie extends Monster {
     //Zombie draw method
     @Override
     public void draw(Graphics g) {
+        //moves the zombie
         move();
+
         //This draw() method, as I have it set up now, is going to be the zombie moving itself
         //and then drawing itself at its new position. I haven't put in any movment or other
         //functional code yet, but you can put that here.
@@ -119,7 +123,7 @@ public class Zombie extends Monster {
 
     }
 
-
+    //rotates the image by some number of radians
     public BufferedImage rotateImageByRadians(BufferedImage image, double rad) {
         int w = image.getWidth();
         int h = image.getHeight();
@@ -142,6 +146,9 @@ public class Zombie extends Monster {
         return rotatedImage;
     }
 
+    //sets the zombie image, it's called once, initially.
+    //if this was not used, then the game would have to get the HD image, and re-scale it with every zombie the game creates.
+    //this causes severe lag spikes on later rounds, when 15+ zombies are spawned in on the same game tick
     public static void setZombieImage() {
         BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB); //unused image, just to get rid of error
         try {

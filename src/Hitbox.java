@@ -15,6 +15,7 @@ public abstract class Hitbox {
     private int hw; //width of the hitbox
     private int hh; //height of the hitbox
 
+    //default constructor
     public Hitbox(double x, double y, int w, int h) {
         this.hx = x;
         this.hy = y;
@@ -43,35 +44,43 @@ public abstract class Hitbox {
     }
 
     //generic "get" methods
+    //gets the x coord of the hitbox
     public double getHx() {
         return hx;
     }
 
+    //gets the y coord of the hitbox
     public double getHy() {
         return hy;
     }
 
+    //gets the width of the hitbox
     public int getHw() {
         return hw;
     }
 
+    //gets the height of the hitbox
     public int getHh() {
         return hh;
     }
 
     //generic "set" methods
+    //sets the x coord of the hitbox
     public void setHx(double x) {
         this.hx = x;
     }
 
+    //sets the y coord of the hitbox
     public void setHy(double y) {
         this.hy = y;
     }
 
+    //sets the width of the hitbox
     public void setHw(int w) {
         this.hw = w;
     }
 
+    //sets the height of the hitbox
     public void setHh(int h) {
         this.hh = h;
     }

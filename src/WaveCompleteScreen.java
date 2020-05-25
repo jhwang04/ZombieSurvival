@@ -17,18 +17,20 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
-    private int mouseX;
-    private int mouseY;
-    private boolean isMousePressed;
-    private ZombieSurvivalGame game;
-    private Button nextWaveButton;
-    private Button buyShotgunButton;
+    private int mouseX; //x coord of the mouse
+    private int mouseY; //y coord of the mouse
+    private boolean isMousePressed; //whether or not the mouse is pressed
+    private ZombieSurvivalGame game; //the game that the screen is inside of
+    private Button nextWaveButton; //the button that begins the next wave
+    private Button buyShotgunButton; //the button to buy a shotgun
     //private Button useHealthKitButton;
-    private int ticksOnScreen;
+    private int ticksOnScreen; //the number of ticks it's been on screen
 
-
+    //constructor, creates a new screen
     public WaveCompleteScreen(ZombieSurvivalGame game) {
         this.game = game;
+
+        //creates new buttons that are disabled by default
         nextWaveButton = new Button(250, 700, 500, 150, Color.BLUE, Color.RED);
         nextWaveButton.setEnabled(false);
         buyShotgunButton = new Button(250, 600, 500, 50, Color.BLUE, Color.RED);
@@ -37,27 +39,34 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
         //useHealthKitButton.setEnabled(false);
     }
 
-
+    //draws the screen
     public void draw(Graphics g) {
+        //increases the number of ticks it's been on screen
         ticksOnScreen++;
+
+        //enables the next wave button after 2 seconds (that way the user can't accidentally click the button immediately
         if(ticksOnScreen >= 100) {
             nextWaveButton.setEnabled(true);
         } else {
             nextWaveButton.setEnabled(false);
         }
 
+        //enabled buyShotgun button if player can afford it, and does not already have it
         if(game.getPlayer().getCoins() >= 1000 && !(game.getPlayer().getGun() instanceof Shotgun)) {
             buyShotgunButton.setEnabled(true);
         } else {
             buyShotgunButton.setEnabled(false);
         }
 
+        //sets the background to black
         g.setColor(Color.BLACK);
         g.fillRect(-1, -1, 1002, 1002);
 
+        //draws the buttons
         nextWaveButton.draw(g);
         buyShotgunButton.draw(g);
 
+        //draws the main text
         g.setColor(Color.WHITE);
         g.setFont(new Font("Impact", Font.PLAIN, 30));
 
@@ -74,6 +83,7 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
         g.drawString("Buy shotgun for 1000 coins?", 340, 635);
 
 
+        //loops through the long string, and draws one line at a time going downwards
         int lineNumber = 0;
         while(text.contains("\n")) {
             String line = text.substring(0, text.indexOf("\n"));
@@ -92,11 +102,14 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
 
     }
 
+    //called when the mouse is released
     @Override
     public void mouseReleased(MouseEvent e) {
         isMousePressed = false;
         nextWaveButton.setPressed(false);
         nextWaveButton.setHovered(false);
+
+        //if the mouse was released when on a button, then it calls the button functionality
         if(nextWaveButton.isTouchedBy(mouseX, mouseY) && nextWaveButton.getEnabled() == true) {
             mouseX = -1;
             mouseY = -1; //prevents mouse from activating it immediately again the next wave.
@@ -105,6 +118,7 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
 
         buyShotgunButton.setPressed(false);
         buyShotgunButton.setHovered(false);
+        //if the mouse was released on this button, then the button functionality is called
         if(buyShotgunButton.isTouchedBy(mouseX, mouseY) && nextWaveButton.getEnabled() == true) {
             mouseX = -1;
             mouseY = -1; //prevents mouse from activating it immediately again the next wave.
@@ -113,11 +127,13 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
         }
     }
 
+    //called when the mouse is moved
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
         mouseY = e.getY();
 
+        //if the buttons are being hovered over, they change color
         if(nextWaveButton.isTouchedBy(mouseX, mouseY)) {
             nextWaveButton.setHovered(true);
             if(isMousePressed == true) {
@@ -139,9 +155,11 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
         }
     }
 
+    //when mouse is clicked down, this is called
     @Override
     public void mousePressed(MouseEvent e) {
         isMousePressed = true;
+        //if a button is being touched when the mouse is pressed, it shrinks a little bit to give some response to the user
         if(nextWaveButton.isTouchedBy(mouseX, mouseY)) {
             nextWaveButton.setPressed(true);
         } else {
@@ -156,15 +174,16 @@ public class WaveCompleteScreen implements MouseMotionListener, MouseListener {
     }
 
 
+    //called when the mouse is pressed down and moved without being released
     @Override
     public void mouseDragged(MouseEvent e) {
         mouseMoved(e);
     }
 
+    //resets the number of ticks it's been on screen
     public void resetTicks() {
         this.ticksOnScreen = 0;
     }
-
 
 
 
