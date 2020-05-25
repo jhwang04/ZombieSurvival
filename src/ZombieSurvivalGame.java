@@ -71,7 +71,7 @@ public class ZombieSurvivalGame extends JPanel {
         w.addMouseListener(startScreen);
         w.addMouseMotionListener(startScreen);
 
-        w.setBounds(200, 0, 1000, 1000);
+        w.setBounds(200, 200, 1000, 1000);
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container c = w.getContentPane();
         c.add(this);
